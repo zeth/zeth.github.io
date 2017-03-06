@@ -1,0 +1,1559 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
+        <meta name="viewport" content="width=device-width">
+        <title>Page 3 &mdash; Zeth.net</title>
+            <link rel="stylesheet" href="_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="_static/main.css" type="text/css">
+            <link rel="stylesheet" href="_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="_static/plugins.js"></script>
+        <script src="_static/main.js"></script>
+        <link rel="next" title="Older" href="page4.html" /><link rel="prev" title="Newer" href="page2.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="_static/underscore.js"></script><script type="text/javascript" src="_static/doctools.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="index.html">Zeth.net</a></h1><h2>Taking control of your own technology</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="index.html">Home</a>
+                </li>
+              <li class="main-nav">
+                  <a href="pages/welcome.html">Welcome</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>June 12, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/06/12/distributed_global_textual_community.html">A Distributed Global Textual Community</a></h1>
+<img alt="../../../_images/raindeer.png" src="_images/raindeer.png"/>
+<p>In the digital humanities when a scholar wants to transcribe and edit
+texts such as ancient or medieval manuscripts, that scholar uses her
+institution’s own systems (for the rest of this post I will call this
+a ‘site’).</p>
+<p>In Birmingham we have the Workspace for collaborative editing that I
+was the main coder on, this provides editing and analysis facilities
+for digital text projects hosted or associated with the University of
+Birmingham in some way. There are several of these kind of sites,
+maybe even dozens.</p>
+<p><a class="reference external" href="http://www.textualcommunities.usask.ca/">Textual Communities</a> is another such site, based at the University of
+Saskatchewan, wherever that is, however, the difference is that
+Textual Communities aims to “provide an infrastructure and tools to
+allow anyone, anywhere, interested in a text to contribute to its
+study, as part of a community working together.”</p>
+<p>Here is a photo of some of the main Textual Communities people:</p>
+<img alt="../../../_images/textualcomm.png" src="_images/textualcomm.png"/>
+<p>So as part of the <a class="reference external" href="http://estoria.bham.ac.uk/">Estoria de Espanna Project</a>, I have been using
+Textual Communities and integrating it somewhat with some display and
+analysis tools on a server in Birmingham.</p>
+<p>Part of the vision from the Textual Communities people is to build a
+global editing community, which would imply being an open and
+distributed system, not being based on one server.</p>
+<p>Furthermore, there are performance and reliability drawbacks to
+relying on a single server in Canada to hold the data and pass it back
+and forth in real time over HTTP.</p>
+<p>So the first immediate approach I have taken is to use database
+replication.</p>
+<div class="section" id="master-slave-model">
+<h2>1. Master/slave model</h2>
+<p>The immediate steps to make Birmingham back up the Canadian site is a
+simple and low level approach and it is a master/slave model.</p>
+<blockquote>
+<div><p>Master = Canadian Server</p>
+<p>Slave = Birmingham server</p>
+</div></blockquote>
+<p>1. Every Hour, the slave server checks that the connecting SSH tunnel
+is still up, if it is not it re-establishes it. The SSH tunnel can be
+broken by server reboots or network issues.</p>
+<p>2. Every time a write happens on the master server, the slave copies
+it automatically.</p>
+<p>3. The code that builds the edition (the public frontend that is one
+of the key project outputs) works from the local copy of the database
+which is far more efficient, and if the master goes down, the data is
+still available locally.</p>
+<p>This takes us 50% of the way but there is a big step missing. You
+cannot actually write data to the slave without breaking the approach,
+if master is down, and you start writing in the slave, there is no
+automatic way to get the changes back.</p>
+<p>It also doesn’t scale very easily, adding a new site to the global
+textual community is a completely manual process. Beyond three or four
+institutions it would be a serious labour cost in maintaining the
+whole thing.</p>
+<p>So sooner or later, you need to design a high level approach. The rest
+of this post is what I have been studying and building little test
+prototypes for.</p>
+</div>
+<div class="section" id="a-textual-communities-distribution-system">
+<h2>2. A textual communities distribution system</h2>
+<p><cite>Caveat emptor</cite>: So this the approach I have been working on, it may not be the
+approach favoured in the end by the Estoria project or Textual Communities.</p>
+<img alt="../../../_images/pacman.png" src="_images/pacman.png"/>
+<p>Versions of data can be written at different sites and shared between
+them, yet what is considered the ‘approved’ or ‘best’ or ‘current’
+version may be different at different sites.</p>
+<p>Therefore the key to making textual communities into a distributed
+system is to separate the sharing of versions from the interpretation
+of these versions.</p>
+<p>Each site must therefore keep an additional file/directory form of the
+data for use by the distribution system. These are plain-text files
+that can be easily backed up and easily analysed (a similar format to
+the existing textual communities API, see below).</p>
+<p>The actual textual community software does not have to be run from
+these files, e.g. the Canadian site which uses MySQL can carry on
+doing so, but the internal changes to the database are exported in
+real time to plain text files in the data directory.</p>
+<p>Likewise, changes by other sites can then be read into Canadian MySQL
+database from the data files (which changes are accepted and applied
+is subject to its merge algorithm, see below).</p>
+<p>The data files are organised in a three level directory structure. The
+naming of the directories can be interpreted in different ways:</p>
+<p>According to an SQL database approach:</p>
+<blockquote>
+<div>database_name/table_name/row_id/</div></blockquote>
+<p>Or in a document oriented approach:</p>
+<blockquote>
+<div>database_name/collection/document/</div></blockquote>
+<p>Or in object oriented way:</p>
+<blockquote>
+<div>object_name_space/object_type/object_id/</div></blockquote>
+<p>Inside the lowest level directory are files, each file is a version of
+the data fragment expressed in (or at least wrapped) in JSON. The
+system of distribution does not actually care what fields are inside
+the file.</p>
+<p>For example, a transcription of a page in the textual communities API
+is already expressed in this format with a field called “text” which
+contains the TEI XML text, as well as other fields (id, user, doc,
+create_date, commit_date, prev, next).</p>
+<p>The first version of this data file would be named like this:</p>
+<blockquote>
+<div>textual_communities/transcripts/1688800/1.json</div></blockquote>
+<p>New versions are written according to a principle called
+copy-on-write. When a new version is written, the old file is left
+alone, the new file is called:</p>
+<blockquote>
+<div>textual_communities/transcripts/1688800/2.json</div></blockquote>
+<p>There is also a symbolic link called ‘current’, this points to what is the
+current canonical version of the data (for this particular site).</p>
+<p>Different people at different sites can generate new versions of the
+file, which are automatically shared using <a class="reference external" href="http://git-scm.com/">git</a>. However, what
+‘current’ points to depends on a site specific algorithm.</p>
+<p>The simplest algorithm is to point current at the file with the
+highest integer in the file name, however, sites with editors and
+crowd sourcing etc will not do that, current will only be re-pointed
+when the editor (the scholar) has approved it.</p>
+<p>Groups of sites can have the same of or different algorithms, it does not
+affect the system of distribution.</p>
+<img alt="../../../_images/gitbranch.png" src="_images/gitbranch.png"/>
+<p>Since data files are tracked and shared using git, this creates metadata
+that can be used to power a user-friendly web frontend for editors to
+see new versions, approve/disapprove them and look at history.</p>
+<p>When a new version is approved by the local editor, current is repointed
+to the new file, if the version is not approved, it is just
+ignored. Undoing a new version is moving current to the older file,
+the rejected change is just ignored.</p>
+<p>Using plain files and git solves many problems with crowd sourcing and
+distributed editing without having to write the software ourselves.</p>
+<p>When the files are used, e.g. they are loaded into the Canadian site’s
+MySQL database, the file pointed to by current is uploaded, the other
+files can be safely ignored.</p>
+<p>Git has an event based system known as ‘hooks’. So for example, when a
+new version of a file is created at a site, various actions can
+happen, such as notifying the relevant local editors that a newer
+version is available and can be approved or ignored.</p>
+</div>
+<div class="section" id="beyond-textual-communities-digital-editions">
+<h2>3. Beyond Textual Communities - Digital Editions</h2>
+<p>While it is somewhat parochial to talk about the project I am working
+on, others in the global “Textual Communities” may have the same
+aspirations and problems. Eventually you want to take the live form of
+the text and turn it into digital editions.</p>
+<p>The previous projects I was working on used Python and MongoDB for
+serverside applications, but increasingly I am using IndexedDB,
+Javascript and HTML5 to make the local browser do the work and allow
+the user to continue offline.</p>
+<p>These data directories can, more or less, be exposed via the web server
+to Javascript as is, just with a few bits of censoring any relevant
+private information. This is several orders of magnitude more
+efficient than an application server like Django or Ruby on rails
+serving the data.</p>
+<img alt="../../../_images/bplustree.png" src="_images/bplustree.png"/>
+<p>I have been working on a <a class="reference external" href="http://en.wikipedia.org/wiki/B+tree">B+Tree</a> representation of the Estoria de
+Espanna project data to provide search and a fast web frontend, these
+can be read directly from the data files.</p>
+<p>A fast web server like Nginx throwing out static files combined with
+B+tree index for searches is pretty much unbeatable in terms of
+performance. It is also pretty future proof - stupid lasts longer than
+clever! The importance of this cannot be overstated in externally
+funded projects that exist for their period of project funding and
+then afterwards are maintained on a while-we-can basis.</p>
+<p>Also, I am hoping to produce native mobile applications as part of the
+Estoria project output, compiling an abridged version of the data
+files directly into the app is far easier and has far better
+performance than trying to port web application code to a phone by
+statically linking in a Python interpreter.</p>
+</div>
+<div class="section" id="the-end-of-the-beginning">
+<h2>4. The End of the Beginning</h2>
+<p>Somebody might come up with something better and the Textual
+communities probably have their own strong ideas, but this is
+where my thoughts and experiments are at now.</p>
+<blockquote>
+<div>Image credits: <a class="reference external" href="http://fav.me/d71hioq">When it rains..dear by NaBHaN</a> , <a class="reference external" href="http://fav.me/d6ye4hj">Pack-man by NaBHaN</a> , <a class="reference external" href="http://commons.wikimedia.org/wiki/File:Bplustree.png">Bplustree by Grundprinzip</a></div></blockquote>
+</div>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>May 28, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/05/28/modern_mounting_with_udisks2.html">Modern Mounting with Udisks2</a></h1>
+<img alt="../../../_images/mounted.jpg" src="_images/mounted.jpg"/>
+<p>In this post we look at the changes in disk mounting and then look at
+the udisksctl command which allows you to automount disks from the
+command line. Feel free to skip past the background info if you just
+want to learn how to use the command.</p>
+<div class="section" id="background">
+<h2>Background</h2>
+<p>In the beginning (Thursday, 1 January 1970?) to add a storage device
+(such as a hard disk) to a computer was an infrequent affair, and
+required the machine to be turned off.</p>
+<p>So the classic system of disk mounting on a Posix (‘Unix-like’) system
+was for the system administrator to list all the disks in a plain text
+file systems table, which on most systems can be found in the file
+/etc/fstab.</p>
+<p>Nowadays servers often have the ability to add and remove disks
+without turning the machine off. Even in desktop computers, SATA
+drives have this facility too at least according to the SATA drive -
+but it depends a lot on the manufacturer of motherboard controller
+actually following the standard so it is not usually worth the risk.</p>
+<p>The main thing that has really brought hotplugging into use is
+external disks such as USB drives and other trendy connectors that
+come and (mostly) go such as Firewire, eSata, Thunderbolt, etc.</p>
+<img alt="../../../_images/duck.jpg" src="_images/duck.jpg"/>
+<p>In the early 2000s, the first attempt to cope with this was called
+HAL - Hardware Abstraction Layer, which did what it said on the tin,
+provided a layer between device nodes and the user of the nodes, so
+storage devices (and other hardware) can be added and removed without
+rebooting this system and without rewriting the /etc/fstab file.</p>
+<p>Then everything gets replaced a dizzying number of times (DeviceKit,
+devfs, etc) as better approaches are discovered in a fast moving
+period of hardware development, udev eventually won and was the main
+thing for the rest of the decade.</p>
+<p>When a device is added or removed from the system, the Linux kernel
+notices and sends out an event. Udev is a daemon that waits around
+listening for these events and then responding accordingly. udev runs
+in user space not kernel space which is good for security as you
+cannot plug in a USB stick and take over the kernel like on some
+proprietary operating systems.</p>
+<p>In 2012, the <a class="reference external" href="http://article.gmane.org/gmane.linux.hotplug.devel/17392">udev project merged</a> into the systemd project; systemd is
+the next generation (or current generation for some distributions)
+system and service manager. Systemd is really cool and is being
+adopted by most of the major distributions but it is still a year or
+two away in some cases depending on their release cycles.</p>
+<p>Anyway, the point is that if you want to control disks on the command
+line and you are using the mount command you are 20 years out of
+date. Enough history, lets get to the flesh.</p>
+<img alt="../../../_images/usb.jpg" src="_images/usb.jpg"/>
+</div>
+<div class="section" id="command-line-usage">
+<h2>Command Line Usage</h2>
+<p>When you hot plug disks in the system, the graphical interface
+automatically reacts and provides buttons to mount, unmount and so
+on. However, if you have accessed a machine remotely, or just like to
+use the command line, then this post will tell you how to use the same
+automounting approach as the GUI.</p>
+<p>For a system controlled by udev (or systemd), one command line tool is
+called udisks. It has two versions, in the original version 1, the
+command is udisks, for the second version udisks2, it is udisksctl.</p>
+<p>If you don’t have these commands already installed then you will have
+to install the udisks2 or udisks packages. In the case of the Debian
+distribution, udisks is in Wheezy and udisks2 is in Jessie. I seem to
+have both installed for some reason, possibly because I started at
+Wheezy and upgraded to Jessie.</p>
+<p>Anyway, we will look at the newest one, udisksctl.</p>
+</div>
+<div class="section" id="udisksctl">
+<h2>udisksctl</h2>
+<p>The main commands follow, there are several more that can be seen with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>udisksctl <span class="nb">help</span>
+</pre></div>
+</div>
+<p>To see a list of disks attached to the system:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>udisksctl status
+</pre></div>
+</div>
+<p>For a very in depth list of disk information:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>udisksctl dump
+</pre></div>
+</div>
+<p>To mount a filesystem:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>udisksctl mount -b /dev/sdb1
+</pre></div>
+</div>
+<p>You don’t need to give a location, it will sort that out automatically
+for you. On my system it mounts the disk at /media/username/label
+where username is obviously your username and label is the label of
+the disk partition, other distributions may deal with it differently.</p>
+<p>To unmount a filesystem:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>udisksctl unmount -b /dev/sdb1
+</pre></div>
+</div>
+<p>Note that the command is unmount with an N, not umount like the
+classic command.</p>
+<p>Note that these command names autocomplete which is kinda cool.</p>
+</div>
+<div class="section" id="udisks">
+<h2>udisks</h2>
+<p>The old udisks command is pretty similar except instead of giving a command
+name, you give an argument, e.g. to get the full disk information:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>udisks --dump
+</pre></div>
+</div>
+<p>Instead of status, it has –enumerate. This option lists partitions instead
+of physical disks like in the newer udisksctl.</p>
+</div>
+<div class="section" id="go-forth-and-mount">
+<h2>Go forth and mount</h2>
+<p>So udisksctl is pretty cool, we can now mount and unmount disks from
+the command line in the same way as the GUI. Do remember that the disk
+information from the udisksctl dump command can quite be useful when
+wanting to know about the disks attached to a system.</p>
+<blockquote>
+<div>Image Credits: <a class="reference external" href="http://fav.me/d76l5bw">Duck, duck, duck... by PartTimeCowboy</a>, <a class="reference external" href="http://fav.me/d2t1oce">On the wall by Millita</a>, <a class="reference external" href="http://fav.me/dv7ofu">USB Device Not Recognized by photonFUEL</a></div></blockquote>
+</div>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>May 27, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/05/27/python_long_type.html">Python’s Disappearing Long Type</a></h1>
+<img alt="../../../_images/robotspider.png" src="_images/robotspider.png"/>
+<p><em>Note: everything below refers to the default (missionary position) C
+implementation of Python.</em></p>
+<p>If you are converting Python code from Python 2 to Python 3, you might
+notice that the conversion tool transforms any uses of <em>long()</em> into
+<em>int()</em>. If that confuses you, this post will hopefully make it clear.</p>
+<p>Before Python 2.2, there was a clear distinction between two of the
+Python numerical types, the <em>int</em> type and the Python <em>long</em> type.</p>
+<p>Firstly, Python’s <em>int</em> type was implemented as a signed long. So a Python
+<em>int</em> takes 32 bits of memory, which while not as efficient as some
+really optimised approach using shorter types, is still very fast
+indeed.</p>
+<p>Secondly, Python’s <em>long</em> type is an integer of unlimited size (well until you
+run of RAM - which would be an unrealistically massive number not
+useful for anything).</p>
+<p>Python’s <em>long</em> type does not map directly to a C type, it is a custom
+type implemented in the Python source code somewhere which I guess
+uses a C struct or whatever. As you might imagine, using the Python
+<em>long</em> type is significantly more RAM intensive and slower than the Python
+<em>int</em> type, but in reality it is rarely a problem (see below).</p>
+<p>Hans Fangohr <a class="reference external" href="http://www.southampton.ac.uk/~fangohr/blog/performance-of-pythons-long-data-type.html">did a little performance testing</a> and found that
+Python’s long type is about three times slower than the Python’s <em>int</em>
+type.</p>
+<p>Unified <em>ints</em> were <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0237/">brought in for Python 2.2</a>. This starts off as a
+Python <em>int</em> but transforms magically to a Python <em>long</em> if it needs
+to. Here is how it works in Python 2.2 to 2.7:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+<span class="go">9223372036854775807</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
+<span class="go">&lt;type 'int'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">9223372036854775808L</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;type 'long'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">long</span>
+<span class="go">&lt;type 'long'&gt;</span>
+</pre></div>
+</div>
+<p>Note that when we add 1 to sys.maxsize, the result has an L suffix to
+denote it is a Python <em>long</em> and no longer a 32 bit number.</p>
+<p>In Python 3, it works in a similar the way, however the fact you are
+no longer using a 32 bit type is now completely hidden away from the
+user:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+<span class="go">9223372036854775807</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
+<span class="go">&lt;class 'int'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">9223372036854775808</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;class 'int'&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">long</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name 'long' is not defined</span>
+</pre></div>
+</div>
+<p>This time, when we add 1 to sys.maxsize, the result has no L suffix;
+trying to call the long constructor function causes an exception
+because it does not exist anymore in Python 3.</p>
+<p>Of course, the fun of Python is that being a high level language, we
+normally don’t really care as long a we get a number; this is it
+rightly got changed it to be one unified type.</p>
+<p>One might design a high performance application not to use the Python
+<em>long</em> type if it turns out to be a bottleneck. However, normally you
+would have other bigger insurmountable bottlenecks in your
+software/hardware/network stack so you don’t care about this.</p>
+<p>However, if you are working on a multi-language project, especially if
+you are using Python alongside a lower level language like C, then it
+is useful to know what is going on underneath the Python types.</p>
+<p>The Python float type is implemented as a C double. This doesn’t
+change across versions. Several other numeric types are available in
+Python of course.</p>
+<p>So if you see <em>long</em> being converted to <em>int</em> by the 2to3 conversion
+tool, now you know why.</p>
+<blockquote>
+<div>Image Credit: <a class="reference external" href="http://fav.me/d52n1d5">The Spiderbot by Raikoh</a></div></blockquote>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>March 10, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/03/10/the_digital_text.html">The Digital Text</a></h1>
+<p>In this post we will example the digital text and how and why it is encoded.</p>
+<div class="section" id="denarius">
+<h2>Denarius</h2>
+<p>Wars are often an unexpected event, and a lot of the major currency
+developments in the 19th and 20th centuries were due to wars. In the
+ancient world it was no different. The requirement to quickly gather
+resources required an efficient form of money.</p>
+<p>During the Second Punic War, in 211 BC, Rome brought out the Denarius,
+which means ‘containing ten’ - because one silver Denarius was worth
+ten bronze (later copper) Asses.</p>
+<p>During the Third Punic war, in 140 BC, Rome decided to go hexadecimal,
+where one silver-coloured Denarius became worth 16 copper Asses.</p>
+<p>The silver-coloured Denarius was considered a day’s wages for a
+soldier. The gold-coloured Solidus varied in value but eventually
+stabilised by the 8th century as 12 denarii.</p>
+<p>The Romans carried spread currency around and in Britain, the denarius
+became the penny but was still written as d until 1971 e.g. 5d for 5
+pence.</p>
+<p>12d made a shilling, which is the Anglo-Saxon term for the
+Solidus. The shilling was in the 16th century pegged to the value of a
+cow in Kent market.</p>
+<p>Twenty shilling made a pound which was named after the unit of mass, a
+pound in cash was originally worth the value of a pound weight of silver
+(which is now about £300).</p>
+<p>The pound of a unit of mass is itself Roman of course, from libra,
+which is why pound is shortened to lb. The pound £ sign was originally
+an L. 1 lb in mass is 16 ounces.</p>
+<p>Part the deal when Britain applied to join the European Economic
+Community in the 1960s and 1970s, was that we got rid of all these
+crazy measurements and adopted metric, also known as scientific
+measurements, which we did eventually, to a certain extent. For
+example, milk, beer and cider are officially sold in units of 568 mL!</p>
+<p>So until recently, the idea of non-base 10 measurements was completely
+normal.</p>
+</div>
+<div class="section" id="binary">
+<h2>Binary</h2>
+<p>George Boole was a theologian who was also one of the greatest
+mathematicians of the 19th Century.Boole understood mathematics and
+religion as intertwined. George Boole believed that studying
+mathematics would help reveal a new understanding of God.</p>
+<img alt="../../../_images/george_boole.jpg" src="_images/george_boole.jpg"/>
+<p>More on George Boole:
+<a class="reference external" href="http://zeth.net/archive/2007/07/19/what-is-truth-part-3-all-you-need-is-one-and-zero/">http://zeth.net/archive/2007/07/19/what-is-truth-part-3-all-you-need-is-one-and-zero/</a></p>
+<p>The core idea that all knowledge and thought could be reduced to two
+factors nothing (0) and God (1), had long been discussed, for example
+by the the Jesuit Gottfried Leibniz writing in the 17th
+Century. However, Boole had the mathematical knowledge to take the
+idea and build a complete system of logic around it.</p>
+<img alt="../../../_images/yin_and_yang.png" src="_images/yin_and_yang.png"/>
+<p>Everything is either True (God - 1) or False (nothing - 0):</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="mi">1</span> <span class="ow">or</span>  <span class="mi">0</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="ow">or</span>  <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="ow">or</span>  <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">0</span> <span class="ow">or</span>  <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+  <span class="ow">not</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="ow">not</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Everything that is not God is nothingness, everything that is
+something is God. God fills the nothingness but the nothingness cannot
+conquer God.</p>
+<p>Any number can be represented by any sequence of bits. A bit is 0 or
+a 1.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%"/>
+<col width="50%"/>
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Binary</th>
+<th class="head">Decimal</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>100</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>101</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>110</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>111</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>1000</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>1001</td>
+<td>9</td>
+</tr>
+<tr class="row-even"><td>1010</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>1011</td>
+<td>11</td>
+</tr>
+<tr class="row-even"><td>1100</td>
+<td>12</td>
+</tr>
+<tr class="row-odd"><td>1101</td>
+<td>13</td>
+</tr>
+<tr class="row-even"><td>1110</td>
+<td>14</td>
+</tr>
+<tr class="row-odd"><td>1111</td>
+<td>15</td>
+</tr>
+<tr class="row-even"><td>10000</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>Traditionally, eight bits was called a byte (more correctly it is an
+octet). Four bits is a nibble.</p>
+<p>A computer processor has lots of microscopic transistors. The CPU in
+my laptop (the Intel Ivy Bridge) has 1.4 billion of them. Each
+transistor is like a switch with an on and off state.</p>
+</div>
+<div class="section" id="hexadecimal">
+<h2>Hexadecimal</h2>
+<p>Binary is very low level. The first level of abstraction over binary is called hexadecimal.</p>
+<p>In previous lecture, we looked at how and when and where computing was
+developed. These early computer developers choose the most efficient
+representation. As we mentioned earlier, until recently non-base 10
+measurements were completely normal.</p>
+<p>Hexadecimal (‘hex’ for short) is counting in base 16, here is the
+table from above with hex as well:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%"/>
+<col width="22%"/>
+<col width="39%"/>
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Binary</th>
+<th class="head">Hex</th>
+<th class="head">Decimal</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>100</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>101</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>110</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>111</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>1000</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>1001</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="row-even"><td>1010</td>
+<td>a</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>1011</td>
+<td>b</td>
+<td>11</td>
+</tr>
+<tr class="row-even"><td>1100</td>
+<td>c</td>
+<td>12</td>
+</tr>
+<tr class="row-odd"><td>1101</td>
+<td>d</td>
+<td>13</td>
+</tr>
+<tr class="row-even"><td>1110</td>
+<td>e</td>
+<td>14</td>
+</tr>
+<tr class="row-odd"><td>1111</td>
+<td>f</td>
+<td>15</td>
+</tr>
+<tr class="row-even"><td>10000</td>
+<td>10</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>Now it is easy to convert any binary number to hex. You just split it
+up into nibbles from the right.</p>
+<p>So this number:</p>
+<p>11111011110</p>
+<p>Split up is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="mi">0111</span> <span class="mi">1101</span> <span class="mi">1110</span>
+  <span class="mi">7</span>    <span class="n">d</span>    <span class="n">e</span>
+</pre></div>
+</div>
+<p>So in hex it is 7de.</p>
+<p>What number is it in decimal? Well that is more complicated. Going
+from binary to decimal requires you to split the binary number up into
+parts:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/>10000000000 1024
+1000000000   512
+100000000    256
+10000000     128
+1000000       64
+10000         16
+1000           8
+100            4
+10             2
+
+1024 + 512 + 256 + 128 + 64 + 16 + 8 + 4 + 2 = ?
+</pre></div>
+</div>
+<p>So data is electrical impulses in a transistor, which represent 1 and
+0, which are then hexadecimal numbers.</p>
+<p>Now we have numbers, we can now encode characters. Each character is given a hex number.</p>
+<p>So 41 in hex (which is 65 in decimal) is “latin capital letter A”.</p>
+<p>There are different encodings (mapping between numbers and characters)
+but the only one that really matters in 2014 is called UTF-8 commonly
+called Unicode (although there are other forms of Unicode which did
+not win).</p>
+<p>UTF-8 has room for 1,112,064 different characters and symbols which
+aim to represent all of the world’s languages.</p>
+<p>The first 128 characters are carried over from an older standard
+called ASCII. The first 32 of these are historic control characters
+for controlling printers and teletype devices (remember those from a
+previous lecture?).</p>
+<p>20 in hex (so 32 in decimal) is the empty space, then we get
+punctuation, then we get the numbers and so more punctuation etc then
+the letters in upper case then some more symbols then the letters in
+lower case etc.</p>
+<p>This gets us to 7E (126) which is ~, and we have all of the English
+keyboard covered. The next 129 characters are Western European
+languages (German etc) and then it carries on after that through all
+the world’s letters and symbols.</p>
+<p>Including some really fun stuff added to give compatibility with
+Japanese mobile phones:</p>
+<p><a class="reference external" href="http://www.fileformat.info/info/unicode/char/1f4a9/index.htm">http://www.fileformat.info/info/unicode/char/1f4a9/index.htm</a>
+<a class="reference external" href="http://www.fileformat.info/info/unicode/char/1f302/index.htm">http://www.fileformat.info/info/unicode/char/1f302/index.htm</a>
+<a class="reference external" href="http://www.fileformat.info/info/unicode/block/miscellaneous_symbols_and_pictographs/images.htm">http://www.fileformat.info/info/unicode/block/miscellaneous_symbols_and_pictographs/images.htm</a>
+<a class="reference external" href="http://en.wikipedia.org/wiki/Emoji">http://en.wikipedia.org/wiki/Emoji</a></p>
+<p>So a digital text is a series of these hexadecimal numbers representing
+characters and symbols including spaces (20 in hex/32 in decimal) and
+control codes such as line breaks (0A in hex, 10 in decimal) and so
+on.</p>
+<p>Here is a nice chart version of the first 127 (ASCII) characters:
+<a class="reference external" href="http://web.cs.mun.ca/~michael/c/ascii-table.html">http://web.cs.mun.ca/~michael/c/ascii-table.html</a></p>
+<p>So you can decode these characters (with some spaces added to make it
+simpler):</p>
+<p>41 6e 64 20 74 68 65 72 65 66 6f 72 65 20 6e 65 76 65 72 20 73 65 6e
+64 20 74 6f 20 6b 6e 6f 77 20 66 6f 72 20 77 68 6f 6d 20 74 68 65 20
+62 65 6c 6c 20 74 6f 6c 6c 73 3b 20 49 74 20 74 6f 6c 6c 73 20 66 6f
+72 20 74 68 65 65 2e</p>
+<p>To make it clear that something is a hex value, it is often prefixed
+with 0x or x or U+.</p>
+<p>This is as good as it far as it goes. But to make practical use of the
+data, just loads of text doesn’t help that much.</p>
+<p>If we want to make a digital representation of a humanities artefact
+like a manuscript, we need to use a file format. Otherwise the digital
+text is of limited use for other scholars and software.</p>
+</div>
+<div class="section" id="why-not-use-a-word-processor">
+<h2>Why not use a word processor?</h2>
+<p>A word processor is an approximation of a late 19th century typewriter. A word processor will not help in transcribing this:</p>
+<img alt="../../../_images/codex_sinaiticus.jpg" src="_images/codex_sinaiticus.jpg"/>
+<p>Let alone this:</p>
+<img alt="../../../_images/P52_recto.jpg" src="_images/P52_recto.jpg"/>
+<p>What about this:</p>
+<img alt="../../../_images/hamlet.png" src="_images/hamlet.png"/>
+<p>How about this:</p>
+<img alt="../../../_images/ylwenzipu.jpg" src="_images/ylwenzipu.jpg"/>
+<p>In the 1980s and onwards, a group of humanities scholars created the
+TEI, which is a set of guidelines for digitally representing
+humanities data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">These</span> <span class="n">Guidelines</span> <span class="n">apply</span> <span class="n">to</span> <span class="n">texts</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">natural</span> <span class="n">language</span><span class="p">,</span> <span class="n">of</span> <span class="nb">any</span> <span class="n">date</span><span class="p">,</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">literary</span> <span class="n">genre</span> <span class="ow">or</span> <span class="n">text</span> <span class="nb">type</span><span class="p">,</span> <span class="n">without</span> <span class="n">restriction</span> <span class="n">on</span> <span class="n">form</span> <span class="ow">or</span> <span class="n">content</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The guidelines can be found online here:</p>
+<p><a class="reference external" href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/">http://www.tei-c.org/release/doc/tei-p5-doc/en/html/</a></p>
+<p>The TEI was initially SGML based then became XML based. What this
+means is that the text of the artefact is typed up, and meaning and extra information is inserted into the text using angle brackets.</p>
+<p>An example of a text encoded using the TEI format:
+<a class="reference external" href="http://epapers.bham.ac.uk/718/1/47.xml">http://epapers.bham.ac.uk/718/1/47.xml</a></p>
+<p>So in this simple line here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="o">&lt;</span><span class="n">w</span> <span class="n">n</span><span class="o">=</span><span class="s2">"6"</span><span class="o">&gt;</span><span class="n">testimonium</span><span class="o">&lt;/</span><span class="n">w</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The element &lt;w&gt; which means word, has an attribute n with value 6
+which quite obviously tells us that it is word number 6. The text of
+the word then follows, and then the word ends with a closing tag: &lt;/w&gt;</p>
+<p>As explained in the preface to the TEI guidelines, part of the reason
+for them was to enable sharing of data and a new generation of shared
+TEI-supporting software to emerge.</p>
+<p>Sadly that never really happened. The problem with the TEI is that it
+is a huge standard that doesn’t really simplify the problem space in
+any way. There are hundreds of available elements and every author of
+a TEI document uses their own subset it in his/her own way.</p>
+<p>Churchill famously said that “Democracy is the worst form of government, except for all those other forms that have been tried from time to time.”</p>
+<p>TEI is the worst form of encoding, except for all the other forms that have been tried from time to time.</p>
+<p>Wizard of OZ</p>
+<p><a class="reference external" href="https://github.com/TEI-examples/tei-examples/blob/master/nypl.org/WizardOfOz.xml">https://github.com/TEI-examples/tei-examples/blob/master/nypl.org/WizardOfOz.xml</a></p>
+</div>
+<div class="section" id="json">
+<h2>JSON</h2>
+<p>Current interest is in storing text in JSON. Here is a really simple example:</p>
+<p><a class="reference external" href="http://zeth.net/examples/example.json">http://zeth.net/examples/example.json</a></p>
+<p>It shows a single verse.</p>
+</div>
+<div class="section" id="plain-text-formats">
+<h2>Plain Text formats</h2>
+</div>
+<div class="section" id="collating">
+<h2>Collating</h2>
+<p>Collating is comparing texts together. Show examples.</p>
+</div>
+
+        </div>
+        <div class="postmeta">
+        
+        
+        
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>February 09, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/02/09/the_politics_ethics_and_social_context_of_digital_culture.html">The politics, ethics and social context of digital culture</a></h1>
+<p>I thought it might be useful to give a non-digital example first. We
+will see whether it really helps or not!</p>
+<div class="section" id="trams-a-case-study-in-technology">
+<h2>Trams: a case study in technology</h2>
+<p>In 1700, what we now call South Birmingham was a patchwork of small
+subsistence tenant farms, but as people left the land to work in
+factories and other industrial jobs, these farms gradually became larger.</p>
+<p>Here is a map of Birmingham in 1831, as you can see South Birmingham
+does not really exist yet. The built up areas are what is now known as
+the city centre:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/birmingham1831.png"><img alt="Image of Birmingham in 1831" src="_images/birmingham1831_small.png"/></a>
+<p>One of these larger farms was called the Grange Estate, in the
+following image, Isaac Bate and his family pose outside the farmhouse
+in 1876:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/batesfamily.png"><img alt="Image of a Grange Farmhouse" src="_images/batesfamily_small.png"/></a>
+<p>At the turn of the 20th Century, there was a massive housing boom and
+the Grange Estate was bought in 1895 and zoned for housing and roads.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/grangeplan.png"><img alt="../../../_images/grangeplan_small.png" src="_images/grangeplan_small.png"/></a>
+<p>It is like Sim-City, everything needed for the good life is provided,
+including shops and the important combination of a church and a
+brewery.</p>
+<p>Victorian industrial workers would walk or cycle along quiet
+tree-lined avenues and then take the tram and train for longer
+distance travelling.</p>
+<p>So far so good. You will notice there is no car parks, no off street
+parking, no garages. The total number of cars in the world was at this
+point was approximately 25, most of which were Benz hand made cars in
+Germany.</p>
+<p>However, after the war, the brave new world required that the trees,
+train station and tramlines were all removed to make more space for
+the motorcar.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/morrisminor.jpg"><img alt="../../../_images/morrisminor_small.png" src="_images/morrisminor_small.png"/></a>
+<p>The Grange Estate is now overflowing with cars, and the Alcester Road is
+a traffic jam for much of the day. Traffic accidents are the leading cause of
+death for children and Birmingham is one of the most obese cities in Europe.</p>
+<p>Car ownership in Birmingham peaked at 50% of households, one of the
+highest rates of car ownership for a large city. There is not, and
+never will be, enough space for everyone to own a car in dense urban
+areas like Birmingham.</p>
+<p>Cars socially exclude people who do not own them, and are dangerous to
+people walking and cycling, and prevent community building as you
+cannot talk to other residents while stuck in a small metal box.</p>
+<p>There are currently 380,000 cars in Birmingham (8000 are added every
+year). As the population of Birmingham is predicted to continue
+growing, the car is becoming increasingly unsustainable. The council
+have produced a plan:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/birmingham_transport_plan.png"><img alt="../../../_images/birmingham_transport_plan_small.png" src="_images/birmingham_transport_plan_small.png"/></a>
+<p>You guessed it, the plan is to reopen the train stations and put the trams
+back. Getting us precisely back to where we were in 1896.</p>
+<p>The new Birmingham trams have a maximum capacity of 210. Cars in Birmingham
+have an average occupancy rate of 1.2.</p>
+<p>A car driven for an hour every day, spends 4% of its time in use,
+96% of its time rusting and getting in the way.</p>
+<p>Cars are overproduced and inefficiency used. However, this
+overproduction has provided large numbers of good jobs - 145,000 in
+the UK alone currently work in the automotive industry.</p>
+<p>If everyone moves to trains, trams and bikes, where do the jobs come from?</p>
+<p>If Birmingham gets its comprehensive tram network, it needs just 120 tram sets to provide transport for the whole city (service every 6 minutes each way).</p>
+<p>What does Birmingham’s 60 year love affair with the car tell us about
+technology?</p>
+<ul class="simple">
+<li>Increased technological efficiency destroys jobs (while creating
+others).</li>
+<li>Sometimes you have to go “back to the future”</li>
+<li>Not all new technologies are necessarily a good idea</li>
+<li>Technology is never un-invented, everything survives somewhere but
+the rate of growth or decline is the important thing to notice.</li>
+</ul>
+<p>The history of the computer is much like the history of the tram.</p>
+</div>
+<div class="section" id="the-real-history-of-computing-short-version">
+<h2>The real history of computing (short version)</h2>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/jacquard_loom.jpg"><img alt="../../../_images/jacquard_loom_small.jpg" src="_images/jacquard_loom_small.jpg"/></a>
+<p>The first programmable object is the Jacquard Loom in 1801, it used
+punch cards which allowed different weaving patterns.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Ada_Lovelace.jpg"><img alt="../../../_images/Ada_Lovelace_small.jpg" src="_images/Ada_Lovelace_small.jpg"/></a>
+<p>The digital age almost begins in 1843, when Lady Ada Lovelace (the
+daughter of poet Lord Byron) wrote the first computer programme,
+algorithm for Charles Babbage Analytical Engine to compute Bernoulli
+numbers.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/adalovelaceplaque.jpg"><img alt="../../../_images/adalovelaceplaque_small.jpg" src="_images/adalovelaceplaque_small.jpg"/></a>
+<p>The programme was written as part of a set of examples of what could
+be run on Charles Babbage’s computer the Analytical Engine. Sadly, the
+British government decided to cancel his research funding so this
+machine was never finished, but it would have been the first general
+purpose digital computer.</p>
+<p>Here is his earlier machine called the difference engine:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Babbage_Difference_Engine.jpg"><img alt="../../../_images/Babbage_Difference_Engine_small.jpg" src="_images/Babbage_Difference_Engine_small.jpg"/></a>
+<p>The digital age tries to begin again in 1936 when Alan Turing explains
+in a seminar paper that any real-world general-purpose computer or
+computer language can approximately simulate any other real-world
+general-purpose computer or computer language, i.e. it is “Turing
+complete”.</p>
+<img alt="../../../_images/Alan_Turing_photo.jpg" src="_images/Alan_Turing_photo.jpg"/>
+<p>Turing went on to create this, the Bombe, a machine designed to
+decipher encrypted German messages during World War II.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Bletchley_Park_Bombe.jpg"><img alt="../../../_images/Bletchley_Park_Bombe_small.jpg" src="_images/Bletchley_Park_Bombe_small.jpg"/></a>
+<p>The successor was called Colossus, and is starting to be a
+recognisable computer.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/colossus.jpg"><img alt="../../../_images/colossus_small.jpg" src="_images/colossus_small.jpg"/></a>
+<p>Alan Turing was not appreciated during his lifetime, to put it lightly. However, now he is a man of many memorials, including these:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Alan_Turing_Olympic_Torch.jpg"><img alt="../../../_images/Alan_Turing_Olympic_Torch_small.jpg" src="_images/Alan_Turing_Olympic_Torch_small.jpg"/></a>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Turing_Plaque.jpg"><img alt="../../../_images/Turing_Plaque_small.jpg" src="_images/Turing_Plaque_small.jpg"/></a>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Sackville_Park_Turing_plaque.jpg"><img alt="../../../_images/Sackville_Park_Turing_plaque_small.jpg" src="_images/Sackville_Park_Turing_plaque_small.jpg"/></a>
+<p>After that we have the first non-military computer, the Manchester
+Mark I in 1949, and pretty much from here the digital age has begun.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/mark1.jpg"><img alt="../../../_images/mark1_small.jpg" src="_images/mark1_small.jpg"/></a>
+<p>The next image shows the Atlas, also at the University of Manchester,
+the world’s most powerful computer in 1962. It had more computer
+capacity than the rest of the United Kingdom put together.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/University_of_Manchester_Atlas,_January_1963.jpg"><img alt="../../../_images/University_of_Manchester_Atlas,_January_1963_small.jpg" src="_images/University_of_Manchester_Atlas,_January_1963_small.jpg"/></a>
+<p>This is the 1970 PDP-11 operated here by Ken Thompson and Dennis Ritchie.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/pdp11.jpg"><img alt="../../../_images/pdp11_small.png" src="_images/pdp11_small.png"/></a>
+<p>Thompson is sitting at a teletype terminal. Where you code into
+the keyboard and the computer responds by printing out the result.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Teletype_with_papertape_punch_and_reader.jpg"><img alt="../../../_images/Teletype_with_papertape_punch_and_reader_small.jpg" src="_images/Teletype_with_papertape_punch_and_reader_small.jpg"/></a>
+<p>Shortly afterwards, video terminals were invented. Such as this one:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/DEC_VT100_terminal.jpg"><img alt="../../../_images/DEC_VT100_terminal_small.jpg" src="_images/DEC_VT100_terminal_small.jpg"/></a>
+<p>It may look like a computer, but it is actually just a screen and a
+keyboard, all the processing happens in the mainframe computer
+elsewhere.</p>
+<p>These type of computers can and normally did had multiple terminals,
+sometimes in other rooms or other buildings.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Digital.PDP-11.1970.102646128.jpg"><img alt="../../../_images/Digital.PDP-11.1970.102646128_small.png" src="_images/Digital.PDP-11.1970.102646128_small.png"/></a>
+<p>In the 1970s, it was called time-sharing. Hundreds or thousands of
+terminals could share the same mainframe - which would be maintained
+and updated by specialists.</p>
+<p>I love this next photo, the guy in the front looks like he has the
+universal programmer’s tense expression, i.e. ‘Why the heck is this not
+working now?’.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/ctrlroom-1.jpg"><img alt="../../../_images/ctrlroom-1_small.png" src="_images/ctrlroom-1_small.png"/></a>
+<p>These mainframes ran an operating system called Unix started by
+Thompson and Ritchie. The different terminal users could communicate
+with each other and collaborate.</p>
+<p>The terminals got smarter over time, and even had graphical front ends
+that looked something like this:</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/cde.png"><img alt="../../../_images/cde_small.jpg" src="_images/cde_small.jpg"/></a>
+<p>This was the start of the modern era of computing. Many programs that were written in the 1970s are maintained today. There is a continuous thread that runs from Lovelace and Babbage, through Turing to the real beginning of the digital age in the 1970s.</p>
+<p>So far so good. This is our tram. Next, comes the car, or indeed two of them.</p>
+</div>
+<div class="section" id="personal-computers">
+<h2>1. Personal computers</h2>
+<p>Here is an early attempt from 1969 to market a home computer.</p>
+<img alt="../../../_images/cook.png" src="_images/cook.png"/>
+<p>This particular model was a commercial failure.</p>
+<p>When the PC came out, such this example from 1981, compared to the
+Unix systems of the 1970s and 1980s, they were giant step backwards.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/IBM_PC_5150.jpg"><img alt="../../../_images/IBM_PC_5150_small.jpg" src="_images/IBM_PC_5150_small.jpg"/></a>
+<p>No networking, a single process at once, focused on really dull office
+tasks like typing a letter. The biggest problem looking back was the
+software.</p>
+</div>
+<div class="section" id="the-rise-of-proprietary-software">
+<h2>2. The rise of proprietary software</h2>
+<p>Until this point, the source code of all programs had been shared
+among the largely academic computing world. Everyone could study and
+improve computer programs and share those improvements back to the
+community.</p>
+<p>With the new idea of proprietary software or closed source software,
+you don’t legally own the software anymore, you have merely licensed
+the right to use it under certain conditions.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/Windows1.0.png"><img alt="../../../_images/Windows1.0_small.png" src="_images/Windows1.0_small.png"/></a>
+<p>The source of the software is not shared, you just have compiled
+(unreadable) copy of it. There can now be a difference on what you
+think the software does (something useful) and what it actually does
+e.g. spy on you.</p>
+<p>When you understand this point, you suddenly a realise it is a bad
+idea to licence or use any software that cannot be publicly peer
+reviewed and fixed.</p>
+<p>Proprietary software comes with multiple pages of legalese and asks
+you to tick that you not only read it but also understand it. You have
+to lie in order to start it, and goes downhill from there.</p>
+<p>The Snowden revelations printed <a class="reference external" href="http://www.theguardian.com/world/2013/jul/11/microsoft-nsa-collaboration-user-data">in the Guardian</a> have confirmed what
+we already knew, that Microsoft software has built-in backdoors for
+the NSA to spy on its users. Even scarier is that secret backdoors
+created for Microsoft and the NSA could also be exploited by
+criminals.</p>
+<p>Proprietary software, especially in the form of Microsoft Windows, is
+a temporary aberration in the history of the digital. In 50 years
+time, Microsoft Windows will be considered as important as this
+device:</p>
+<img alt="../../../_images/peppapig.jpg" src="_images/peppapig.jpg"/>
+<p>So lets get back to the trams. There were two massive and related
+developments which happened almost in the background, but would come
+to dominate the digital world.</p>
+</div>
+<div class="section" id="the-rise-of-free-open-source-software">
+<h2>The rise of free/open source software</h2>
+<p>In 1983, a famous programmer in MIT called Richard Stallman began the
+‘Free Software’ movement. As well as being a well known software
+developer (he invented the concept of a live real time text editor and
+started the most widely used compiler today - GCC), he best known as a
+digital philosopher.</p>
+<img alt="../../../_images/rms.jpg" src="_images/rms.jpg"/>
+<p>Stallman argued that software developers had a moral, ethical and
+political duty to enable co-operation and prevent restrictions on the
+ability of users to study, examine, peer review, modify and share
+software. He argued that proprietary software was anti-social, corrupt
+and ultimately self-defeating.</p>
+<p>It is important to understand the difference between the terms
+‘commercial’ and ‘proprietary’. Software can be ‘commercial’ -
+i.e. made by a company for profit, with or without being
+proprietary. Likewise a proprietary program may be made available at
+cost or at no cost.</p>
+<p>He illustrates the concept by comparing ‘a free beer’ with ‘free
+speech’.</p>
+<p>Eric Raymond and Bruce Perens created a later related concept called
+‘open source’, which emphases the practical aspects rather than the
+political and ethical ones. For example, the vast majority of software is
+not created for sale in packaged boxes but is created use within
+companies and institutions where software is not their primary
+purpose. So if this software is shared and improved in a community, it
+gives added value to those who engage in it.</p>
+<p>Almost every major software development of the 1990s and 21st century
+has happened within the Free Software/Open Source world including
+Linux and Android.</p>
+<p>Most importantly, the most famous piece of free/open source software
+of them all, the World Wide Web.</p>
+</div>
+<div class="section" id="the-world-wide-web">
+<h2>The World Wide Web</h2>
+<p>In the early 1990s, the best designed and most powerful information
+protocol was called Gopher. However, despite its technical strengths,
+Gopher eventually lost out because the copyright owner, the University
+of Minnesota, wanted to sell it as proprietary software.</p>
+<p>And finally a Brit again!</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/berners-lee.png"><img alt="../../../_images/berners-lee_small.png" src="_images/berners-lee_small.png"/></a>
+<p>Tim Berners-Lee created World Wide Web, which while technically
+inferior to Gopher, was free software. Anyone could develop a server
+or a client without having to ask or pay anyone for permission. When
+WWW became widely shared in 1993, proprietary Gopher was toast. Gopher
+was eventually re-licensed as free software in 2000, but it was too
+late, WWW had taken over everything.</p>
+<p>Finally, desktop computers had similar networking capabilities to
+1970s mainframes. While they are a lot of people still using Windows,
+these are merely like the 1970s dumb terminals, 83% of web servers are
+running free software. Now with Apple OS X (based on FreeBSD Unix-like
+system), Linux desktops like Ubuntu and the rise of Android based phones
+and tablet (Android is based on the free software operating system
+Linux), almost everyone is running a system which is based on the
+1970s Unix. The 20 years of the Windows aberration is coming to a close.</p>
+<p>Go Linux, go WWW, go Trams, go bikes!</p>
+</div>
+<div class="section" id="academia-and-open-source-software">
+<h2>Academia and Open Source Software</h2>
+<p>Most UK and EU funding bodies now require that any software produced
+in a research project is released as open source software. Software
+developers within the academy, especially those in the humanities, are
+unlikely to be allowed to large pay licensing fees and are expected to
+use open source tools wherever possible.</p>
+<p>Any project that uses the digital is likely to involve some open
+source software.</p>
+</div>
+<div class="section" id="beyond-open-source">
+<h2>Beyond Open Source</h2>
+<p>The WWW has enabled collaboration in many areas, not just
+software. Principles and ideas from open source have been applied to
+other fields.</p>
+<ul class="simple">
+<li>Freedom of Information - providing open access to government
+documents through the Web</li>
+<li>Open Access - unrestricted access via the Web to peer-reviewed
+journal articles and primary data.</li>
+<li>Crowd sourcing - creating content by soliciting contributions from
+online communities - Wikipedia being a prominent example</li>
+<li>Crowd funding - funding projects through soliciting contributions
+from web users - e.g. Kickstarter</li>
+</ul>
+</div>
+<div class="section" id="digital-conduct">
+<h2>Digital Conduct</h2>
+<p>Collaborative and creative online communities are
+self-selecting. People form communities to create something, should
+they also be responsible for social justice?</p>
+<p>Should these collaborative communities enabled by the web and by
+free/open principles have standards of behaviour, if so what should
+they be and who polices them?</p>
+<p>Increasingly these creative communities have published codes of
+conduct, especially regarding communication and discrimination.</p>
+<p>Developing-world criticisms: does attempting to regulate conduct in
+digital creative communities risk the danger of western (especially US
+west-coast) cultural imperialism? How do diversity and social
+policies relate to freedom of speech?</p>
+<p>Does forcing participants to use real names instead of pseudonyms
+cause problems for those with fear of harassment?</p>
+<p>How should gender be dealt with in largely male dominated online
+communities? Are those who run these communities responsible for
+addressing gender imbalances?</p>
+<p>Communities that work primarily online but have conferences or social
+meetings pose particular issues in terms of harassment/unwanted
+attention. E.g. conferences with male to female ratios of 10 to 1 are not
+uncommon.</p>
+</div>
+<div class="section" id="some-further-reading">
+<h2>Some further reading</h2>
+<p>Karen Sandler, 2012 Keynote, (first 25 mins about hacking the software on her defibrillator),
+<a class="reference external" href="http://www.youtube.com/watch?v=5XDTQLa3NjE">http://www.youtube.com/watch?v=5XDTQLa3NjE</a></p>
+<p>Happy Hacking, The Keiser Report, Russia Today, 2012 (start at 12m)
+<a class="reference external" href="http://youtu.be/3o82P4V1vu0?t=12m9s">http://youtu.be/3o82P4V1vu0?t=12m9s</a></p>
+<p>The Zen of Python, Tim Peters, 2004
+<a class="reference external" href="http://www.python.org/dev/peps/pep-0020/">http://www.python.org/dev/peps/pep-0020/</a></p>
+<p>Free Software, Free Society:
+Selected Essays of Richard M. Stallman, 2002
+<a class="reference external" href="http://www.gnu.org/philosophy/fsfs/rms-essays.pdf">http://www.gnu.org/philosophy/fsfs/rms-essays.pdf</a></p>
+<p>The Cathedral and the Bazaar, Eric Raymond 2002
+<a class="reference external" href="http://www.unterstein.net/su/docs/CathBaz.pdf">http://www.unterstein.net/su/docs/CathBaz.pdf</a></p>
+<p>Revolution OS (2001), <a class="reference external" href="http://www.youtube.com/watch?v=CjaC8Pq9-V0">http://www.youtube.com/watch?v=CjaC8Pq9-V0</a></p>
+<p>Biculturalism, Joel Spolsky, 2003
+<a class="reference external" href="http://www.joelonsoftware.com/articles/Biculturalism.html">http://www.joelonsoftware.com/articles/Biculturalism.html</a></p>
+<p>The Code Of Conduct, Jesse Noller, 2012
+<a class="reference external" href="http://jessenoller.com/blog/2012/12/7/the-code-of-conduct">http://jessenoller.com/blog/2012/12/7/the-code-of-conduct</a></p>
+<p>Geek Feminism: Timeline_of_incidents
+<a class="reference external" href="http://geekfeminism.wikia.com/wiki/Timeline_of_incidents">http://geekfeminism.wikia.com/wiki/Timeline_of_incidents</a></p>
+<p>Donna Haraway, “A Cyborg Manifesto: Science, Technology, and Socialist-Feminism in the Late Twentieth Century,” in Simians, Cyborgs and Women: The Reinvention of Nature (New York; Routledge, 1991), pp.149-181.
+<a class="reference external" href="http://www.egs.edu/faculty/donna-haraway/articles/donna-haraway-a-cyborg-manifesto/">http://www.egs.edu/faculty/donna-haraway/articles/donna-haraway-a-cyborg-manifesto/</a></p>
+</div>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>January 13, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/13/crunchbang_linux_tips.html">Three Crunchbang Linux Tips</a></h1>
+<img alt="Image of Debian swirls in black and grey" src="_images/debian-bulbs-by-omns.png"/>
+<p>As <a class="reference external" href="http://zeth.net/2014/01/10/crunchbang.html">talked about previously</a>, my main computers currently have the
+Crunchbang Linux distribution, which is a version of Debian GNU/Linux
+using the Openbox window manager.</p>
+<p>These tips might also be useful for some other Debian or Ubuntu based
+systems.</p>
+<div class="section" id="setting-the-keymap-for-an-apple-keyboard">
+<h2>Setting the keymap for an Apple keyboard</h2>
+<img alt="Image of Apple Keyboard with big keys" src="_images/A1048_british_apple_keyboard.jpg"/>
+<p>While laptops might need flat keys for portability (though I might
+argue the point), I hate typing on them. I like full-sized keys, not
+flaccid little flat ones.</p>
+<p>I once bought an Apple Mac G4, I don’t use it anymore but I still use
+the keyboard I bought for it. Using Linux, it is not too much of a
+problem just to use the IBM layout without (i.e. remembering that the
+double quote mark is above the 2 key for example) but it is worth
+setting it properly in case someone else needs to use my computer.</p>
+<p>I also have an Apple Macbook Pro laptop for work reasons which also
+has the same key layout.</p>
+<p>Anyway, I edited the file called /etc/default/keyboard and set the
+following option:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">XKBVARIANT</span><span class="o">=</span><span class="s2">"mac"</span>
+</pre></div>
+</div>
+<p>I am in Great Britain, so I also need to be sure that the following
+option is set:</p>
+<blockquote>
+<div>XKBLAYOUT=”gb”</div></blockquote>
+<p>Maybe there was a way to change this using a graphical tool, but this
+way worked.</p>
+</div>
+<div class="section" id="creating-screen-layouts-with-arandr">
+<h2>Creating screen layouts with ARandR</h2>
+<img alt="Image of ARandR Screen Layout Editor programme" src="_images/arandr.png"/>
+<p>ARandR Screen Layout Editor is a wonderful tool for setting up your
+monitors.  You can drag them around, change the resolution and rotate
+them in order to create your perfect screen layout.</p>
+<p>To save the configuration, click on ‘Layout’ then ‘Save As’ to save a
+particular configuration.</p>
+<p>You can reload this configuration within the program, but the
+configuration file is itself a simple shell script (which calls xrandr
+with arguments representing what you have picked in the GUI).</p>
+<p>So to automatically configure your screen layout when the graphical
+session first starts, you can append the script to the file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="o">~/.</span><span class="n">config</span><span class="o">/</span><span class="n">openbox</span><span class="o">/</span><span class="n">autostart</span>
+</pre></div>
+</div>
+<p>The fact that a configuration is just a shell script means you can
+easily have multiple layouts for different situations, and either call
+them yourself on the command line, assign desktop shortcuts or use
+other tools to call them, e.g.  you can use cron to change the screen
+configuration at a certain time or write an upstart/systemd script to
+execute it based on some system event etc.</p>
+</div>
+<div class="section" id="dealing-with-not-found-commands">
+<h2>Dealing with not-found commands</h2>
+<img alt="Image of glass smashing with Linux penguin looking through" src="_images/tuxsmash.png"/>
+<p>When using the command line in Ubuntu, if you try to call a
+command/program that has not been installed, it says something like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">The</span> <span class="n">program</span> <span class="s1">'tuxpaint'</span> <span class="ow">is</span> <span class="n">currently</span> <span class="ow">not</span> <span class="n">installed</span><span class="o">.</span> <span class="n">You</span> <span class="n">can</span> <span class="n">install</span> <span class="n">it</span> <span class="n">by</span> <span class="n">typing</span><span class="p">:</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">tuxpaint</span>
+</pre></div>
+</div>
+<p>Here is a more complicated example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">The</span> <span class="n">program</span> <span class="s1">'a2ensite'</span> <span class="ow">is</span> <span class="n">currently</span> <span class="ow">not</span> <span class="n">installed</span><span class="o">.</span> <span class="n">You</span> <span class="n">can</span> <span class="n">install</span> <span class="n">it</span> <span class="n">by</span> <span class="n">typing</span><span class="p">:</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">apache2</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">common</span>
+</pre></div>
+</div>
+<p>What actually happens here is a Python script appropriately named
+command-not-found is called which then looks up what package is needed
+to run the program.</p>
+<p>If you want the same behaviour on Crunchbang, just do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">command</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">found</span>
+</pre></div>
+</div>
+<p>The problem with this utility on older hardware is when you
+accidentally make a typo that is actually a valid command somewhere,
+you get a second or so delay while it searches Apt’s cache, which
+could get annoying quite quickly.</p>
+<p>If you want to search for a particular package, you can just use the
+pre-installed apt-cache command, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">cache</span> <span class="n">search</span> <span class="n">tuxpaint</span>
+</pre></div>
+</div>
+<p>All the packages to do with tuxpaint are listed in the
+terminal. However, this does not go down to the file level like
+command-not-found does. For example, the other example of a2ensite
+finds nothing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">cache</span> <span class="n">search</span> <span class="n">a2ensite</span>
+</pre></div>
+</div>
+<p>I don’t know a way of searching for a package by command using the
+stock Crunchbang install. However, you can install the apt-file
+package, which allows searches like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">apt</span><span class="o">-</span><span class="n">file</span> <span class="n">search</span> <span class="n">filename</span>
+</pre></div>
+</div>
+</div>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="categories/crunchbang.html">crunchbang</a>, <a href="categories/linux.html">linux</a>, <a href="categories/notetoself.html">notetoself</a>, <a href="categories/tips.html">tips</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>January 12, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/12/installing_multiple_versions_of_firefox.html">Installing Multiple Versions of Firefox</a></h1>
+<img alt="Iceweasel logo" src="_images/500px-Iceweasel_icon.svg.png"/>
+<p>8Y3U5AJRHKZ2</p>
+<p>So I want to test my web application using multiple versions of Firefox,
+especially the latest version, but I do not want to mess with my default system
+version (which is in fact Iceweasel :).</p>
+<p>You can make this as over-complicated as you like. The simple way is to ignore
+apt and your system packaging system and run the test browser completely in user
+space.</p>
+<p>The downside of this is that you will not get automatic security updates, so
+you have to keep an eye yourself for them and download new versions yourself.
+On the bright side, the browser is running as an unprivileged user and you are
+only testing your own site.</p>
+<p>So you just download the archive from Mozilla. So I am using 64 bit Linux and
+I speak British English, so I used the following URL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">firefox</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">/</span><span class="n">en</span><span class="o">-</span><span class="n">GB</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>You can edit the URL as appropriate and then unpack it e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">tar</span> <span class="n">jxf</span> <span class="n">firefox</span><span class="o">*.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+<p>Inside the new firefox directory there is an executable named, somewhat
+unsurprisingly, firefox, call it in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="o">./</span><span class="n">firefox</span> <span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">remote</span> <span class="o">-</span><span class="n">P</span>
+</pre></div>
+</div>
+<p>This will pop up a little dialogue that allows you to choose the user profile,
+so create a new one:</p>
+<img alt="Image of firefox user profile dialogue" src="_images/firefox_user_profile_dialog.png"/>
+<p>You can see I have created a profile called Firefox26. In this way, the new
+Firefox version will not mess with the main system version. Click ‘Start
+Firefox’ to launch it. Having a new profile for each test version will keep
+things both sane and nicely decoupled.</p>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/firefox.html">firefox</a>, <a href="tags/webdevelopment.html">webdevelopment</a>, <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>January 11, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/11/building_python_from_source_on_debian_or_ubuntu.html">Building Python from source on Debian or Ubuntu</a></h1>
+<img alt="Cruchbang Linux Logo" src="_images/500px-Python-logo-notext.svg.png"/>
+<p>Python is available pre-built for more or less every platform and if you are
+using Linux or Mac then you have it already. If you don’t know why would you want to build Python from source, then this post is probably not for you.</p>
+<p>I wanted to test things on a newer version of Python than is currently available
+in Debian stable. There are also things I want to improve in the standard
+library, but sadly I do not have time for that at the present moment - but a man
+is allowed to dream.</p>
+<p>Building Python is explained in the <a class="reference external" href="http://docs.python.org/devguide/setup.html">Python Developer’s Guide</a>. This post is a
+commentary on that, and I am assuming you are using a Debian or Ubuntu based
+operating system on your computer.</p>
+<p>To start with you need the Mercurial source control management tool, commonly
+known as hg. If you don’t have it, you can get it with the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mercurial</span>
+</pre></div>
+</div>
+<p>Now you need to get the source code of Python, as the developer guide says:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">hg</span> <span class="n">clone</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">hg</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">cpython</span>
+</pre></div>
+</div>
+<p>You will get output like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">destination</span> <span class="n">directory</span><span class="p">:</span> <span class="n">cpython</span>
+<span class="n">requesting</span> <span class="nb">all</span> <span class="n">changes</span>
+<span class="n">adding</span> <span class="n">changesets</span>
+</pre></div>
+</div>
+<p>Now you have to wait for a little bit; obviously there has been quite a lot of
+changes since Python began in 1989, so this may take ten minutes (depending on
+the speed of your computer). There is no progress bar or anything, so you have
+to just have faith that something is happening. Eventually, I ended up with
+301 M in my new cpython directory.</p>
+<p>While that is working, open a new terminal tab and start installing the
+dependencies. As the guide points out, the following gives the minimum
+required:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">build</span><span class="o">-</span><span class="n">dep</span> <span class="n">python3</span>
+</pre></div>
+</div>
+<p>Several modules in the standard library depend on optional dependencies, to get
+them all you can do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libreadline6</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span> <span class="n">liblzma</span><span class="o">-</span><span class="n">dev</span> <span class="n">libbz2</span><span class="o">-</span><span class="n">dev</span> <span class="n">tk8</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">dev</span> <span class="n">blt</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgdbm</span><span class="o">-</span><span class="n">dev</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libncurses5</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>Feel free to leave out the ones you know you are not interested in e.g. a
+server will not need support for GUIs, so leave out tk8.5-dev and blt-dev in
+that case.</p>
+<p>A slightly obvious point, but worth pointing out, is that some of these
+packages have version numbers in. If your distribution has newer packages than
+mine, especially if you are reading this post years after I wrote it, then this
+command might give errors. In that case, first try increasing the numbers.</p>
+<p>Now we are ready to go back to the developer guide:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">cd</span> <span class="n">cpython</span>
+<span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">pydebug</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">j2</span>
+</pre></div>
+</div>
+<p>For completeness, I will just point out that -s is for silent and -j2 allows
+make to use two parallel ‘jobs’ which then invoke the compiler i.e. gcc
+(for portability reasons make does not use threads or processes but has its own
+<a class="reference external" href="http://make.paulandlesley.org/jobserver.html">internal jobserver</a>), you can increase the number 2 but compiling Python is
+pretty quick (especially compared to the earlier steps), around half of cpython is actually written in Python anyway.</p>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/python.html">python</a>, <a href="tags/howto.html">howto</a>, <a href="tags/notetoself.html">notetoself</a>, <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>January 10, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/10/crunchbang.html">Even more minimal with CrunchBang Linux</a></h1>
+<img alt="Cruchbang Linux Logo" src="_images/500px-Crunchbang_linux_logo.svg.png"/>
+<p>I seem to have become the <a class="reference external" href="http://youtu.be/IzBQnWlWpRY">Littlest Hobo</a> of Linux distributions. I still like
+Lubuntu, which is perhaps the best known of half a dozen configured
+distribution disk images based on the fast and efficient LXDE.</p>
+<p>However, I accidentally selected an option in the login manager of Lubuntu that
+made my computer boot into plain Openbox, and I was hooked.</p>
+<p>Then in May 2003, I noticed the release announcement of CrunchBang 11 “Waldorf” (which coincided with Debian 7 “Wheezy”) and installed it onto an old machine.</p>
+<img alt="Image of a Crunchbang logo with the words decrustification services since 2008" src="_images/crunchbang-decrustification-services.png"/>
+<p><a class="reference external" href="http://crunchbang.org/">CrunchBang Linux</a>. is even more minimal than Lubuntu, using the Openbox
+window manager, like Lubuntu does, however Crunchbang does not put any desktop
+environment on top.</p>
+<p>I initially just installed it for research purposes, I wanted to learn what an
+Openbox distribution looks like when properly configured. I thought I was just
+picking up ideas that I would be able to bring back to my Lubuntu computer. (It
+turns out that Crunchbang is pretty much the only Openbox distribution.)</p>
+<p>The almost completely empty grey screen felt a bit depressing at first but it
+subconsciously grew on me; when you have all your applications open, the theme
+is a tasteful yet minimalist frame, the OS completely gets out of the way.</p>
+<p>The key combination Super and Space (Super is also known as Command on the Apple Mac or the Windows key on Microsoft) brings up the main menu wherever the mouse
+cursor is (you can also use right click). This is especially beautiful on
+multiple monitors as you do not need to move your focus to the bottom corner of
+the left most monitor.</p>
+<a class="reference external image-reference" href="http://www.zeth.net/images/blog/crunchbang_large.png"><img alt="Image of a two monitor Cruchbang Linux desktop" src="_images/crunchbang_small.png"/></a>
+<p>The level of configuration and integration is really quite stunning for such a
+small team. However, once up and running, you are basically just running Debian. Apart from a few packages like the themes as so on, everything comes straight
+from the Debian stable repositories. Indeed Crunchbang might as well just be
+one of the default Debian disk images.</p>
+<p>After using some form of Ubuntu or other for the last seven years or so, I was
+initially a bit hesitant to install a Debian based system on my desktop.
+However, I need not have worried, the difference between Debian and Ubuntu is
+rather marginal and certainly far less than my previous jumps from Slackware to Redhat to Gentoo to Ubuntu.</p>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
+            <span>March 09, 2013</span>
+        </div>
+        <div class="section">
+            <h1><a href="2013/03/09/why_lubuntu.html">Why Lubuntu?</a></h1>
+<img alt="Lubuntu Logo" src="_images/Lubuntu_logo500.png"/>
+<p><a class="reference external" href="http://lubuntu.net">Lubuntu</a> is a version of Ubuntu with the LXDE desktop instead of Unity. I am not a Unity hater, I actually like Unity a lot. I just like LXDE more.</p>
+<p><a class="reference external" href="http://lxde.org/">LXDE</a> is a desktop focused on performance and keeping out of your way. It is based on GTK+, so in practice it is similar to GNOME or Unity.</p>
+<p>I have to admit it is not yet as polished as those other desktop environments, especially the preferences tools are not as consistent and simple as the ones in normal Unity. Since I am the kind of person who ignores the desktop tools anyway and installs my own choice of programs, it doesn’t really matter a great deal.</p>
+<p>The LXDE and Lubuntu projects are relatively new and have quite small teams (after all, the more well known GNOME project started in 1997).</p>
+<p>If you are interested in writing software for the open source desktop, there seems to be a lot of niches unfilled, a lot more opportunities to make an impact in this kind of project.</p>
+<p>I often read articles on the web recommending LXDE for old computers, where is does work much better than more hungrier desktops. Indeed I started using Lubuntu because a computer was struggling with Unity, so I replaced it with Lubuntu and it became a lot more responsive.</p>
+<p>However, the same theory applies to new computers too, why waste RAM and processor cycles on stuff you are not even using 99% of the time?</p>
+<p>The RAM and processor are there to run the programs I want. The desktop environment, and the operating system in general, should use as little resources as possible.</p>
+<p>Currently, Lubuntu has now become the main operating system I use on almost all my computers. I have not tried other LXDE desktops, such as those from Debian or Fedora, I would be very interested in how they compare to Lubuntu.</p>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="categories/linux.html">linux</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/linux.html">linux</a>, <a href="tags/lubuntu.html">lubuntu</a>, <a href="tags/ubuntu.html">ubuntu</a>, <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="archive_link">
+        <a href="archive.html"> &mdash; Blog Archive &mdash; </a>
+    </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="page2.html">Newer</a></li>
+            <li class="right"><a href="page4.html">Older</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
+        </li><li>
+            <a href="2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
+        </li><li>
+            <a href="2016/12/02/occams_racists.html">Occam's racists</a>
+        </li><li>
+            <a href="2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
+        </li><li>
+            <a href="2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
+        </li><li>
+            <a href="2016/11/06/godwin_part_two.html">Godwin part two</a>
+        </li><li>
+            <a href="2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
+        </li><li>
+            <a href="2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
+        </li><li>
+            <a href="2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
+        </li><li>
+            <a href="2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section></section><section></section><section><div class="widget" id="twitterbox">
+<h2>Zeth0 on Twitter</h2>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/zeth0"  data-widget-id="480688116408131585">Tweets by @zeth0</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2014, Zeth. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>
