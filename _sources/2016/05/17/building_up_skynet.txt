@@ -1,0 +1,40 @@
+Building up Skynet
+==================
+
+.. image:: /newimages/posts/building_up_skynet/office.jpg
+
+This has been a very exciting year. I burst out of the academy and
+started a `new company`_ with a couple of other chaps called Rob and
+Luke.
+
+The idea is write a platform to help generate form-based applications,
+which could absorb and display business data. We could then in the
+future add machine learning/artificial intelligence type features, and
+learn original ideas that have not been apparent without such
+statistical modelling.
+
+Basically we are trying to make Skynet, the singularity itself, which
+we call Infomachine. Of course, being a start-up, it might evolve into
+a different concept involving washing machines or something.
+
+.. image:: /newimages/posts/building_up_skynet/infomachine.png
+
+Meanwhile, some customers found their way to us and we have been doing
+lots of consulting and contract software development. The customers
+themselves are highly intelligent and beautiful people who have
+extensive domain knowledge in their own field, and it has been very
+interesting learning some of this as we write software to make their
+companies more efficient or expand into new areas.
+
+This all feeds back into the eventual completion of the Infomachine,
+or not; maybe we will go in a completely different direction, that is
+the fun part, there are just three of us in a (often virtual) room and
+we can do whatever the heck we like.
+
+.. _`new company`: https://www.infomachine.uk/
+
+
+.. author:: default
+.. categories:: none
+.. tags:: craft
+.. comments::

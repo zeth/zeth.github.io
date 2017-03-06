@@ -1,0 +1,189 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
+        <meta name="viewport" content="width=device-width">
+        <title>Building Python from source on Debian or Ubuntu &mdash; Zeth.net</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="Even more minimal with CrunchBang Linux" href="../10/crunchbang.html" /><link rel="prev" title="Installing Multiple Versions of Firefox" href="../12/installing_multiple_versions_of_firefox.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Zeth.net</a></h1><h2>Taking control of your own technology</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Home</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/welcome.html">Welcome</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>January 11, 2014</span>
+        </div>
+    <div class="section" id="building-python-from-source-on-debian-or-ubuntu">
+<h1>Building Python from source on Debian or Ubuntu</h1>
+<img alt="Cruchbang Linux Logo" src="../../../_images/500px-Python-logo-notext.svg.png" />
+<p>Python is available pre-built for more or less every platform and if you are
+using Linux or Mac then you have it already. If you don&#8217;t know why would you want to build Python from source, then this post is probably not for you.</p>
+<p>I wanted to test things on a newer version of Python than is currently available
+in Debian stable. There are also things I want to improve in the standard
+library, but sadly I do not have time for that at the present moment - but a man
+is allowed to dream.</p>
+<p>Building Python is explained in the <a class="reference external" href="http://docs.python.org/devguide/setup.html">Python Developer&#8217;s Guide</a>. This post is a
+commentary on that, and I am assuming you are using a Debian or Ubuntu based
+operating system on your computer.</p>
+<p>To start with you need the Mercurial source control management tool, commonly
+known as hg. If you don&#8217;t have it, you can get it with the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mercurial</span>
+</pre></div>
+</div>
+<p>Now you need to get the source code of Python, as the developer guide says:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">hg</span> <span class="n">clone</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">hg</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">cpython</span>
+</pre></div>
+</div>
+<p>You will get output like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">destination</span> <span class="n">directory</span><span class="p">:</span> <span class="n">cpython</span>
+<span class="n">requesting</span> <span class="nb">all</span> <span class="n">changes</span>
+<span class="n">adding</span> <span class="n">changesets</span>
+</pre></div>
+</div>
+<p>Now you have to wait for a little bit; obviously there has been quite a lot of
+changes since Python began in 1989, so this may take ten minutes (depending on
+the speed of your computer). There is no progress bar or anything, so you have
+to just have faith that something is happening. Eventually, I ended up with
+301 M in my new cpython directory.</p>
+<p>While that is working, open a new terminal tab and start installing the
+dependencies. As the guide points out, the following gives the minimum
+required:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">build</span><span class="o">-</span><span class="n">dep</span> <span class="n">python3</span>
+</pre></div>
+</div>
+<p>Several modules in the standard library depend on optional dependencies, to get
+them all you can do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libreadline6</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span> <span class="n">liblzma</span><span class="o">-</span><span class="n">dev</span> <span class="n">libbz2</span><span class="o">-</span><span class="n">dev</span> <span class="n">tk8</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">dev</span> <span class="n">blt</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgdbm</span><span class="o">-</span><span class="n">dev</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libncurses5</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>Feel free to leave out the ones you know you are not interested in e.g. a
+server will not need support for GUIs, so leave out tk8.5-dev and blt-dev in
+that case.</p>
+<p>A slightly obvious point, but worth pointing out, is that some of these
+packages have version numbers in. If your distribution has newer packages than
+mine, especially if you are reading this post years after I wrote it, then this
+command might give errors. In that case, first try increasing the numbers.</p>
+<p>Now we are ready to go back to the developer guide:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">cpython</span>
+<span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">pydebug</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">j2</span>
+</pre></div>
+</div>
+<p>For completeness, I will just point out that -s is for silent and -j2 allows
+make to use two parallel &#8216;jobs&#8217; which then invoke the compiler i.e. gcc
+(for portability reasons make does not use threads or processes but has its own
+<a class="reference external" href="http://make.paulandlesley.org/jobserver.html">internal jobserver</a>), you can increase the number 2 but compiling Python is
+pretty quick (especially compared to the earlier steps), around half of cpython is actually written in Python anyway.</p>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/python.html">python</a>, <a href="../../../tags/howto.html">howto</a>, <a href="../../../tags/notetoself.html">notetoself</a>, <a href="../../../tags/craft.html">craft</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="../12/installing_multiple_versions_of_firefox.html">Installing Multiple Versions of Firefox</a></li>
+            <li class="right"><a href="../10/crunchbang.html">Even more minimal with CrunchBang Linux</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "zeth";    var disqus_identifier = "2014/01/11/building_python_from_source_on_debian_or_ubuntu";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="../../../2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
+        </li><li>
+            <a href="../../../2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
+        </li><li>
+            <a href="../../../2016/12/02/occams_racists.html">Occam's racists</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
+        </li><li>
+            <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
+        </li><li>
+            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
+        </li><li>
+            <a href="../../../2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
+        </li><li>
+            <a href="../../../2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
+        </li><li>
+            <a href="../../../2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section></section><section></section><section><div class="widget" id="twitterbox">
+<h2>Zeth0 on Twitter</h2>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/zeth0"  data-widget-id="480688116408131585">Tweets by @zeth0</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2014, Zeth. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

@@ -1,0 +1,31 @@
+Why Lubuntu?
+============
+
+.. image:: /newimages/posts/why_lubuntu/Lubuntu_logo500.png
+    :alt: Lubuntu Logo
+
+Lubuntu_ is a version of Ubuntu with the LXDE desktop instead of Unity. I am not a Unity hater, I actually like Unity a lot. I just like LXDE more.
+
+LXDE_ is a desktop focused on performance and keeping out of your way. It is based on GTK+, so in practice it is similar to GNOME or Unity. 
+
+I have to admit it is not yet as polished as those other desktop environments, especially the preferences tools are not as consistent and simple as the ones in normal Unity. Since I am the kind of person who ignores the desktop tools anyway and installs my own choice of programs, it doesn't really matter a great deal.
+
+The LXDE and Lubuntu projects are relatively new and have quite small teams (after all, the more well known GNOME project started in 1997).
+
+If you are interested in writing software for the open source desktop, there seems to be a lot of niches unfilled, a lot more opportunities to make an impact in this kind of project.
+
+I often read articles on the web recommending LXDE for old computers, where is does work much better than more hungrier desktops. Indeed I started using Lubuntu because a computer was struggling with Unity, so I replaced it with Lubuntu and it became a lot more responsive.
+
+However, the same theory applies to new computers too, why waste RAM and processor cycles on stuff you are not even using 99% of the time?
+
+The RAM and processor are there to run the programs I want. The desktop environment, and the operating system in general, should use as little resources as possible. 
+
+Currently, Lubuntu has now become the main operating system I use on almost all my computers. I have not tried other LXDE desktops, such as those from Debian or Fedora, I would be very interested in how they compare to Lubuntu.
+
+.. _LXDE: http://lxde.org/
+.. _Lubuntu: http://lubuntu.net
+
+.. author:: default
+.. categories:: linux
+.. tags:: linux, lubuntu, ubuntu, craft
+.. comments::

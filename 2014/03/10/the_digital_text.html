@@ -1,0 +1,482 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
+        <meta name="viewport" content="width=device-width">
+        <title>The Digital Text &mdash; Zeth.net</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="The politics, ethics and social context of digital culture" href="../../02/09/the_politics_ethics_and_social_context_of_digital_culture.html" /><link rel="prev" title="Python’s Disappearing Long Type" href="../../05/27/python_long_type.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Zeth.net</a></h1><h2>Taking control of your own technology</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Home</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/welcome.html">Welcome</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>March 10, 2014</span>
+        </div>
+    <div class="section" id="the-digital-text">
+<h1>The Digital Text</h1>
+<p>In this post we will example the digital text and how and why it is encoded.</p>
+<div class="section" id="denarius">
+<h2>Denarius</h2>
+<p>Wars are often an unexpected event, and a lot of the major currency
+developments in the 19th and 20th centuries were due to wars. In the
+ancient world it was no different. The requirement to quickly gather
+resources required an efficient form of money.</p>
+<p>During the Second Punic War, in 211 BC, Rome brought out the Denarius,
+which means &#8216;containing ten&#8217; - because one silver Denarius was worth
+ten bronze (later copper) Asses.</p>
+<p>During the Third Punic war, in 140 BC, Rome decided to go hexadecimal,
+where one silver-coloured Denarius became worth 16 copper Asses.</p>
+<p>The silver-coloured Denarius was considered a day&#8217;s wages for a
+soldier. The gold-coloured Solidus varied in value but eventually
+stabilised by the 8th century as 12 denarii.</p>
+<p>The Romans carried spread currency around and in Britain, the denarius
+became the penny but was still written as d until 1971 e.g. 5d for 5
+pence.</p>
+<p>12d made a shilling, which is the Anglo-Saxon term for the
+Solidus. The shilling was in the 16th century pegged to the value of a
+cow in Kent market.</p>
+<p>Twenty shilling made a pound which was named after the unit of mass, a
+pound in cash was originally worth the value of a pound weight of silver
+(which is now about £300).</p>
+<p>The pound of a unit of mass is itself Roman of course, from libra,
+which is why pound is shortened to lb. The pound £ sign was originally
+an L. 1 lb in mass is 16 ounces.</p>
+<p>Part the deal when Britain applied to join the European Economic
+Community in the 1960s and 1970s, was that we got rid of all these
+crazy measurements and adopted metric, also known as scientific
+measurements, which we did eventually, to a certain extent. For
+example, milk, beer and cider are officially sold in units of 568 mL!</p>
+<p>So until recently, the idea of non-base 10 measurements was completely
+normal.</p>
+</div>
+<div class="section" id="binary">
+<h2>Binary</h2>
+<p>George Boole was a theologian who was also one of the greatest
+mathematicians of the 19th Century.Boole understood mathematics and
+religion as intertwined. George Boole believed that studying
+mathematics would help reveal a new understanding of God.</p>
+<img alt="../../../_images/george_boole.jpg" src="../../../_images/george_boole.jpg" />
+<p>More on George Boole:
+<a class="reference external" href="http://zeth.net/archive/2007/07/19/what-is-truth-part-3-all-you-need-is-one-and-zero/">http://zeth.net/archive/2007/07/19/what-is-truth-part-3-all-you-need-is-one-and-zero/</a></p>
+<p>The core idea that all knowledge and thought could be reduced to two
+factors nothing (0) and God (1), had long been discussed, for example
+by the the Jesuit Gottfried Leibniz writing in the 17th
+Century. However, Boole had the mathematical knowledge to take the
+idea and build a complete system of logic around it.</p>
+<img alt="../../../_images/yin_and_yang.png" src="../../../_images/yin_and_yang.png" />
+<p>Everything is either True (God - 1) or False (nothing - 0):</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">or</span>  <span class="mi">0</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="ow">or</span>  <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mi">1</span> <span class="ow">or</span>  <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">0</span> <span class="ow">or</span>  <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="mi">0</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">1</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="mi">0</span> <span class="ow">and</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+  <span class="ow">not</span> <span class="mi">0</span> <span class="o">==</span> <span class="mi">1</span>
+  <span class="ow">not</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Everything that is not God is nothingness, everything that is
+something is God. God fills the nothingness but the nothingness cannot
+conquer God.</p>
+<p>Any number can be represented by any sequence of bits. A bit is 0 or
+a 1.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Binary</th>
+<th class="head">Decimal</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>100</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>101</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>110</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>111</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>1000</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>1001</td>
+<td>9</td>
+</tr>
+<tr class="row-even"><td>1010</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>1011</td>
+<td>11</td>
+</tr>
+<tr class="row-even"><td>1100</td>
+<td>12</td>
+</tr>
+<tr class="row-odd"><td>1101</td>
+<td>13</td>
+</tr>
+<tr class="row-even"><td>1110</td>
+<td>14</td>
+</tr>
+<tr class="row-odd"><td>1111</td>
+<td>15</td>
+</tr>
+<tr class="row-even"><td>10000</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>Traditionally, eight bits was called a byte (more correctly it is an
+octet). Four bits is a nibble.</p>
+<p>A computer processor has lots of microscopic transistors. The CPU in
+my laptop (the Intel Ivy Bridge) has 1.4 billion of them. Each
+transistor is like a switch with an on and off state.</p>
+</div>
+<div class="section" id="hexadecimal">
+<h2>Hexadecimal</h2>
+<p>Binary is very low level. The first level of abstraction over binary is called hexadecimal.</p>
+<p>In previous lecture, we looked at how and when and where computing was
+developed. These early computer developers choose the most efficient
+representation. As we mentioned earlier, until recently non-base 10
+measurements were completely normal.</p>
+<p>Hexadecimal (&#8216;hex&#8217; for short) is counting in base 16, here is the
+table from above with hex as well:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="39%" />
+<col width="22%" />
+<col width="39%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Binary</th>
+<th class="head">Hex</th>
+<th class="head">Decimal</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr class="row-odd"><td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="row-even"><td>10</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="row-odd"><td>11</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="row-even"><td>100</td>
+<td>4</td>
+<td>4</td>
+</tr>
+<tr class="row-odd"><td>101</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="row-even"><td>110</td>
+<td>6</td>
+<td>6</td>
+</tr>
+<tr class="row-odd"><td>111</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>1000</td>
+<td>8</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>1001</td>
+<td>9</td>
+<td>9</td>
+</tr>
+<tr class="row-even"><td>1010</td>
+<td>a</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>1011</td>
+<td>b</td>
+<td>11</td>
+</tr>
+<tr class="row-even"><td>1100</td>
+<td>c</td>
+<td>12</td>
+</tr>
+<tr class="row-odd"><td>1101</td>
+<td>d</td>
+<td>13</td>
+</tr>
+<tr class="row-even"><td>1110</td>
+<td>e</td>
+<td>14</td>
+</tr>
+<tr class="row-odd"><td>1111</td>
+<td>f</td>
+<td>15</td>
+</tr>
+<tr class="row-even"><td>10000</td>
+<td>10</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>Now it is easy to convert any binary number to hex. You just split it
+up into nibbles from the right.</p>
+<p>So this number:</p>
+<p>11111011110</p>
+<p>Split up is:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">0111</span> <span class="mi">1101</span> <span class="mi">1110</span>
+  <span class="mi">7</span>    <span class="n">d</span>    <span class="n">e</span>
+</pre></div>
+</div>
+<p>So in hex it is 7de.</p>
+<p>What number is it in decimal? Well that is more complicated. Going
+from binary to decimal requires you to split the binary number up into
+parts:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>10000000000 1024
+1000000000   512
+100000000    256
+10000000     128
+1000000       64
+10000         16
+1000           8
+100            4
+10             2
+
+1024 + 512 + 256 + 128 + 64 + 16 + 8 + 4 + 2 = ?
+</pre></div>
+</div>
+<p>So data is electrical impulses in a transistor, which represent 1 and
+0, which are then hexadecimal numbers.</p>
+<p>Now we have numbers, we can now encode characters. Each character is given a hex number.</p>
+<p>So 41 in hex (which is 65 in decimal) is &#8220;latin capital letter A&#8221;.</p>
+<p>There are different encodings (mapping between numbers and characters)
+but the only one that really matters in 2014 is called UTF-8 commonly
+called Unicode (although there are other forms of Unicode which did
+not win).</p>
+<p>UTF-8 has room for 1,112,064 different characters and symbols which
+aim to represent all of the world&#8217;s languages.</p>
+<p>The first 128 characters are carried over from an older standard
+called ASCII. The first 32 of these are historic control characters
+for controlling printers and teletype devices (remember those from a
+previous lecture?).</p>
+<p>20 in hex (so 32 in decimal) is the empty space, then we get
+punctuation, then we get the numbers and so more punctuation etc then
+the letters in upper case then some more symbols then the letters in
+lower case etc.</p>
+<p>This gets us to 7E (126) which is ~, and we have all of the English
+keyboard covered. The next 129 characters are Western European
+languages (German etc) and then it carries on after that through all
+the world&#8217;s letters and symbols.</p>
+<p>Including some really fun stuff added to give compatibility with
+Japanese mobile phones:</p>
+<p><a class="reference external" href="http://www.fileformat.info/info/unicode/char/1f4a9/index.htm">http://www.fileformat.info/info/unicode/char/1f4a9/index.htm</a>
+<a class="reference external" href="http://www.fileformat.info/info/unicode/char/1f302/index.htm">http://www.fileformat.info/info/unicode/char/1f302/index.htm</a>
+<a class="reference external" href="http://www.fileformat.info/info/unicode/block/miscellaneous_symbols_and_pictographs/images.htm">http://www.fileformat.info/info/unicode/block/miscellaneous_symbols_and_pictographs/images.htm</a>
+<a class="reference external" href="http://en.wikipedia.org/wiki/Emoji">http://en.wikipedia.org/wiki/Emoji</a></p>
+<p>So a digital text is a series of these hexadecimal numbers representing
+characters and symbols including spaces (20 in hex/32 in decimal) and
+control codes such as line breaks (0A in hex, 10 in decimal) and so
+on.</p>
+<p>Here is a nice chart version of the first 127 (ASCII) characters:
+<a class="reference external" href="http://web.cs.mun.ca/~michael/c/ascii-table.html">http://web.cs.mun.ca/~michael/c/ascii-table.html</a></p>
+<p>So you can decode these characters (with some spaces added to make it
+simpler):</p>
+<p>41 6e 64 20 74 68 65 72 65 66 6f 72 65 20 6e 65 76 65 72 20 73 65 6e
+64 20 74 6f 20 6b 6e 6f 77 20 66 6f 72 20 77 68 6f 6d 20 74 68 65 20
+62 65 6c 6c 20 74 6f 6c 6c 73 3b 20 49 74 20 74 6f 6c 6c 73 20 66 6f
+72 20 74 68 65 65 2e</p>
+<p>To make it clear that something is a hex value, it is often prefixed
+with 0x or x or U+.</p>
+<p>This is as good as it far as it goes. But to make practical use of the
+data, just loads of text doesn&#8217;t help that much.</p>
+<p>If we want to make a digital representation of a humanities artefact
+like a manuscript, we need to use a file format. Otherwise the digital
+text is of limited use for other scholars and software.</p>
+</div>
+<div class="section" id="why-not-use-a-word-processor">
+<h2>Why not use a word processor?</h2>
+<p>A word processor is an approximation of a late 19th century typewriter. A word processor will not help in transcribing this:</p>
+<img alt="../../../_images/codex_sinaiticus.jpg" src="../../../_images/codex_sinaiticus.jpg" />
+<p>Let alone this:</p>
+<img alt="../../../_images/P52_recto.jpg" src="../../../_images/P52_recto.jpg" />
+<p>What about this:</p>
+<img alt="../../../_images/hamlet.png" src="../../../_images/hamlet.png" />
+<p>How about this:</p>
+<img alt="../../../_images/ylwenzipu.jpg" src="../../../_images/ylwenzipu.jpg" />
+<p>In the 1980s and onwards, a group of humanities scholars created the
+TEI, which is a set of guidelines for digitally representing
+humanities data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">These</span> <span class="n">Guidelines</span> <span class="n">apply</span> <span class="n">to</span> <span class="n">texts</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">natural</span> <span class="n">language</span><span class="p">,</span> <span class="n">of</span> <span class="nb">any</span> <span class="n">date</span><span class="p">,</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">literary</span> <span class="n">genre</span> <span class="ow">or</span> <span class="n">text</span> <span class="nb">type</span><span class="p">,</span> <span class="n">without</span> <span class="n">restriction</span> <span class="n">on</span> <span class="n">form</span> <span class="ow">or</span> <span class="n">content</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>The guidelines can be found online here:</p>
+<p><a class="reference external" href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/">http://www.tei-c.org/release/doc/tei-p5-doc/en/html/</a></p>
+<p>The TEI was initially SGML based then became XML based. What this
+means is that the text of the artefact is typed up, and meaning and extra information is inserted into the text using angle brackets.</p>
+<p>An example of a text encoded using the TEI format:
+<a class="reference external" href="http://epapers.bham.ac.uk/718/1/47.xml">http://epapers.bham.ac.uk/718/1/47.xml</a></p>
+<p>So in this simple line here:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">w</span> <span class="n">n</span><span class="o">=</span><span class="s2">&quot;6&quot;</span><span class="o">&gt;</span><span class="n">testimonium</span><span class="o">&lt;/</span><span class="n">w</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The element &lt;w&gt; which means word, has an attribute n with value 6
+which quite obviously tells us that it is word number 6. The text of
+the word then follows, and then the word ends with a closing tag: &lt;/w&gt;</p>
+<p>As explained in the preface to the TEI guidelines, part of the reason
+for them was to enable sharing of data and a new generation of shared
+TEI-supporting software to emerge.</p>
+<p>Sadly that never really happened. The problem with the TEI is that it
+is a huge standard that doesn&#8217;t really simplify the problem space in
+any way. There are hundreds of available elements and every author of
+a TEI document uses their own subset it in his/her own way.</p>
+<p>Churchill famously said that &#8220;Democracy is the worst form of government, except for all those other forms that have been tried from time to time.&#8221;</p>
+<p>TEI is the worst form of encoding, except for all the other forms that have been tried from time to time.</p>
+<p>Wizard of OZ</p>
+<p><a class="reference external" href="https://github.com/TEI-examples/tei-examples/blob/master/nypl.org/WizardOfOz.xml">https://github.com/TEI-examples/tei-examples/blob/master/nypl.org/WizardOfOz.xml</a></p>
+</div>
+<div class="section" id="json">
+<h2>JSON</h2>
+<p>Current interest is in storing text in JSON. Here is a really simple example:</p>
+<p><a class="reference external" href="http://zeth.net/examples/example.json">http://zeth.net/examples/example.json</a></p>
+<p>It shows a single verse.</p>
+</div>
+<div class="section" id="plain-text-formats">
+<h2>Plain Text formats</h2>
+</div>
+<div class="section" id="collating">
+<h2>Collating</h2>
+<p>Collating is comparing texts together. Show examples.</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        
+        
+        
+        </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="../../05/27/python_long_type.html">Python&#8217;s Disappearing Long Type</a></li>
+            <li class="right"><a href="../../02/09/the_politics_ethics_and_social_context_of_digital_culture.html">The politics, ethics and social context of digital culture</a> &raquo; </li>
+        </ul></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="../../../2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
+        </li><li>
+            <a href="../../../2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
+        </li><li>
+            <a href="../../../2016/12/02/occams_racists.html">Occam's racists</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
+        </li><li>
+            <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
+        </li><li>
+            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
+        </li><li>
+            <a href="../../../2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
+        </li><li>
+            <a href="../../../2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
+        </li><li>
+            <a href="../../../2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section></section><section></section><section><div class="widget" id="twitterbox">
+<h2>Zeth0 on Twitter</h2>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/zeth0"  data-widget-id="480688116408131585">Tweets by @zeth0</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2014, Zeth. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><script type="text/javascript">    var disqus_shortname = "zeth";    disqus_count();</script><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

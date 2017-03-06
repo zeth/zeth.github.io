@@ -1,0 +1,127 @@
+Everything is just C with bells on
+==================================
+
+.. image:: /newimages/posts/everything_is_just_c_with_bells_on/dancer.jpg
+
+In this post I thought about the world of cool that lies between
+high-level languages and C. Thought is too strong, it is more of a
+seed of a thought that has not germinated yet. This is not a fable
+with a moral at the end.
+
+When I first came across C#, I thought that is much better than Visual
+Basic, perhaps Microsoft's .Net platform could be interesting one day,
+but not personally having an obvious project to use it in, I put it to
+one side and have never touched it since.
+
+When Vala was first announced, I thought wow, that is so sexy and I
+played with it for about a week. Not personally having an obvious
+project to use it in, I put it to one side and have never touched it
+since.
+
+I had pretty much the same reaction to Go (aka golang) - wow that's
+cool, perhaps not as sexy as Vala but I like the goroutines. I did the
+trendy web based tour, I installed everything locally and played with
+the standard library. Then, not personally having an obvious project
+to use it in, I put it to one side and have never touched it since.
+
+I could go on and on. Whatever piece of tech that comes into (or back
+into) fashion seems to follow this pattern, Haskell, Erlang, Java,
+Scala, etc etc. A lot of the developer tools industry and technology
+media needs something shiny and new to promote this year.
+
+Don't get me wrong, I love all this stuff, I would love to do projects
+in different programming languages but obviously, as I have a
+reputation for writing Python or JavaScript or doing system
+administration, people hire me to do that and don't perhaps think of
+me for other things.
+
+Maybe there is more too it than that, since in whatever I am doing, in
+my head I seem to think of any algorithm in Python first as executable
+pseudocode even if it gets typed in using JavaScript or another
+language.
+
+I had a long stint as an academic, but basically my whole career in
+software is as a freelancer or contractor. A journeyman who works to
+live.
+
+Often the customer has an existing project or specific library,
+toolkit or team which pre-determines the choice of programming
+language.
+
+Otherwise, my usual process for creating software is to prototype it
+in a high level language (normally always Python but sometimes
+JavaScript). 90% of the time, once it works the customer has solved
+their immediate problem and wants to move their focus onto their next
+problem, which may not be software and may not involve paying
+freelance programmers. Sad I know, thanks for all the fish, I am here,
+`like the song says`_, etc etc :)
+
+When the prototype is working, there is a lot to be done to optimise
+it and keep it as a Python application, and almost always there is
+some specific other bottleneck (such as network, database or some
+industrial requirement) that means that CPU usage is not the problem
+and so cutting out the Python interpreter wouldn't actually make much
+difference in the short and medium time-frames that most companies
+care about.
+
+Indeed I have seen cases where the customer has gotten someone to
+rewrite the prototype application in Java, and found that the new
+version is actually slower. A lot of the heavy duty work in the Python
+version was actually happening inside a C library that has been highly
+optimised over the last 30 years; changing the dependency from that to
+a poorly implemented Java library caused the poor performance.
+
+If we imagine a Python application is like a commissioning a
+photograph, a C app is commissioning a sculpture. You only do it when
+you want something to really last or really be the core of something
+fundamental for your future success.
+
+All the above notwithstanding, the genius of Python's initial design
+is that once your application has taken a stable(ish) form, it is
+normally pretty straightforward to convert the application to C.
+
+Most of the standard library inherits Linux/Unix best practice (and
+even the same function names) and a lot of the best external libraries
+in Python are just wrappers around the C equivalents. You always have
+the fully working Python application to test it against.
+
+It takes a long time yes, going through line by line, but you are not
+troubling the boundaries of computer science or software engineering
+as we know it. I actually love those kind of cathartic jobs, but I am
+a freak.
+
+Apologies if I am stating the bleeding obvious, none of the above text
+is news to anyone, any Python developer knows the same thing, however
+it is the foundation for what follows.
+
+So the real reason why I have not personally had an obvious project to
+use a lot of these fashionable and 'cool' languages and toolkits is
+that they fall in the luke-warm middle ground between the extremely
+high-level Python (and JS/Ruby/LISP etc) and the low level C language.
+
+For most use cases, all these middle ground languages are slower and
+less portable than C. If you have decided on a re-implementation, then
+it takes no longer to rewrite a Python project to C than to Go, Java,
+C# or whatever, indeed it might often be quicker to C.
+
+I have actually used C hardly at all, far less than I would like to
+have done, but I have used these middle-ground languages even
+less. Everything just stays in high level code.
+
+So as I warned, I have no moral for this fable, no conclusion to
+offer, it is just the beginnings of a thought that ran through my
+brain, I like to think I will pick up this theme later, but I will
+probably look back in five years to find I have put it to one side and
+have never touched it since.
+
+    Image credit: `Dancer in the Streets by dannyst`_
+
+      
+.. _`Dancer in the Streets by dannyst`: http://fav.me/d49p4vp
+.. _`like the song says`:  https://www.youtube.com/watch?v=0XGX98OW4Rc
+
+.. author:: default
+.. categories:: none
+.. tags:: craft
+.. comments::
+   

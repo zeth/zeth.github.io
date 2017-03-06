@@ -1,0 +1,209 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
+        <meta name="viewport" content="width=device-width">
+        <title>Python’s Disappearing Long Type &mdash; Zeth.net</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="The Digital Text" href="../../03/10/the_digital_text.html" /><link rel="prev" title="Modern Mounting with Udisks2" href="../28/modern_mounting_with_udisks2.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Zeth.net</a></h1><h2>Taking control of your own technology</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Home</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/welcome.html">Welcome</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>May 27, 2014</span>
+        </div>
+    <div class="section" id="python-s-disappearing-long-type">
+<h1>Python&#8217;s Disappearing Long Type</h1>
+<img alt="../../../_images/robotspider.png" src="../../../_images/robotspider.png" />
+<p><em>Note: everything below refers to the default (missionary position) C
+implementation of Python.</em></p>
+<p>If you are converting Python code from Python 2 to Python 3, you might
+notice that the conversion tool transforms any uses of <em>long()</em> into
+<em>int()</em>. If that confuses you, this post will hopefully make it clear.</p>
+<p>Before Python 2.2, there was a clear distinction between two of the
+Python numerical types, the <em>int</em> type and the Python <em>long</em> type.</p>
+<p>Firstly, Python&#8217;s <em>int</em> type was implemented as a signed long. So a Python
+<em>int</em> takes 32 bits of memory, which while not as efficient as some
+really optimised approach using shorter types, is still very fast
+indeed.</p>
+<p>Secondly, Python&#8217;s <em>long</em> type is an integer of unlimited size (well until you
+run of RAM - which would be an unrealistically massive number not
+useful for anything).</p>
+<p>Python&#8217;s <em>long</em> type does not map directly to a C type, it is a custom
+type implemented in the Python source code somewhere which I guess
+uses a C struct or whatever. As you might imagine, using the Python
+<em>long</em> type is significantly more RAM intensive and slower than the Python
+<em>int</em> type, but in reality it is rarely a problem (see below).</p>
+<p>Hans Fangohr <a class="reference external" href="http://www.southampton.ac.uk/~fangohr/blog/performance-of-pythons-long-data-type.html">did a little performance testing</a> and found that
+Python&#8217;s long type is about three times slower than the Python&#8217;s <em>int</em>
+type.</p>
+<p>Unified <em>ints</em> were <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0237/">brought in for Python 2.2</a>. This starts off as a
+Python <em>int</em> but transforms magically to a Python <em>long</em> if it needs
+to. Here is how it works in Python 2.2 to 2.7:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+<span class="go">9223372036854775807</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
+<span class="go">&lt;type &#39;int&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">9223372036854775808L</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;type &#39;long&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">long</span>
+<span class="go">&lt;type &#39;long&#39;&gt;</span>
+</pre></div>
+</div>
+<p>Note that when we add 1 to sys.maxsize, the result has an L suffix to
+denote it is a Python <em>long</em> and no longer a 32 bit number.</p>
+<p>In Python 3, it works in a similar the way, however the fact you are
+no longer using a 32 bit type is now completely hidden away from the
+user:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span>
+<span class="go">9223372036854775807</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
+<span class="go">&lt;class &#39;int&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="go">9223372036854775808</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">&lt;class &#39;int&#39;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">long</span>
+<span class="gt">Traceback (most recent call last):</span>
+  File <span class="nb">&quot;&lt;stdin&gt;&quot;</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span>
+<span class="gr">NameError</span>: <span class="n">name &#39;long&#39; is not defined</span>
+</pre></div>
+</div>
+<p>This time, when we add 1 to sys.maxsize, the result has no L suffix;
+trying to call the long constructor function causes an exception
+because it does not exist anymore in Python 3.</p>
+<p>Of course, the fun of Python is that being a high level language, we
+normally don&#8217;t really care as long a we get a number; this is it
+rightly got changed it to be one unified type.</p>
+<p>One might design a high performance application not to use the Python
+<em>long</em> type if it turns out to be a bottleneck. However, normally you
+would have other bigger insurmountable bottlenecks in your
+software/hardware/network stack so you don&#8217;t care about this.</p>
+<p>However, if you are working on a multi-language project, especially if
+you are using Python alongside a lower level language like C, then it
+is useful to know what is going on underneath the Python types.</p>
+<p>The Python float type is implemented as a C double. This doesn&#8217;t
+change across versions. Several other numeric types are available in
+Python of course.</p>
+<p>So if you see <em>long</em> being converted to <em>int</em> by the 2to3 conversion
+tool, now you know why.</p>
+<blockquote>
+<div>Image Credit: <a class="reference external" href="http://fav.me/d52n1d5">The Spiderbot by Raikoh</a></div></blockquote>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/craft.html">craft</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="../28/modern_mounting_with_udisks2.html">Modern Mounting with Udisks2</a></li>
+            <li class="right"><a href="../../03/10/the_digital_text.html">The Digital Text</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "zeth";    var disqus_identifier = "2014/05/27/python_long_type";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="../../../2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
+        </li><li>
+            <a href="../../../2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
+        </li><li>
+            <a href="../../../2016/12/02/occams_racists.html">Occam's racists</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
+        </li><li>
+            <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
+        </li><li>
+            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
+        </li><li>
+            <a href="../../../2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
+        </li><li>
+            <a href="../../../2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
+        </li><li>
+            <a href="../../../2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section></section><section></section><section><div class="widget" id="twitterbox">
+<h2>Zeth0 on Twitter</h2>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/zeth0"  data-widget-id="480688116408131585">Tweets by @zeth0</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2014, Zeth. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

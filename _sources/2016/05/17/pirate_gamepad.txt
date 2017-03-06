@@ -1,0 +1,97 @@
+The Case of the Pirate Gamepad
+==============================
+
+.. image:: /newimages/posts/pirate_gamepad/pirategamepad.jpg
+
+I made some software (which will be explained in a future post) and
+used my trusty Argos third-party PS3 style gamepad to control it.
+
+On the way to open sourcing it, I thought I had better try it with a
+an official Sony PS3 gamepad, and I could always do with another
+gamepad for when playing computer with the sprog.
+
+We play a lot of open source games like SuperTuxKart and Frogatto
+which are two of our favourites. To be honest we play almost every
+game made available through Debian's Apt.
+
+So not really thinking too heavily about it, I popped onto a leading
+auction website, typed in PS3 gamepad, saw that the first result cost
+less than £13 including postage, and just bought it and moved
+on. Total time spent was about a minute.
+
+Later I thought it was a bit cheap but ignored the thought on the
+basis that the PS3 is ten years old and has been long replaced by the
+PS4. The controller that game was the one above. In the following box.
+
+.. image:: /newimages/posts/pirate_gamepad/piratebox.jpg
+
+Initial impressions were that it was a little light and the D-pad was
+different than I remember. However, it is probably been 5 years since
+I touched an official PS3 gamepad and maybe they made production
+improvements to make it lighter or I didn't really remember right.
+
+However, as soon as I plugged it in, and typed `dmesg`, the controller
+itself confessed to its real identity.::
+
+    usb 4-2: new full-speed USB device number 24 using uhci_hcd
+    usb 4-2: New USB device found, idVendor=054c, idProduct=0268
+    usb 4-2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+    usb 4-2: Product: PS(R) Gamepad
+    usb 4-2: Manufacturer: Gasia Co.,Ltd
+    input: Gasia Co.,Ltd PS(R) Gamepad as /devices/pci0000:00/0000:00:1d.0/usb4/4-2/4-2:1.0/0003:054C:0268.0010/input/input41
+    sony 0003:054C:0268.0010: input,hiddev0,hidraw3: USB HID v1.11 Joystick [Gasia Co.,Ltd PS(R) Gamepad] on usb-0000:00:1d.0-2/input0
+
+A Gasia Co.,Ltd PS(R) Gamepad, what is that you may ask? Well so did I. It should look like this::
+
+    usb 4-2: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+    usb 4-2: Product: PLAYSTATION(R)3 Controller
+    usb 4-2: Manufacturer: Sony
+    sony 0003:054C:0268.0008: Fixing up Sony Sixaxis report descriptor
+    input: Sony PLAYSTATION(R)3 Controller as /devices/pci0000:00/0000:00:13.2/usb4/4-2/4-2:1.0/input/input18
+    sony 0003:054C:0268.0008: input,hiddev0,hidraw0: USB HID v1.11 Joystick [Sony PLAYSTATION(R)3 Controller] on usb-0000:00:13.2-2/input0
+
+The controller was totally fake!
+
+So it didn't help me generalise my software. Also these controllers
+contain a Lithium battery so I am not comfortable putting this
+counterfeit device in my child's hands. If they are so far beyond the
+legal system that they do not need to care about the trademarks of
+Sony, how much do they care about electrical safety? Or chemical
+safety?
+
+So I emailed my findings to the seller and they gave me an immediate
+refund and didn't need to send the controller back. A counterfeiter
+with great customer service! Bizarre.
+
+It is amazing the level of detail they went to. It is itself an
+interesting cultural artefact; a Chinese made plastic product
+pretending to be a different Chinese made plastic product. It is
+interesting philosophical discussion about if you use the same design,
+make it in the same place and maybe even use the exact same parts,
+what does genuine actually mean?
+
+And what the heck is the markup on the official Sony controller if
+another company can make an almost exact replica for a less than a
+third of the price?
+
+It is shame that people feel the need to be dishonest. A third party
+PS3 controller does not need to hide its true nature. I love my Argos
+one which has some useful extra features.
+
+Surely selling the controller as what it is would be simpler than
+having to sneak around and recreate accounts constantly on the auction
+site?
+
+If the manufacturer had said, "this is a PS3 compatible gamepad and it
+is three times cheaper", then it could find its own market. While you
+are at it, put in a higher capacity battery and better bluetooth
+aerial than Sony's controller and win on both price and quality.
+
+As for me, I bought an official wired Xbox 360 controller from
+Argos. I actually prefer the shape ergonomically and it is more
+reliably detected by Linux and is much cheaper than the PS3 gamepad.
+
+.. author:: default
+.. categories:: none
+.. tags:: craft
+.. comments::

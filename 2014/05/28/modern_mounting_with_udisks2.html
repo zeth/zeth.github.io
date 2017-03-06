@@ -1,0 +1,244 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
+        <meta name="viewport" content="width=device-width">
+        <title>Modern Mounting with Udisks2 &mdash; Zeth.net</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="Python’s Disappearing Long Type" href="../27/python_long_type.html" /><link rel="prev" title="A Distributed Global Textual Community" href="../../06/12/distributed_global_textual_community.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Zeth.net</a></h1><h2>Taking control of your own technology</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Home</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/welcome.html">Welcome</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>May 28, 2014</span>
+        </div>
+    <div class="section" id="modern-mounting-with-udisks2">
+<h1>Modern Mounting with Udisks2</h1>
+<img alt="../../../_images/mounted.jpg" src="../../../_images/mounted.jpg" />
+<p>In this post we look at the changes in disk mounting and then look at
+the udisksctl command which allows you to automount disks from the
+command line. Feel free to skip past the background info if you just
+want to learn how to use the command.</p>
+<div class="section" id="background">
+<h2>Background</h2>
+<p>In the beginning (Thursday, 1 January 1970?) to add a storage device
+(such as a hard disk) to a computer was an infrequent affair, and
+required the machine to be turned off.</p>
+<p>So the classic system of disk mounting on a Posix (&#8216;Unix-like&#8217;) system
+was for the system administrator to list all the disks in a plain text
+file systems table, which on most systems can be found in the file
+/etc/fstab.</p>
+<p>Nowadays servers often have the ability to add and remove disks
+without turning the machine off. Even in desktop computers, SATA
+drives have this facility too at least according to the SATA drive -
+but it depends a lot on the manufacturer of motherboard controller
+actually following the standard so it is not usually worth the risk.</p>
+<p>The main thing that has really brought hotplugging into use is
+external disks such as USB drives and other trendy connectors that
+come and (mostly) go such as Firewire, eSata, Thunderbolt, etc.</p>
+<img alt="../../../_images/duck.jpg" src="../../../_images/duck.jpg" />
+<p>In the early 2000s, the first attempt to cope with this was called
+HAL - Hardware Abstraction Layer, which did what it said on the tin,
+provided a layer between device nodes and the user of the nodes, so
+storage devices (and other hardware) can be added and removed without
+rebooting this system and without rewriting the /etc/fstab file.</p>
+<p>Then everything gets replaced a dizzying number of times (DeviceKit,
+devfs, etc) as better approaches are discovered in a fast moving
+period of hardware development, udev eventually won and was the main
+thing for the rest of the decade.</p>
+<p>When a device is added or removed from the system, the Linux kernel
+notices and sends out an event. Udev is a daemon that waits around
+listening for these events and then responding accordingly. udev runs
+in user space not kernel space which is good for security as you
+cannot plug in a USB stick and take over the kernel like on some
+proprietary operating systems.</p>
+<p>In 2012, the <a class="reference external" href="http://article.gmane.org/gmane.linux.hotplug.devel/17392">udev project merged</a> into the systemd project; systemd is
+the next generation (or current generation for some distributions)
+system and service manager. Systemd is really cool and is being
+adopted by most of the major distributions but it is still a year or
+two away in some cases depending on their release cycles.</p>
+<p>Anyway, the point is that if you want to control disks on the command
+line and you are using the mount command you are 20 years out of
+date. Enough history, lets get to the flesh.</p>
+<img alt="../../../_images/usb.jpg" src="../../../_images/usb.jpg" />
+</div>
+<div class="section" id="command-line-usage">
+<h2>Command Line Usage</h2>
+<p>When you hot plug disks in the system, the graphical interface
+automatically reacts and provides buttons to mount, unmount and so
+on. However, if you have accessed a machine remotely, or just like to
+use the command line, then this post will tell you how to use the same
+automounting approach as the GUI.</p>
+<p>For a system controlled by udev (or systemd), one command line tool is
+called udisks. It has two versions, in the original version 1, the
+command is udisks, for the second version udisks2, it is udisksctl.</p>
+<p>If you don&#8217;t have these commands already installed then you will have
+to install the udisks2 or udisks packages. In the case of the Debian
+distribution, udisks is in Wheezy and udisks2 is in Jessie. I seem to
+have both installed for some reason, possibly because I started at
+Wheezy and upgraded to Jessie.</p>
+<p>Anyway, we will look at the newest one, udisksctl.</p>
+</div>
+<div class="section" id="udisksctl">
+<h2>udisksctl</h2>
+<p>The main commands follow, there are several more that can be seen with:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udisksctl <span class="nb">help</span>
+</pre></div>
+</div>
+<p>To see a list of disks attached to the system:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udisksctl status
+</pre></div>
+</div>
+<p>For a very in depth list of disk information:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udisksctl dump
+</pre></div>
+</div>
+<p>To mount a filesystem:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udisksctl mount -b /dev/sdb1
+</pre></div>
+</div>
+<p>You don&#8217;t need to give a location, it will sort that out automatically
+for you. On my system it mounts the disk at /media/username/label
+where username is obviously your username and label is the label of
+the disk partition, other distributions may deal with it differently.</p>
+<p>To unmount a filesystem:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udisksctl unmount -b /dev/sdb1
+</pre></div>
+</div>
+<p>Note that the command is unmount with an N, not umount like the
+classic command.</p>
+<p>Note that these command names autocomplete which is kinda cool.</p>
+</div>
+<div class="section" id="udisks">
+<h2>udisks</h2>
+<p>The old udisks command is pretty similar except instead of giving a command
+name, you give an argument, e.g. to get the full disk information:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>udisks --dump
+</pre></div>
+</div>
+<p>Instead of status, it has &#8211;enumerate. This option lists partitions instead
+of physical disks like in the newer udisksctl.</p>
+</div>
+<div class="section" id="go-forth-and-mount">
+<h2>Go forth and mount</h2>
+<p>So udisksctl is pretty cool, we can now mount and unmount disks from
+the command line in the same way as the GUI. Do remember that the disk
+information from the udisksctl dump command can quite be useful when
+wanting to know about the disks attached to a system.</p>
+<blockquote>
+<div>Image Credits: <a class="reference external" href="http://fav.me/d76l5bw">Duck, duck, duck... by PartTimeCowboy</a>, <a class="reference external" href="http://fav.me/d2t1oce">On the wall by Millita</a>, <a class="reference external" href="http://fav.me/dv7ofu">USB Device Not Recognized by photonFUEL</a></div></blockquote>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/craft.html">craft</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="../../06/12/distributed_global_textual_community.html">A Distributed Global Textual Community</a></li>
+            <li class="right"><a href="../27/python_long_type.html">Python&#8217;s Disappearing Long Type</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "zeth";    var disqus_identifier = "2014/05/28/modern_mounting_with_udisks2";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="../../../2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
+        </li><li>
+            <a href="../../../2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
+        </li><li>
+            <a href="../../../2016/12/02/occams_racists.html">Occam's racists</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
+        </li><li>
+            <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
+        </li><li>
+            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
+        </li><li>
+            <a href="../../../2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
+        </li><li>
+            <a href="../../../2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
+        </li><li>
+            <a href="../../../2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section></section><section></section><section><div class="widget" id="twitterbox">
+<h2>Zeth0 on Twitter</h2>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/zeth0"  data-widget-id="480688116408131585">Tweets by @zeth0</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2014, Zeth. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

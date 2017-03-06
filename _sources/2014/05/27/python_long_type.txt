@@ -1,0 +1,105 @@
+Python's Disappearing Long Type
+===============================
+
+.. image:: /newimages/posts/python_long_type/robotspider.png
+
+*Note: everything below refers to the default (missionary position) C
+implementation of Python.*
+
+If you are converting Python code from Python 2 to Python 3, you might
+notice that the conversion tool transforms any uses of *long()* into
+*int()*. If that confuses you, this post will hopefully make it clear.
+
+Before Python 2.2, there was a clear distinction between two of the
+Python numerical types, the *int* type and the Python *long* type.
+
+Firstly, Python's *int* type was implemented as a signed long. So a Python
+*int* takes 32 bits of memory, which while not as efficient as some
+really optimised approach using shorter types, is still very fast
+indeed.
+
+Secondly, Python's *long* type is an integer of unlimited size (well until you
+run of RAM - which would be an unrealistically massive number not
+useful for anything).
+
+Python's *long* type does not map directly to a C type, it is a custom
+type implemented in the Python source code somewhere which I guess
+uses a C struct or whatever. As you might imagine, using the Python
+*long* type is significantly more RAM intensive and slower than the Python
+*int* type, but in reality it is rarely a problem (see below).
+
+Hans Fangohr `did a little performance testing`_ and found that
+Python's long type is about three times slower than the Python's *int*
+type.
+
+Unified *ints* were `brought in for Python 2.2`_. This starts off as a
+Python *int* but transforms magically to a Python *long* if it needs
+to. Here is how it works in Python 2.2 to 2.7:
+
+>>> import sys
+>>> sys.maxsize
+9223372036854775807
+>>> type(sys.maxsize)
+<type 'int'>
+>>> sys.maxsize + 1
+9223372036854775808L
+>>> type(sys.maxsize + 1)
+<type 'long'>
+>>> long
+<type 'long'>
+
+Note that when we add 1 to sys.maxsize, the result has an L suffix to
+denote it is a Python *long* and no longer a 32 bit number.
+
+In Python 3, it works in a similar the way, however the fact you are
+no longer using a 32 bit type is now completely hidden away from the
+user:
+
+>>> import sys
+>>> sys.maxsize
+9223372036854775807
+>>> type(sys.maxsize)
+<class 'int'>
+>>> sys.maxsize + 1
+9223372036854775808
+>>> type(sys.maxsize + 1)
+<class 'int'>
+>>> long
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'long' is not defined
+
+This time, when we add 1 to sys.maxsize, the result has no L suffix;
+trying to call the long constructor function causes an exception
+because it does not exist anymore in Python 3.
+
+Of course, the fun of Python is that being a high level language, we
+normally don't really care as long a we get a number; this is it
+rightly got changed it to be one unified type.
+
+One might design a high performance application not to use the Python
+*long* type if it turns out to be a bottleneck. However, normally you
+would have other bigger insurmountable bottlenecks in your
+software/hardware/network stack so you don't care about this.
+
+However, if you are working on a multi-language project, especially if
+you are using Python alongside a lower level language like C, then it
+is useful to know what is going on underneath the Python types.
+
+The Python float type is implemented as a C double. This doesn't
+change across versions. Several other numeric types are available in
+Python of course.
+
+So if you see *long* being converted to *int* by the 2to3 conversion
+tool, now you know why.
+
+    Image Credit: `The Spiderbot by Raikoh`_
+
+.. _`brought in for Python 2.2`: http://legacy.python.org/dev/peps/pep-0237/
+.. _`did a little performance testing`: http://www.southampton.ac.uk/~fangohr/blog/performance-of-pythons-long-data-type.html
+.. _`The Spiderbot by Raikoh`: http://fav.me/d52n1d5
+
+.. author:: default
+.. categories:: none
+.. tags:: craft
+.. comments::

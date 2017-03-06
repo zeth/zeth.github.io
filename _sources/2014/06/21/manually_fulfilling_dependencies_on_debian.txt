@@ -1,0 +1,87 @@
+Manually Fulfilling Dependencies on Debian
+==========================================
+
+.. image:: /newimages/posts/manually_fulfilling_dependencies_on_debian/atlas.png
+
+msmtp is yet another Mail Transfer Agent that merely relays the
+outgoing email message to another (e.g. your ISP's) SMTP server. There
+seems to be quite a lot of these, but this one seems to be the most
+actively maintained - `see its homepage on sourceforge`_ for more
+information and documentation. At time of writing, the last stable
+release is March 9, 2014 which is very recent.
+
+Other similar ones, such as ssmtp, esmtp and nbsmtp, still seem to
+work, they are pretty simple programs with few dependencies apart from
+the C environment which basically never changes anymore and they are
+recompiled and repackaged regularly by the distributions.
+
+I have a machine running on Debian stable but wanted a newer version
+of msmtp than is packaged for stable. So I cloned the source code
+using git and compiled it.
+
+However, after removing the default mail transfer agent (Exim),
+Debian's apt command is desperate to re-install it.
+
+So I needed to tell the system that I already have a mail transfer
+agent. This post explains how I did it. I don't know if this is the
+correct 'modern' way to do it, but it worked for me, and it is quite
+interesting because it exposes a little of how Apt works under the
+hood.
+
+Fortunately, my problem is the use case given in the old Apt Howto
+under the section called 
+`4.1 How to install locally compiled packages: equivs`_ there is
+more useful information there.
+
+The package that helps us to circumvent Debian package dependencies is
+called equivs, so first I needed to install that.  sudo apt-get
+install equivs
+
+.. code-block:: bash
+
+    sudo apt-get install equivs
+
+Next I ran the following command.
+
+.. code-block:: bash
+
+    equivs-control msmtp-git
+
+This created a template Debian control file. I gave it a meaningful
+name, i.e. msmtp installed from git.
+
+I added the following lines:
+
+.. code-block:: control
+
+    Package: msmtp-git
+    Provides: mail-transport-agent
+
+The `Provides` line is the key, it tells the system that a
+mail-transport-agent is installed.
+    
+Then I created a .deb from this control file.
+
+.. code-block:: bash
+
+    equivs-build msmtp-git
+
+Lastly I installed the deb:
+
+.. code-block:: bash
+
+    sudo dpkg --install  msmtp-git_1.0_all.deb
+
+Pretty weird but it works.
+
+    Image Credit: `Atlas - The Titan's Punishment by IndigoDesigns`_
+
+.. _`4.1 How to install locally compiled packages: equivs`: https://www.debian.org/doc/manuals/apt-howto/ch-helpers.en.html
+.. _`see its homepage on sourceforge`: http://msmtp.sourceforge.net/
+.. _`Atlas - The Titan's Punishment by IndigoDesigns`: http://fav.me/d3ap0ek
+
+
+.. author:: default
+.. categories:: none
+.. tags:: craft
+.. comments::

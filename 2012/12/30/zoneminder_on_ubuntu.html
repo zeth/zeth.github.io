@@ -1,0 +1,270 @@
+<!DOCTYPE html><!--[if lt IE 7]>      <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:og="http://ogp.me/ns#"
+    xmlns:fb="https://www.facebook.com/2008/fbml" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
+        <meta name="viewport" content="width=device-width">
+        <title>Zoneminder on Ubuntu &mdash; Zeth.net</title>
+            <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/flat.css" type="text/css">
+            <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+            <link rel="stylesheet" href="../../../_static/font-awesome.min.css" type="text/css">
+        <link rel="shortcut icon" href="../../../_static/tinkerer.ico" /><!-- Load modernizr and JQuery -->
+        <script src="../../../_static/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+        <script src="../../../_static/plugins.js"></script>
+        <script src="../../../_static/main.js"></script>
+        <link rel="next" title="You can’t stop the signal" href="../11/cant_stop_the_signal.html" /><link rel="prev" title="Netbooks in a tablet world" href="../../../2013/01/02/netbooks_in_a_tablet_world.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script><script type="text/javascript" src="../../../_static/underscore.js"></script><script type="text/javascript" src="../../../_static/doctools.js"></script><script type="text/javascript" src="../../../_static/disqus.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Scroll to content if on small screen
+            if (screen.width < 480)
+            {
+                $(document).scrollTop(document.getElementsByTagName("article")[0].offsetTop - 44);
+            }
+        });
+    </script></head>
+    <body role="document">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+      <div id="container"><header role="banner">
+            <hgroup>
+              <h1><a href="../../../index.html">Zeth.net</a></h1><h2>Taking control of your own technology</h2></hgroup>
+          </header>
+      <nav role="navigation">
+            <ul><li class="main-nav">
+                  <a href="../../../index.html">Home</a>
+                </li>
+              <li class="main-nav">
+                  <a href="../../../pages/welcome.html">Welcome</a>
+                </li>
+              </ul>
+          </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>December 30, 2012</span>
+        </div>
+    <div class="section" id="zoneminder-on-ubuntu">
+<h1>Zoneminder on Ubuntu</h1>
+<p>Ever thought about building your own CCTV system? All you need is free and open source software Zoneminder, a free Linux distribution such as Ubuntu, Lubuntu or Debian, an old PC and a camera.</p>
+<div class="section" id="what-is-zoneminder">
+<h2>What is Zoneminder?</h2>
+<p><a class="reference external" href="http://www.zoneminder.com/">Zoneminder</a> is an open source application used for CCTV and other security and surveillance applications. You can use it to monitor your home or work property or to monitor your pets while you are out, whatever you can imagine really (look at the <a class="reference external" href="http://www.zoneminder.com/screenshots">screenshots on the Zoneminder homepage</a> for more ideas).</p>
+<p>The implementation is basically a Perl/PHP web app using Apache and MySQL (<a class="reference external" href="http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29">LAMP</a> as we call it in the trade). If you have ever set up a website or blog or something then you will understand it instantly. It is a nice concept as using <a class="reference external" href="http://en.wikipedia.org/wiki/Shared_nothing">shared nothing</a> web application and system administration principles it can scale up indefinitely to very large commercial uses.</p>
+<p>If you are the kind of person who already has a home wifi or wired network and a home server or desktop on all the time, then Zoneminder will fit in great, as the only extra electricity you will be using will be the camera (or cameras) themselves.</p>
+<p>Zoneminder is really flexible and configurable, which is fantastic but also means that you do have to configure it for your own needs. If you have quite a minimalist IT setup at home with no machines running most of the time (e.g. just a iPad in your Thames-side studio apartment), then using Zoneminder at home might be overkill, as you can probably buy a pre-made embedded home CCTV system that runs off a single plug and does not require configuration.</p>
+<p>Zoneminder stores the recorded video as single frame images in a simple data layout on your filesystem and the web application allows you to configure it and view the cameras in real time and view recorded footage. The metadata is stored in the MySQL database.</p>
+</div>
+<div class="section" id="what-kind-of-camera-do-i-need">
+<h2>What kind of camera do I need?</h2>
+<p>It seems you can use anything. If you have a simple USB webcam lying around at home, that is all you need to get started. If then you like Zoneminder you can then get a posher camera later if you want.</p>
+<p>There different types of cameras depending on how serious you are. The more serious people put a card in their computer (such as the <a class="reference external" href="http://www.amazon.co.uk/gp/product/B000075ANQ/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B000075ANQ">Hauppauge Impact VCB/PCI Composite AV Input card</a> ) and use real high definition video cameras.</p>
+<p>I personally use a &#8216;netcam&#8217; (I have the model called <a class="reference external" href="http://www.amazon.co.uk/gp/product/B004UBSHQO/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B004UBSHQO">TRENDnet SecurView Wireless N Internet Camera</a> if you want to be precise) which is basically a webcam with a built in wireless card (and or ethernet socket). So you can put the camera anywhere you can power it and it will log onto your wireless network like any other device. You don&#8217;t have to run AV cables back to your computer.</p>
+<blockquote>
+<div>[The same advice that I always give concerning routers and other network devices applies here: if you buy such a netcam, check its website for any firmware updates, especially security updates, before you add the device to your network. These things are little network connected computers after all, containing a proprietary operating system. This system may have been written by a guy with a masters in network security from MIT, or it could have been written by a subcontractor earning £1 per hour in who knows where. The problem with all proprietary software is that there is no public peer review (unlike with open source software). So check the vendor for security updates.]</div></blockquote>
+<p>If a burglar manages to get in and picks up the netcam, there are no wires to follow back and so no clue as to where the images go. One can also use backup software or write a few bash scripts to copy images to a remote server or the cloud if you are in a high crime area. If you have a really good internet connection at both ends, you can put netcams in your relatives&#8217; houses and allow your Zoneminder server to grab the images off.</p>
+</div>
+<div class="section" id="what-kind-of-server-do-i-need">
+<h2>What kind of server do I need?</h2>
+<p>By &#8216;server&#8217; in the article, I just mean the computer that will have Zoneminder installed, as opposed to any other computers, tablets, phones or even TVs you might use to operate the system on a day to day basis.</p>
+<p>I suppose (in theory) you could use any operating system that can run Perl, Apache and Mysql. However, the assumption from here is that you will be using a Linux distribution, because Windows and OS X are, to put it bluntly, completely crap in this server role and a massive hassle to work with. If you have a Linux Desktop already at home, then that will probably work fine.</p>
+<p>In my experience, the server does not need to particularly powerful for a simple home setup. I am using a low-powered PC from 2006 which runs Zoneminder and lots of other apps quite nicely.</p>
+<p>You don&#8217;t have to have a graphical system, you can use something like Ubuntu Server if you want. However, you will need some computer or phone with a web browser to control Zoneminder and view the saved images/video, this does not have to be a Linux computer (toy operating systems work fine as clients).</p>
+</div>
+<div class="section" id="source-vs-packages">
+<h2>Source vs Packages</h2>
+<p>A couple of years ago I installed Zoneminder on Ubuntu 11.04 by downloading the source. Now over Christmas I had a spare 20 mins and re-installed the OS. I like backing up and reinstalling occasionally as it gives a nice clean system. This time I went for Ubuntu 12.10 in the Lubuntu flavour (I will talk about that in the future). Then I had to put all the data and programs back on.</p>
+<p>Last time I installed Zoneminder from source, this time I thought I would try the Ubuntu packages. This guide should work for any Ubuntu or Debian type system, but your mileage may vary.</p>
+</div>
+<div class="section" id="lets-get-started">
+<h2>Lets get started.</h2>
+<p>Firstly, we need to install the zoneminder package, you can do this in the graphical &#8220;software centre&#8221; or you can just open a terminal and use this command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">zoneminder</span>
+</pre></div>
+</div>
+<p>On a fresh system without Mysql, it will ask you to set a Mysql root password. Next it configures the nullmailer mail relay, I just accepted the default answers. Then it stops returns control of the shell.</p>
+</div>
+<div class="section" id="apache-settings">
+<h2>Apache settings</h2>
+<p>Now we need to let Apache know what is going on. If you are already using Apache to show websites on this system, you can integrate Zoneminder in a way that does not clash with your other sites.</p>
+<p>However, on a fresh system, you can do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zm</span><span class="o">/</span><span class="n">apache</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">zoneminder</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">apache2</span> <span class="n">reload</span>
+</pre></div>
+</div>
+<p>Now when you go in your web browser to <a class="reference external" href="http://localhost/zm/">http://localhost/zm/</a> you can now see the console.</p>
+<img alt="Image of the Zoneminder console in a web browser" src="../../../_images/zoneminder_on_ubuntu-1console.png" />
+<p>If you have installed Zoneminder to a non-graphical server distribution, then obviously use the IP address or domain name instead of localhost when you access Zoneminder from your external computer or phone or whatever.</p>
+</div>
+<div class="section" id="camera-setup">
+<h2>Camera Setup</h2>
+<p>When you click on Add New Monitor, you get a web form that looks like this:</p>
+<img alt="Image of the Add New Monitor web form in a web browser." src="../../../_images/zoneminder_on_ubuntu-2addmonitor.png" />
+<p>The most important field here is &#8220;source type&#8221;, the setting chosen affects the options available in the source tab (see below). Since I am using a netcam, I set it to remote.</p>
+<p>Another important field is &#8216;Function&#8217;. Modect is short for &#8216;motion detect&#8217;, it records when there is motion, other options include constantly recording and just monitoring without recording.</p>
+<p>Now we come onto the source tab, as shown below:</p>
+<img alt="Image of the define source form in a web browser." src="../../../_images/zoneminder_on_ubuntu-3definesource.png" />
+<p>This window allows you to define the hostname of your camera. So for a netcam we give it the host name of the camera, which in a home setup will probably be a private ip address (e.g. 192.168.x.x). Look up your camera on the <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/Supported_hardware">Supported hardware section of the Zoneminder wiki</a>  to find what settings you need to add here.</p>
+</div>
+<div class="section" id="log-driven-configuration">
+<h2>Log driven configuration</h2>
+<p>You can read the Zoneminder &#8216;system log&#8217; by clicking on a link unsurprisingly called &#8216;log&#8217; (as shown in the main console screenshot above). This gives as a log viewer, as shown below:</p>
+<img alt="Image of the log viewer in a web browser." src="../../../_images/zoneminder_on_ubuntu-4log.png" />
+<p>The way I configure Zoneminder is by reading the activity log and keep changing configuration until it stops moaning.</p>
+<p>So I started with this error:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">Can</span><span class="s1">&#39;t open memory map file /dev/shm/zm.mmap.1, probably not enough space free: Permission denied</span>
+</pre></div>
+</div>
+<p>This due to the default settings of Ubuntu (or Lubuntu in my case). There is a kernel setting called shmmax which determines the maximum size of a shared memory segment i.e. the total amount of RAM that can be used when Zoneminder is grabbing images from the video driver.</p>
+<p>[You may vaguely remember doing this before because some &#8216;enterprise&#8217; (i.e. bloated) databases and other business software often requires this too.]</p>
+<p>So on my fresh install, shmmax was set to 32MB by default and it needed to be more than 96MB, so I increased it to 128MB to be sure.</p>
+<p>How much you need depends on how posh your camera is. The higher resolution the camera, the more RAM Zoneminder will need to use.</p>
+<p>A quick hack way is to just override the number in /proc, obviously this only works on the live system, when you reboot the setting is gone. However, it is a quick way to play about with the setting:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span>
+<span class="n">echo</span> <span class="mi">536870912</span> <span class="o">&gt;/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">shmmax</span>
+<span class="n">exit</span>
+</pre></div>
+</div>
+<p>You can work the setting by trial and error but you can also just to look in the Zonemaster wiki, or to google it, as it is likely that someone else is already using Zonemaster with the same model of camera you have.</p>
+<p>I restarted zonemaster:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">init</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">zonemaster</span> <span class="n">restart</span>
+</pre></div>
+</div>
+<p>And it solved the problem. So because I then knew it worked, (as <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/FAQ#What_does_a_.27Can.27t_shmget:_Invalid_argument.27_error_in_my_logs_mean.3F_and_my_cameras_won.27t_display_video_at_higher_resolutions.">advised by Zonemaster wiki</a>), I made a config file to do this on boot:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">su</span>
+<span class="n">echo</span> <span class="n">kernel</span><span class="o">.</span><span class="n">shmmax</span> <span class="o">=</span> <span class="mi">536870912</span> <span class="o">&gt;/</span><span class="n">etc</span><span class="o">/</span><span class="n">sysctl</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="mi">60</span><span class="o">-</span><span class="n">kernel</span><span class="o">-</span><span class="n">shm</span><span class="o">.</span><span class="n">conf</span>
+<span class="n">sysctl</span> <span class="o">-</span><span class="n">p</span>
+<span class="n">exit</span>
+</pre></div>
+</div>
+<p>Next up in the log was the error:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">waiting</span> <span class="k">for</span> <span class="n">capture</span> <span class="n">daemon</span>
+</pre></div>
+</div>
+<p>This is fixed by adding the web server user to the video group:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">adduser</span> <span class="n">www</span><span class="o">-</span><span class="n">data</span> <span class="n">video</span>
+</pre></div>
+</div>
+<p>(Why isn&#8217;t this sorted out by the .deb package? And why is it not given its own user?)</p>
+<p>Just keep attacking the log errors until it is all happy really.</p>
+</div>
+<div class="section" id="configuring-image-location">
+<h2>Configuring Image Location</h2>
+<p>By default the images are bunged into: /usr/share/zoneminder/events which is a symbolic link to /var/cache/zoneminder/events/1/</p>
+<p>In theory, to change this you need to change the setting ZM_DIR_EVENTS which is the first setting under &#8216;Options&#8217; then &#8216;Paths&#8217;. Use an absolute path and make sure the destination has the correct permissions.</p>
+<p>In reality, I never had much luck changing this. When it tries to read the events back, it seems to be somehow hardcoded to the old location which is then appends with this location. If anyone has the answer to this let me know.</p>
+<p>So instead I have had more luck just ignoring this configuration option and instead myself replacing the symbolic link /usr/share/zoneminder/events with my own:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">rm</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">zoneminder</span><span class="o">/</span><span class="n">events</span>
+<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="n">my_better_location</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">zoneminder</span><span class="o">/</span><span class="n">events</span>
+</pre></div>
+</div>
+<p>By default there is no lockdown on the web interface, so if the machine is web accessible, you will want to change that (options &gt; OPT_USE_AUTH). When you first turn on authentication, the username is admin and password is admin. You will probably want to change that too! (Options &gt; Users - only appears when authentication is turned on).</p>
+<p>There are lots of other things you can configure like the sensitivity of the motion detection and which regions of the image to watch and which to ignore it etc. However, we have covered everything specific to using Zoneminder on an Ubuntu/Debian system using the .deb packages. The <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/">Zoneminder wiki</a> is very useful and comprehensive so dig around there to find out more.</p>
+</div>
+<div class="section" id="zoneminder-in-action">
+<h2>Zoneminder in action</h2>
+<p>Now if you have read this far you deserve to have some silly pictures.</p>
+<p>Having a CCTV camera at the front of your house educates you a lot about what happens in your local community. I have learned all sorts of things from watching back footage at random. Most of the cool snaps I probably cannot post online for legal and taste reasons.</p>
+<p>The first revelation is that a large amount of people look through your windows. Here is a fairly tame and blurry one.</p>
+<img alt="Image of someone looking into the camera." src="../../../_images/zoneminder_on_ubuntu-5everybodystares.jpg" />
+<p>I have had people come right up to the camera and look through the windows. One person even wrote down details in a pad.</p>
+<p>Where does the box load of paper spam come from? Well Zoneminder will tell you. Here is a guy promoting a pizza company:</p>
+<img alt="Image of someone giving me a pizza advert." src="../../../_images/zoneminder_on_ubuntu-6pizzaad.jpg" />
+<p>Here is a free &#8216;newspaper&#8217; full of ads:</p>
+<img alt="Image of someone giving me free newspaper." src="../../../_images/zoneminder_on_ubuntu-7freeadpaper.jpg" />
+<p>Fortunately, we still have real postmen. But they seem to be far more informally dressed than Postman Pat:</p>
+<img alt="Image of someone giving me free newspaper." src="../../../_images/zoneminder_on_ubuntu-8realpostman.jpg" />
+<p>I think he was a special temp over Christmas. Sadly they all seem to have these granny trolleys now instead of the cool Pashley bicycles they used to have.</p>
+<p>Fortunately, the dustmen come and take all this rubbish away, even in heavy rain:</p>
+<img alt="Image of bin men and a dust cart." src="../../../_images/zoneminder_on_ubuntu-9binmen.jpg" />
+</div>
+<div class="section" id="over-to-you">
+<h2>Over to you</h2>
+<p>So setting up Zoneminder takes a little fiddling but it is good fun and reassuring to have the ability to look back in time at what was happening in front of your house in the past. If you have a go or have tried Zoneminder before, please let everyone know how you got on and how I could improve this guide. Bonus points for silly pictures.</p>
+</div>
+</div>
+
+    <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="../../../categories/linux.html">linux</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="../../../tags/linux.html">linux</a>, <a href="../../../tags/ubuntu.html">ubuntu</a>, <a href="../../../tags/lubuntu.html">lubuntu</a>, <a href="../../../tags/zoneminder.html">zoneminder</a>, <a href="../../../tags/cctv.html">cctv</a>, <a href="../../../tags/craft.html">craft</a></span>
+        </div>
+        </div><ul class="related clearfix">
+            <li class="left"> &laquo; <a href="../../../2013/01/02/netbooks_in_a_tablet_world.html">Netbooks in a tablet world</a></li>
+            <li class="right"><a href="../11/cant_stop_the_signal.html">You can&#8217;t stop the signal</a> &raquo; </li>
+        </ul><div id="disqus_thread"></div><script type="text/javascript">    var disqus_shortname = "zeth";    var disqus_identifier = "2012/12/30/zoneminder_on_ubuntu";    disqus_thread();</script><noscript>Please enable JavaScript to view the    <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></article><aside class="sidebar"><section><div class="widget">
+    <h1>Recent Posts</h1>
+    <ul><li>
+            <a href="../../../2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
+        </li><li>
+            <a href="../../../2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
+        </li><li>
+            <a href="../../../2016/12/02/occams_racists.html">Occam's racists</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
+        </li><li>
+            <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
+        </li><li>
+            <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
+        </li><li>
+            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
+        </li><li>
+            <a href="../../../2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
+        </li><li>
+            <a href="../../../2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
+        </li><li>
+            <a href="../../../2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
+        </li></ul>
+</div>
+</section><section><div class="widget" id="searchbox" role="search">
+    <h1><a href="#searchbox">Search</a></h1>
+    <form action="../../../search.html" method="get">
+        <input type="text" name="q" />
+        <button type="submit"><span class="fa fa-search"></span></button>
+    </form>
+</div></section><section></section><section></section><section><div class="widget" id="twitterbox">
+<h2>Zeth0 on Twitter</h2>
+<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/zeth0"  data-widget-id="480688116408131585">Tweets by @zeth0</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div></section></aside></div> <!-- #main --></div> <!-- #main-container -->
+
+        <div class="footer-container" role="contentinfo"><footer class="wrapper">&copy; Copyright 2014, Zeth. Powered by <a href="http://www.tinkerer.me/">Tinkerer</a> and <a href="http://sphinx.pocoo.org/">Sphinx</a>.</footer></div> <!-- footer-container -->
+
+      </div> <!--! end of #container --><!--[if lt IE 7 ]>
+          <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+          <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+        <![endif]-->
+    </body>
+</html>

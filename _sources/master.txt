@@ -1,0 +1,43 @@
+Sitemap
+=======
+
+.. toctree::
+   :maxdepth: 1
+
+   2017/02/13/deplorables_hysterics_maastricht_trump
+   2016/12/18/leaving_the_eu_in_name_only
+
+   pages/welcome
+   2016/12/02/occams_racists.rst
+   2016/12/01/the_end_of_the_world_is_cancelled
+   2016/12/01/the_treaty_of_losers
+   2016/11/06/godwin_part_two
+   2016/10/08/world_according_to_clinton_email
+   2016/08/06/stylish_super_skulk
+   2016/08/05/put_away_the_student_politics
+   2016/08/02/let_them_eat_cake
+   2016/07/16/hope_wins
+   2016/07/09/good_fences_make_good_neighbours
+   2016/07/02/order_of_magnitude
+   2016/06/25/this_is_my_design
+   2016/06/20/rome_vs_the_matrix
+   2016/05/17/pirate_gamepad
+   2016/05/17/building_up_skynet
+   2015/05/19/everything_is_just_c_with_bells_on
+   2014/06/22/emacs_contacts_application_bbdb
+   2014/06/21/manually_fulfilling_dependencies_on_debian
+   2014/06/12/distributed_global_textual_community
+   2014/05/28/modern_mounting_with_udisks2
+   2014/05/27/python_long_type
+   2014/03/10/the_digital_text
+   2014/02/09/the_politics_ethics_and_social_context_of_digital_culture
+   2014/01/13/crunchbang_linux_tips
+   2014/01/12/installing_multiple_versions_of_firefox
+   2014/01/11/building_python_from_source_on_debian_or_ubuntu
+   2014/01/10/crunchbang
+   2013/03/09/why_lubuntu
+   2013/03/08/lubuntu_on_macbook_pro_retina
+   2013/01/14/samsung_printers_on_ubuntu
+   2013/01/02/netbooks_in_a_tablet_world
+   2012/12/30/zoneminder_on_ubuntu
+   2012/12/11/cant_stop_the_signal	      
