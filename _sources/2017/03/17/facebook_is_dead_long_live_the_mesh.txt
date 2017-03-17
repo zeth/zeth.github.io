@@ -1,7 +1,7 @@
 Facebook is dead - long live the mesh
 =====================================
 
-.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/bond.png
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/longlive.png
 
 For those reading later, Facebook was an early 21st Century "Social
 Network", it was web application that you can sign up to and share
@@ -152,6 +152,8 @@ peace as a casual player, even if you try to, someone will redesign
 the world half way through and negate all the time you put into
 building a character.
 
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/bond.png
+
 Another way of putting it is James is like an Ambassador to the USSR.
 
 An Ambassador to a hostile country should always know they are on
@@ -278,7 +280,7 @@ Linus Torvalds and so on, we are in a line. Moore's law, the compiler,
 the web, robotics, AI, the singularity. No one can stop us.
 
 
-.. _`my previous essay`: http://zeth.net/2017/02/13/deplorables_hysterics_maastricht_trump.html 
+.. _`my previous essay`: http://zeth.net/2017/02/13/deplorables_hysterics_maastricht_trump.html
 .. _`maintains a big list`: https://en.wikipedia.org/wiki/Municipal_wireless_network
 .. _`wrote an article about his problems`: http://www.breitbart.com/tech/2017/03/17/delingpole-facebook-banned-me-for-defending-milo/
 .. _`silent majority`: http://zeth.net/2016/08/02/let_them_eat_cake.html
