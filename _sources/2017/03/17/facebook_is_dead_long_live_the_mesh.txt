@@ -1,13 +1,17 @@
 Facebook is dead - long live the mesh
 =====================================
 
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/bond.png
+
 For those reading later, Facebook was an early 21st Century "Social
 Network", it was web application that you can sign up to and share
 text and pictures with other users.
 
 1. Tangent on why I don't use Facebook
 --------------------------------------
-    
+
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/scrabble.png
+
 I was at University when Facebook started so I got an early invite
 when it was a University based system. I quit in 2006 when it became
 available to the whole public and stopped being connected to the
@@ -39,6 +43,8 @@ care about your cat.
 
 2. From the Web to the Mesh
 ---------------------------
+
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/cyborg_cheshire_cat.png
 
 For those in the military and Universities, we made our own
 networks. To provide internet to homes and businesses, commercial ISPs
@@ -74,6 +80,8 @@ turn to mud if a bank robber is performing a getaway.
 3. I still miss Gopher
 ----------------------
 
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/mesh.png
+
 In 1991, the leading Internet content protocol was Gopher. It had
 automatic client-side formatting and strong typing of content files,
 removing many security problems that WWW faced.
@@ -94,6 +102,8 @@ should be to add your own content to WWW.
 
 4. Social Networks Suck
 -----------------------
+
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/facebook.png
 
 To bridge this easy to read/hard to write gap, the social networks
 jumped in. These are easy for people to quickly post their cat photos
@@ -122,6 +132,8 @@ Coast controlled social networks to promote his work:
     the left.
 
 Sounds like a lot of work.
+
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/noise.png
 
 James Delingpole has a nice podcast, if his content is good enough,
 his fans will share it, it doesn't matter if he is on Facebook
@@ -177,6 +189,8 @@ spirit, but it seems to have an inevitability about it.
 5. Jesus Vs Pontius Pilate
 --------------------------
 
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/net.png
+
 Pontius Pilate served as governor of Judaea then retired to his villa
 in Rome. Did he even remember executing Jesus? To him it would have
 seemed like one of many local disputes he dealt with. Being a colonial
@@ -200,6 +214,8 @@ thing to keep your head on your shoulders as well.
 
 6. The silent majority
 ----------------------
+
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/quiet.png
 
 I never really felt like being a Jesus figure. Most people don't, I
 talked a lot about the `silent majority`_ before.
