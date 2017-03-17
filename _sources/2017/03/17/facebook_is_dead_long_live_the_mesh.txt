@@ -80,7 +80,7 @@ turn to mud if a bank robber is performing a getaway.
 3. I still miss Gopher
 ----------------------
 
-.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/mesh.png
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/noise.png
 
 In 1991, the leading Internet content protocol was Gopher. It had
 automatic client-side formatting and strong typing of content files,
@@ -132,8 +132,6 @@ Coast controlled social networks to promote his work:
     the left.
 
 Sounds like a lot of work.
-
-.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/noise.png
 
 James Delingpole has a nice podcast, if his content is good enough,
 his fans will share it, it doesn't matter if he is on Facebook
@@ -253,6 +251,8 @@ something new.
 
 7. Technology is progress
 -------------------------
+
+.. image:: /newimages/posts/facebook_is_dead_long_live_the_mesh/mesh.png
 
 A lot of the crazy left today is anti-technological. It is mathematics
 that will save the world not socialism or "Intersectionality".
