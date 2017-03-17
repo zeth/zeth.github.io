@@ -259,7 +259,7 @@ corporatism and now we may be going back to capitalism.
 
 However, software has just pressed on. From Turing through to K&R to
 Linus Torvalds and so on, we are in a line. Moore's law, the compiler,
-the web, robotics, AI, the singularity.
+the web, robotics, AI, the singularity. No one can stop us.
 
 
 .. _`my previous essay`: http://zeth.net/2017/02/13/deplorables_hysterics_maastricht_trump.html 
