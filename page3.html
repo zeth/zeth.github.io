@@ -65,6 +65,78 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>June 21, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/06/21/manually_fulfilling_dependencies_on_debian.html">Manually Fulfilling Dependencies on Debian</a></h1>
+<img alt="../../../_images/atlas.png" src="_images/atlas.png"/>
+<p>msmtp is yet another Mail Transfer Agent that merely relays the
+outgoing email message to another (e.g. your ISP’s) SMTP server. There
+seems to be quite a lot of these, but this one seems to be the most
+actively maintained - <a class="reference external" href="http://msmtp.sourceforge.net/">see its homepage on sourceforge</a> for more
+information and documentation. At time of writing, the last stable
+release is March 9, 2014 which is very recent.</p>
+<p>Other similar ones, such as ssmtp, esmtp and nbsmtp, still seem to
+work, they are pretty simple programs with few dependencies apart from
+the C environment which basically never changes anymore and they are
+recompiled and repackaged regularly by the distributions.</p>
+<p>I have a machine running on Debian stable but wanted a newer version
+of msmtp than is packaged for stable. So I cloned the source code
+using git and compiled it.</p>
+<p>However, after removing the default mail transfer agent (Exim),
+Debian’s apt command is desperate to re-install it.</p>
+<p>So I needed to tell the system that I already have a mail transfer
+agent. This post explains how I did it. I don’t know if this is the
+correct ‘modern’ way to do it, but it worked for me, and it is quite
+interesting because it exposes a little of how Apt works under the
+hood.</p>
+<p>Fortunately, my problem is the use case given in the old Apt Howto
+under the section called
+<a class="reference external" href="https://www.debian.org/doc/manuals/apt-howto/ch-helpers.en.html">4.1 How to install locally compiled packages: equivs</a> there is
+more useful information there.</p>
+<p>The package that helps us to circumvent Debian package dependencies is
+called equivs, so first I needed to install that.  sudo apt-get
+install equivs</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>sudo apt-get install equivs
+</pre></div>
+</div>
+<p>Next I ran the following command.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>equivs-control msmtp-git
+</pre></div>
+</div>
+<p>This created a template Debian control file. I gave it a meaningful
+name, i.e. msmtp installed from git.</p>
+<p>I added the following lines:</p>
+<div class="highlight-control"><div class="highlight"><pre><span/><span class="k">Package</span><span class="w">: </span><span class="s">msmtp-git</span>
+<span class="k">Provides</span><span class="w">: </span><span class="s">mail-transport-agent</span>
+</pre></div>
+</div>
+<p>The <cite>Provides</cite> line is the key, it tells the system that a
+mail-transport-agent is installed.</p>
+<p>Then I created a .deb from this control file.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>equivs-build msmtp-git
+</pre></div>
+</div>
+<p>Lastly I installed the deb:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span/>sudo dpkg --install  msmtp-git_1.0_all.deb
+</pre></div>
+</div>
+<p>Pretty weird but it works.</p>
+<blockquote>
+<div>Image Credit: <a class="reference external" href="http://fav.me/d3ap0ek">Atlas - The Titan’s Punishment by IndigoDesigns</a></div></blockquote>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>June 12, 2014</span>
         </div>
         <div class="section">
@@ -1477,37 +1549,6 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
                 Tags:
                 <a href="tags/craft.html">craft</a></span>
         </div>
-        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>March 09, 2013</span>
-        </div>
-        <div class="section">
-            <h1><a href="2013/03/09/why_lubuntu.html">Why Lubuntu?</a></h1>
-<img alt="Lubuntu Logo" src="_images/Lubuntu_logo500.png"/>
-<p><a class="reference external" href="http://lubuntu.net">Lubuntu</a> is a version of Ubuntu with the LXDE desktop instead of Unity. I am not a Unity hater, I actually like Unity a lot. I just like LXDE more.</p>
-<p><a class="reference external" href="http://lxde.org/">LXDE</a> is a desktop focused on performance and keeping out of your way. It is based on GTK+, so in practice it is similar to GNOME or Unity.</p>
-<p>I have to admit it is not yet as polished as those other desktop environments, especially the preferences tools are not as consistent and simple as the ones in normal Unity. Since I am the kind of person who ignores the desktop tools anyway and installs my own choice of programs, it doesn’t really matter a great deal.</p>
-<p>The LXDE and Lubuntu projects are relatively new and have quite small teams (after all, the more well known GNOME project started in 1997).</p>
-<p>If you are interested in writing software for the open source desktop, there seems to be a lot of niches unfilled, a lot more opportunities to make an impact in this kind of project.</p>
-<p>I often read articles on the web recommending LXDE for old computers, where is does work much better than more hungrier desktops. Indeed I started using Lubuntu because a computer was struggling with Unity, so I replaced it with Lubuntu and it became a lot more responsive.</p>
-<p>However, the same theory applies to new computers too, why waste RAM and processor cycles on stuff you are not even using 99% of the time?</p>
-<p>The RAM and processor are there to run the programs I want. The desktop environment, and the operating system in general, should use as little resources as possible.</p>
-<p>Currently, Lubuntu has now become the main operating system I use on almost all my computers. I have not tried other LXDE desktops, such as those from Debian or Fedora, I would be very interested in how they compare to Lubuntu.</p>
-
-        </div>
-        <div class="postmeta">
-        <div class="author">
-            <span>Posted by Zeth</span>
-        </div>
-        <div class="categories">
-            <span>
-                Filed under:
-                <a href="categories/linux.html">linux</a></span>
-        </div>
-        <div class="tags">
-            <span>
-                Tags:
-                <a href="tags/linux.html">linux</a>, <a href="tags/lubuntu.html">lubuntu</a>, <a href="tags/ubuntu.html">ubuntu</a>, <a href="tags/craft.html">craft</a></span>
-        </div>
         </div><div class="archive_link">
         <a href="archive.html"> &mdash; Blog Archive &mdash; </a>
     </div><ul class="related clearfix">
@@ -1516,6 +1557,8 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2017/03/17/facebook_is_dead_long_live_the_mesh.html">Facebook is dead - long live the mesh</a>
+        </li><li>
             <a href="2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
         </li><li>
             <a href="2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
@@ -1533,8 +1576,6 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <a href="2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
         </li><li>
             <a href="2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
-        </li><li>
-            <a href="2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">

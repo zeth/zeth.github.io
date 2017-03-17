@@ -65,6 +65,58 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>August 02, 2016</span>
+        </div>
+        <div class="section">
+            <h1><a href="2016/08/02/let_them_eat_cake.html">Let them eat cake</a></h1>
+<img alt="../../../_images/cake2.jpg" src="_images/cake2.jpg"/>
+<p>On the 23rd June 2016, the people of Great Britain and Northern
+Ireland were asked whether they wanted to leave or remain in the
+European Union. 52% voted to leave while 48% voted to remain.</p>
+<p>On April 10th 2016, ten weeks before the vote, ICM published <a class="reference external" href="https://www.icmunlimited.com/polls/">an opinion poll</a>
+that gave a four-point lead for Leave (52% vs 48%), which turned out
+to be the correct result.</p>
+<p>One explanation is that with several pollsters covering the
+referendum, one has to be right; after all, even a stopped clock is
+correct twice a day.</p>
+<p>However, lets consider an alternative explanation, that the whole EU
+referendum campaign made absolutely no difference to public opinion at
+all.</p>
+<p>Hundreds of millions of pounds spent by the campaigns, posters,
+<a class="reference external" href="https://zeth.net/2016/07/02/order_of_magnitude.html">Boris’ bus slogan</a>, acres of newspaper columns,
+billions and trillions of tweets, all of it, didn’t manage to
+convince anyone of anything.</p>
+<p>People are just not that into politics.</p>
+<p>In other words, the day to day minutiae of events doesn’t really
+matter to the silent majority, they haven’t got the time or the
+inclination to care and why should they? It would be very conceited to
+say the people should look up and spend their time listening to their
+Lords and masters.</p>
+<p>The print circulation of Britain’s main broadsheet newspapers has
+fallen so far they can barely scrape a million per day combined. What
+percentage of their remaining readers do more than browse the news
+before going straight to the crossword or the sport section?</p>
+<p>Meanwhile, less than 200,000 people in the UK watch the BBC’s political
+programmes, but over 15 million people watch ‘The Great British Bake
+Off’ on the same network, which is a cake baking competition.</p>
+<p>As I <a class="reference external" href="https://twitter.com/zeth0/status/748914202933391360">said on Twitter</a>: Politics is important. However, cakes are 75
+times more important.</p>
+<p>In fact, I don’t want to ever live in a country where politics is more
+important than cake, it doesn’t sound like a very benevolent regime.</p>
+<img alt="../../../_images/cake-small.jpg" src="_images/cake-small.jpg"/>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/brexit.html">brexit</a>, <a href="tags/civic.html">civic</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>July 16, 2016</span>
         </div>
         <div class="section">
@@ -1604,78 +1656,6 @@ to provide auto-fill functions, e.g. in the To: field of an email.</p>
                 Tags:
                 <a href="tags/craft.html">craft</a></span>
         </div>
-        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>June 21, 2014</span>
-        </div>
-        <div class="section">
-            <h1><a href="2014/06/21/manually_fulfilling_dependencies_on_debian.html">Manually Fulfilling Dependencies on Debian</a></h1>
-<img alt="../../../_images/atlas.png" src="_images/atlas.png"/>
-<p>msmtp is yet another Mail Transfer Agent that merely relays the
-outgoing email message to another (e.g. your ISP’s) SMTP server. There
-seems to be quite a lot of these, but this one seems to be the most
-actively maintained - <a class="reference external" href="http://msmtp.sourceforge.net/">see its homepage on sourceforge</a> for more
-information and documentation. At time of writing, the last stable
-release is March 9, 2014 which is very recent.</p>
-<p>Other similar ones, such as ssmtp, esmtp and nbsmtp, still seem to
-work, they are pretty simple programs with few dependencies apart from
-the C environment which basically never changes anymore and they are
-recompiled and repackaged regularly by the distributions.</p>
-<p>I have a machine running on Debian stable but wanted a newer version
-of msmtp than is packaged for stable. So I cloned the source code
-using git and compiled it.</p>
-<p>However, after removing the default mail transfer agent (Exim),
-Debian’s apt command is desperate to re-install it.</p>
-<p>So I needed to tell the system that I already have a mail transfer
-agent. This post explains how I did it. I don’t know if this is the
-correct ‘modern’ way to do it, but it worked for me, and it is quite
-interesting because it exposes a little of how Apt works under the
-hood.</p>
-<p>Fortunately, my problem is the use case given in the old Apt Howto
-under the section called
-<a class="reference external" href="https://www.debian.org/doc/manuals/apt-howto/ch-helpers.en.html">4.1 How to install locally compiled packages: equivs</a> there is
-more useful information there.</p>
-<p>The package that helps us to circumvent Debian package dependencies is
-called equivs, so first I needed to install that.  sudo apt-get
-install equivs</p>
-<div class="highlight-bash"><div class="highlight"><pre><span/>sudo apt-get install equivs
-</pre></div>
-</div>
-<p>Next I ran the following command.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span/>equivs-control msmtp-git
-</pre></div>
-</div>
-<p>This created a template Debian control file. I gave it a meaningful
-name, i.e. msmtp installed from git.</p>
-<p>I added the following lines:</p>
-<div class="highlight-control"><div class="highlight"><pre><span/><span class="k">Package</span><span class="w">: </span><span class="s">msmtp-git</span>
-<span class="k">Provides</span><span class="w">: </span><span class="s">mail-transport-agent</span>
-</pre></div>
-</div>
-<p>The <cite>Provides</cite> line is the key, it tells the system that a
-mail-transport-agent is installed.</p>
-<p>Then I created a .deb from this control file.</p>
-<div class="highlight-bash"><div class="highlight"><pre><span/>equivs-build msmtp-git
-</pre></div>
-</div>
-<p>Lastly I installed the deb:</p>
-<div class="highlight-bash"><div class="highlight"><pre><span/>sudo dpkg --install  msmtp-git_1.0_all.deb
-</pre></div>
-</div>
-<p>Pretty weird but it works.</p>
-<blockquote>
-<div>Image Credit: <a class="reference external" href="http://fav.me/d3ap0ek">Atlas - The Titan’s Punishment by IndigoDesigns</a></div></blockquote>
-
-        </div>
-        <div class="postmeta">
-        <div class="author">
-            <span>Posted by Zeth</span>
-        </div>
-        
-        <div class="tags">
-            <span>
-                Tags:
-                <a href="tags/craft.html">craft</a></span>
-        </div>
         </div><div class="archive_link">
         <a href="archive.html"> &mdash; Blog Archive &mdash; </a>
     </div><ul class="related clearfix">
@@ -1684,6 +1664,8 @@ mail-transport-agent is installed.</p>
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2017/03/17/facebook_is_dead_long_live_the_mesh.html">Facebook is dead - long live the mesh</a>
+        </li><li>
             <a href="2017/02/13/deplorables_hysterics_maastricht_trump.html">The Deplorables vs the Hysterics - from Maastricht to Trump</a>
         </li><li>
             <a href="2016/12/18/leaving_the_eu_in_name_only.html">Leaving the EU in name only</a>
@@ -1701,8 +1683,6 @@ mail-transport-agent is installed.</p>
             <a href="2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
         </li><li>
             <a href="2016/08/05/put_away_the_student_politics.html">Time to put away the student politics</a>
-        </li><li>
-            <a href="2016/08/02/let_them_eat_cake.html">Let them eat cake</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">

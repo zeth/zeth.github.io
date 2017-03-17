@@ -89,16 +89,9 @@ These are pages about politics, society and economics. The main focus
 is on the UK so they will probably not be very interesting if you are
 not interested in local UK politics.
 
-Legacy_
-~~~~~~~
-
-My posts from 2005 to 2011 have not been converted to the modern
-format, and also they link internally using old http instead of https
-so they might not even display in your browser.
 
 .. _Craft: https://zeth.net/tags/craft.html
 .. _Civic: https://zeth.net/tags/civic.html
-.. _Legacy: https://zeth.net/archive/posts/
 .. _`PyCon UK`: http://pyconuk.org
 .. _`inputs`: https://github.com/zeth/inputs
 .. _`pip install inputs`: https://pypi.python.org/pypi/inputs
