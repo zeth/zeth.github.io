@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2017/06/23/brexit_means_decolonisation
    2017/03/17/facebook_is_dead_long_live_the_mesh
    2017/02/13/deplorables_hysterics_maastricht_trump
    2016/12/18/leaving_the_eu_in_name_only
