@@ -65,6 +65,78 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>August 06, 2016</span>
+        </div>
+        <div class="section">
+            <h1><a href="2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a></h1>
+<img alt="../../../_images/firefox1.jpg" src="_images/firefox1.jpg"/>
+<p>The <a class="reference external" href="https://zeth.net/2014/01/12/installing_multiple_versions_of_firefox.html">last time I talked about the web browser</a>, I was technically
+speaking about Iceweasel. For the last decade, Linux users like me
+have known the default browser that Debian ships under the name of
+Iceweasel.</p>
+<p>In 2006, due to some hysteria over trademark protection and typical
+West Coast America “we know better than you” attitude, Mozilla told
+Debian it could not use the name Firefox or the Firefox logo.</p>
+<p>Can we even use it here? Well since we don’t want to be told off by
+Mozilla’s logo police, we can use images of some beautiful people who
+have made their own dramatic and artistic costume interpretations of
+the logo. This blog is 90% about cool and silly pictures after all.</p>
+<p>After 10 years of Debian using the name Iceweasel and its own logo,
+eventually, Mozilla <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=815006">gave up and asked Debian to use the normal name and logo</a>.
+Lets celebrate with another costume:</p>
+<img alt="../../../_images/firefox2.jpg" src="_images/firefox2.jpg"/>
+<p>Thanks Iceweasel for your service, we will miss you. LWM published
+<a class="reference external" href="https://lwn.net/Articles/676799/">a longer discussion of this change</a>. Incidentally, Google’s Browser is
+still called Chromium instead of Chrome on the Debian Linux
+platform. I could only find one Chrome costume:</p>
+<img alt="../../../_images/chrome.jpg" src="_images/chrome.jpg"/>
+<p>He (or she) looks pretty happy.</p>
+<p>Meanwhile, this week Firefox 48 has been released which, among other
+things, has caught up with a feature that Chromium has had for a while,
+namely multiple processes.</p>
+<p>Making the browser render web content or play media in a subprocess is
+obviously a win for security and performance, especially on Liunx.</p>
+<p>Processes are the main native form of efficient resource allocation on
+Linux, so now Firefox is using multiple processes it is finally
+working with the grain rather against it.</p>
+<p>It is still early days. Nothing has crashed for me yet, but I am
+keeping the Firefox that Debian distributes (which at time of writing
+is version 45), around just in case. You might want to consider doing
+the same, especially if you are using extensions which may not work in
+the multiprocess mode yet.</p>
+<p>To try it out, <a class="reference external" href="https://www.mozilla.org/en-GB/firefox/new/">download Firefox</a>. By the way in my <a class="reference external" href="https://zeth.net/2014/01/12/installing_multiple_versions_of_firefox.html">last post about
+Firefox</a>, I talked about how to run multiple Versions of Firefox and
+how to create an extra profile, which might be handy.</p>
+<p>Firefox is pretty cautious about turning multiprocess mode on but
+putting <a class="reference external" href="about:status">about:status</a> into the browser will tell you if it is on or
+off. As in the image below:</p>
+<img alt="../../../_images/firefox.png" src="_images/firefox.png"/>
+<p>If you find it is off, you can make a new profile (as I just
+mentioned) or you can open <a class="reference external" href="about:config">about:config</a> and toggle the setting called
+browser.tabs.remote.autostart to true. Then you can go back to
+<a class="reference external" href="about:status">about:status</a> and see if it worked.</p>
+<p>It still might be off because of whatever reason, i.e. they it might
+break an extension or whatever. If you want to push on anyway then you
+have to open <a class="reference external" href="about:config">about:config</a> again and make a new boolean setting called
+browser.tabs.remote.force-enable and set that to true. Find more
+<a class="reference external" href="https://wiki.mozilla.org/Electrolysis#Firefox_Release">instructions here</a>.</p>
+<p>So well done to all the Mozilla developers and volunteers who wrote
+and shipped that. Just for you, another of those great Firefox
+costumes:</p>
+<img alt="../../../_images/firefox3.jpg" src="_images/firefox3.jpg"/>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/firefox.html">firefox</a>, <a href="tags/linux.html">linux</a>, <a href="tags/debian.html">debian</a>, <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>August 05, 2016</span>
         </div>
         <div class="section">
@@ -1549,116 +1621,6 @@ we can do whatever the heck we like.</p>
                 Tags:
                 <a href="tags/craft.html">craft</a></span>
         </div>
-        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
-            <span>May 19, 2015</span>
-        </div>
-        <div class="section">
-            <h1><a href="2015/05/19/everything_is_just_c_with_bells_on.html">Everything is just C with bells on</a></h1>
-<img alt="../../../_images/dancer.jpg" src="_images/dancer.jpg"/>
-<p>In this post I thought about the world of cool that lies between
-high-level languages and C. Thought is too strong, it is more of a
-seed of a thought that has not germinated yet. This is not a fable
-with a moral at the end.</p>
-<p>When I first came across C#, I thought that is much better than Visual
-Basic, perhaps Microsoft’s .Net platform could be interesting one day,
-but not personally having an obvious project to use it in, I put it to
-one side and have never touched it since.</p>
-<p>When Vala was first announced, I thought wow, that is so sexy and I
-played with it for about a week. Not personally having an obvious
-project to use it in, I put it to one side and have never touched it
-since.</p>
-<p>I had pretty much the same reaction to Go (aka golang) - wow that’s
-cool, perhaps not as sexy as Vala but I like the goroutines. I did the
-trendy web based tour, I installed everything locally and played with
-the standard library. Then, not personally having an obvious project
-to use it in, I put it to one side and have never touched it since.</p>
-<p>I could go on and on. Whatever piece of tech that comes into (or back
-into) fashion seems to follow this pattern, Haskell, Erlang, Java,
-Scala, etc etc. A lot of the developer tools industry and technology
-media needs something shiny and new to promote this year.</p>
-<p>Don’t get me wrong, I love all this stuff, I would love to do projects
-in different programming languages but obviously, as I have a
-reputation for writing Python or JavaScript or doing system
-administration, people hire me to do that and don’t perhaps think of
-me for other things.</p>
-<p>Maybe there is more too it than that, since in whatever I am doing, in
-my head I seem to think of any algorithm in Python first as executable
-pseudocode even if it gets typed in using JavaScript or another
-language.</p>
-<p>I had a long stint as an academic, but basically my whole career in
-software is as a freelancer or contractor. A journeyman who works to
-live.</p>
-<p>Often the customer has an existing project or specific library,
-toolkit or team which pre-determines the choice of programming
-language.</p>
-<p>Otherwise, my usual process for creating software is to prototype it
-in a high level language (normally always Python but sometimes
-JavaScript). 90% of the time, once it works the customer has solved
-their immediate problem and wants to move their focus onto their next
-problem, which may not be software and may not involve paying
-freelance programmers. Sad I know, thanks for all the fish, I am here,
-<a class="reference external" href="https://www.youtube.com/watch?v=0XGX98OW4Rc">like the song says</a>, etc etc :)</p>
-<p>When the prototype is working, there is a lot to be done to optimise
-it and keep it as a Python application, and almost always there is
-some specific other bottleneck (such as network, database or some
-industrial requirement) that means that CPU usage is not the problem
-and so cutting out the Python interpreter wouldn’t actually make much
-difference in the short and medium time-frames that most companies
-care about.</p>
-<p>Indeed I have seen cases where the customer has gotten someone to
-rewrite the prototype application in Java, and found that the new
-version is actually slower. A lot of the heavy duty work in the Python
-version was actually happening inside a C library that has been highly
-optimised over the last 30 years; changing the dependency from that to
-a poorly implemented Java library caused the poor performance.</p>
-<p>If we imagine a Python application is like a commissioning a
-photograph, a C app is commissioning a sculpture. You only do it when
-you want something to really last or really be the core of something
-fundamental for your future success.</p>
-<p>All the above notwithstanding, the genius of Python’s initial design
-is that once your application has taken a stable(ish) form, it is
-normally pretty straightforward to convert the application to C.</p>
-<p>Most of the standard library inherits Linux/Unix best practice (and
-even the same function names) and a lot of the best external libraries
-in Python are just wrappers around the C equivalents. You always have
-the fully working Python application to test it against.</p>
-<p>It takes a long time yes, going through line by line, but you are not
-troubling the boundaries of computer science or software engineering
-as we know it. I actually love those kind of cathartic jobs, but I am
-a freak.</p>
-<p>Apologies if I am stating the bleeding obvious, none of the above text
-is news to anyone, any Python developer knows the same thing, however
-it is the foundation for what follows.</p>
-<p>So the real reason why I have not personally had an obvious project to
-use a lot of these fashionable and ‘cool’ languages and toolkits is
-that they fall in the luke-warm middle ground between the extremely
-high-level Python (and JS/Ruby/LISP etc) and the low level C language.</p>
-<p>For most use cases, all these middle ground languages are slower and
-less portable than C. If you have decided on a re-implementation, then
-it takes no longer to rewrite a Python project to C than to Go, Java,
-C# or whatever, indeed it might often be quicker to C.</p>
-<p>I have actually used C hardly at all, far less than I would like to
-have done, but I have used these middle-ground languages even
-less. Everything just stays in high level code.</p>
-<p>So as I warned, I have no moral for this fable, no conclusion to
-offer, it is just the beginnings of a thought that ran through my
-brain, I like to think I will pick up this theme later, but I will
-probably look back in five years to find I have put it to one side and
-have never touched it since.</p>
-<blockquote>
-<div>Image credit: <a class="reference external" href="http://fav.me/d49p4vp">Dancer in the Streets by dannyst</a></div></blockquote>
-
-        </div>
-        <div class="postmeta">
-        <div class="author">
-            <span>Posted by Zeth</span>
-        </div>
-        
-        <div class="tags">
-            <span>
-                Tags:
-                <a href="tags/craft.html">craft</a></span>
-        </div>
         </div><div class="archive_link">
         <a href="archive.html"> &mdash; Blog Archive &mdash; </a>
     </div><ul class="related clearfix">
@@ -1667,6 +1629,8 @@ have never touched it since.</p>
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2017/06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
+        </li><li>
             <a href="2017/06/23/brexit_means_decolonisation.html">Brexit means decolonisation</a>
         </li><li>
             <a href="2017/03/17/facebook_is_dead_long_live_the_mesh.html">Facebook is dead - long live the mesh</a>
@@ -1684,8 +1648,6 @@ have never touched it since.</p>
             <a href="2016/11/06/godwin_part_two.html">Godwin part two</a>
         </li><li>
             <a href="2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
-        </li><li>
-            <a href="2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">

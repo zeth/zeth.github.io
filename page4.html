@@ -65,6 +65,82 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>January 11, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/11/building_python_from_source_on_debian_or_ubuntu.html">Building Python from source on Debian or Ubuntu</a></h1>
+<img alt="Cruchbang Linux Logo" src="_images/500px-Python-logo-notext.svg.png"/>
+<p>Python is available pre-built for more or less every platform and if you are
+using Linux or Mac then you have it already. If you don’t know why would you want to build Python from source, then this post is probably not for you.</p>
+<p>I wanted to test things on a newer version of Python than is currently available
+in Debian stable. There are also things I want to improve in the standard
+library, but sadly I do not have time for that at the present moment - but a man
+is allowed to dream.</p>
+<p>Building Python is explained in the <a class="reference external" href="http://docs.python.org/devguide/setup.html">Python Developer’s Guide</a>. This post is a
+commentary on that, and I am assuming you are using a Debian or Ubuntu based
+operating system on your computer.</p>
+<p>To start with you need the Mercurial source control management tool, commonly
+known as hg. If you don’t have it, you can get it with the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">mercurial</span>
+</pre></div>
+</div>
+<p>Now you need to get the source code of Python, as the developer guide says:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">hg</span> <span class="n">clone</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">hg</span><span class="o">.</span><span class="n">python</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">cpython</span>
+</pre></div>
+</div>
+<p>You will get output like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">destination</span> <span class="n">directory</span><span class="p">:</span> <span class="n">cpython</span>
+<span class="n">requesting</span> <span class="nb">all</span> <span class="n">changes</span>
+<span class="n">adding</span> <span class="n">changesets</span>
+</pre></div>
+</div>
+<p>Now you have to wait for a little bit; obviously there has been quite a lot of
+changes since Python began in 1989, so this may take ten minutes (depending on
+the speed of your computer). There is no progress bar or anything, so you have
+to just have faith that something is happening. Eventually, I ended up with
+301 M in my new cpython directory.</p>
+<p>While that is working, open a new terminal tab and start installing the
+dependencies. As the guide points out, the following gives the minimum
+required:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">build</span><span class="o">-</span><span class="n">dep</span> <span class="n">python3</span>
+</pre></div>
+</div>
+<p>Several modules in the standard library depend on optional dependencies, to get
+them all you can do this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libreadline6</span><span class="o">-</span><span class="n">dev</span> <span class="n">libsqlite3</span><span class="o">-</span><span class="n">dev</span> <span class="n">liblzma</span><span class="o">-</span><span class="n">dev</span> <span class="n">libbz2</span><span class="o">-</span><span class="n">dev</span> <span class="n">tk8</span><span class="o">.</span><span class="mi">5</span><span class="o">-</span><span class="n">dev</span> <span class="n">blt</span><span class="o">-</span><span class="n">dev</span> <span class="n">libgdbm</span><span class="o">-</span><span class="n">dev</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libncurses5</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>Feel free to leave out the ones you know you are not interested in e.g. a
+server will not need support for GUIs, so leave out tk8.5-dev and blt-dev in
+that case.</p>
+<p>A slightly obvious point, but worth pointing out, is that some of these
+packages have version numbers in. If your distribution has newer packages than
+mine, especially if you are reading this post years after I wrote it, then this
+command might give errors. In that case, first try increasing the numbers.</p>
+<p>Now we are ready to go back to the developer guide:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">cd</span> <span class="n">cpython</span>
+<span class="o">./</span><span class="n">configure</span> <span class="o">--</span><span class="k">with</span><span class="o">-</span><span class="n">pydebug</span>
+<span class="n">make</span> <span class="o">-</span><span class="n">s</span> <span class="o">-</span><span class="n">j2</span>
+</pre></div>
+</div>
+<p>For completeness, I will just point out that -s is for silent and -j2 allows
+make to use two parallel ‘jobs’ which then invoke the compiler i.e. gcc
+(for portability reasons make does not use threads or processes but has its own
+<a class="reference external" href="http://make.paulandlesley.org/jobserver.html">internal jobserver</a>), you can increase the number 2 but compiling Python is
+pretty quick (especially compared to the earlier steps), around half of cpython is actually written in Python anyway.</p>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/python.html">python</a>, <a href="tags/howto.html">howto</a>, <a href="tags/notetoself.html">notetoself</a>, <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>January 10, 2014</span>
         </div>
         <div class="section">
@@ -597,6 +673,8 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2017/06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
+        </li><li>
             <a href="2017/06/23/brexit_means_decolonisation.html">Brexit means decolonisation</a>
         </li><li>
             <a href="2017/03/17/facebook_is_dead_long_live_the_mesh.html">Facebook is dead - long live the mesh</a>
@@ -614,8 +692,6 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <a href="2016/11/06/godwin_part_two.html">Godwin part two</a>
         </li><li>
             <a href="2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
-        </li><li>
-            <a href="2016/08/06/stylish_super_skulk.html">Stylish Super Skulk</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">
