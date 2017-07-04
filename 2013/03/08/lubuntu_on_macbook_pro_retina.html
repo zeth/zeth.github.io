@@ -68,7 +68,7 @@
             <span>March 08, 2013</span>
         </div>
     <div class="section" id="ubuntu-on-macbook-pro-retina">
-<h1>Ubuntu on Macbook Pro Retina</h1>
+<h1>Ubuntu on Macbook Pro Retina<a class="headerlink" href="#ubuntu-on-macbook-pro-retina" title="Permalink to this headline">¶</a></h1>
 <p>Yesterday I installed Lubuntu on the Macbook Pro Retina 13 inch. (MacBookPro10,2). I am going to talk about it here. It will be useful for installing normal Ubuntu, or other Linux based distribution on this model of laptop. At the level of hardware support, all flavours of Ubuntu are the same, regardless of the desktop environment.</p>
 <p>There are some dire posts on the web saying installing Ubuntu on this machine is impossible. This is not true.</p>
 <p>Installing on Macbook Pros are always a bit more involved than PC laptops, partly because Apple is very innovative and always uses the most up to date hardware, it doesn&#8217;t seem to care much about compatibility with other hardware or even with its own older products. However, it also does not share its plans or co-operate much, so by the time that the support has got down to the Linux distributions, Apple has completely changed its product line again for the next Christmas.</p>
@@ -78,7 +78,7 @@
 <p>Here we are talking more like two hours or so for the install - or longer if you write lots of crap into your blog :)</p>
 <p>For this laptop, the main problem is not the install, it is that the desktop environments are not yet geared up for such a high resolution, more on this topic later.</p>
 <div class="section" id="usb-boot">
-<h2>USB Boot</h2>
+<h2>USB Boot<a class="headerlink" href="#usb-boot" title="Permalink to this headline">¶</a></h2>
 <p>The first hurdle is to make a bootable USB stick. This model of Macbook Pro does not have a DVD drive. Therefore, making a bootable USB stick or bootable USB drive is next easiest thing. I tried two different approaches.</p>
 <p>The first and simplest approach is to use the usb-creator-gtk application on an existing Linux system. This is a graphical tool that takes an ISO image which you download from the web (e.g. from the <a class="reference external" href="http://lubuntu.net">Lubuntu</a> or <a class="reference external" href="http://ubuntu.com">Ubuntu</a> websites)</p>
 <p>The Macbook Pro seemed to be a bit fussy and hard to please regarding which USB sticks it agreed to boot. Best to gather all the ones you own and find one it likes. Before I did my final install, I played about with various distributions on various sticks. I did not notice any particular pattern or reason why some were rejected.</p>
@@ -95,19 +95,19 @@
 <p>That takes quite some time. Check out <a class="reference external" href="http://www.warp1337.com/content/install-ubuntu-1210-quantal-quetzal-macbook-pro-101-retina-solved">the article on warp1337 for much fuller instructions</a>.</p>
 </div>
 <div class="section" id="a-note-on-mac-os-x-s-toy-file-system">
-<h2>A note on Mac OS X&#8217;s toy file system</h2>
+<h2>A note on Mac OS X&#8217;s toy file system<a class="headerlink" href="#a-note-on-mac-os-x-s-toy-file-system" title="Permalink to this headline">¶</a></h2>
 <p>I don&#8217;t know if they have fixed it now, but in my previous experience, I have found that Mac OS X and its Mac OS Extended format does not defragment itself very well, especially compared to ext4. So after you have run OS X for a long time, the partition will be so fragmented that disk utility will refuse to reduce the size of the OS X partition. In this case the only solution is to reformat the partition and reinstall OS X before you try to install Linux.</p>
 <p>If you are buying a Mac with the aim of installing Linux, then repartition the drive as soon as you can. If you want to delay installing Linux for some reason then keep it as FAT or some other generic format (you can get Mac OS X applications that give ext support). If you make it a Mac OS X extended format partition then OS X might start storing files there and will then break or moan once you replace the partition with ext4 or whatever.</p>
 </div>
 <div class="section" id="resize-mac-partitions">
-<h2>Resize Mac Partitions</h2>
+<h2>Resize Mac Partitions<a class="headerlink" href="#resize-mac-partitions" title="Permalink to this headline">¶</a></h2>
 <p>Now we have to make some space for Linux.</p>
 <p>In previous versions of Mac OS X, the utility called &#8220;Boot Camp Assistant&#8221; would do a lot of the work here, since setting up a partition for Windows would work nicely for Linux too. In OS X 10.8, it wants a Windows DVD to be put in the non-existent DVD drive before it does any work. However, one useful thing Boot Camp Assistant still does is recommend how small you can make the OS X partition, which in my case was 29 GB. So in Boot Camp Assistant, pull the slider around to see what is recommended.</p>
 <p>So we need to shrink the Mac OS X partition it and add a new FAT partition, which we will set aside for Linux, this is then reformatted as part of the Linux install. Don&#8217;t worry about giving it a swap partition, you can live without it or use a swap file which works just as well.</p>
 <p>[Now if like me, you have done it all before in older Macs, be aware. In previous versions, OS X took one partition. Now it actually takes three logical partitions for boot, root and recovery. However, this detail is hidden in the OS X disk utility which only shows one partition, and in the background, re-partitions the root partition and moves the recovery partition along too. I did not realise this and instead of doing the above with the FAT partition, just made free space and let the Ubuntu installer automatically install Linux in it. It kept the first two partitions and gave me Linux root and swap, deleting the recovery partition - frak! Do not make the same mistake, always make sure you have chosen manual partitioning in the installer program - and then double check. If you know how to make OS X put back the OS X recovery partition, please let me know by emailing zeth at the domain name of this site.]</p>
 </div>
 <div class="section" id="linux-install">
-<h2>Linux Install</h2>
+<h2>Linux Install<a class="headerlink" href="#linux-install" title="Permalink to this headline">¶</a></h2>
 <p>So now all the boring stuff is done, shut down the computer.</p>
 <p>If you have the Ethernet dongle, then it is best to plug it in now to an Ethernet connection.</p>
 <p>Stick the USB stick in to the USB port and boot to the USB stick by hold down alt (also known as the Option key - but it says Alt on the key!) when you turn it on.</p>
@@ -115,14 +115,14 @@
 <p>Choose manual partitioning and delete the FAT partition you made earlier. As said above, don&#8217;t worry about swap right now. You can install a swap file later or just forget it. You have 8GB of RAM so hopefully swap will rarely be needed, and a solid state disk does not appreciate it anyway.</p>
 </div>
 <div class="section" id="refit">
-<h2>rEFIt</h2>
+<h2>rEFIt<a class="headerlink" href="#refit" title="Permalink to this headline">¶</a></h2>
 <p>Your Linux install finishes, it reboots and ... nothing happens, OS X boots as before without any choice of Linux!</p>
 <p>Now you have to install a boot menu. I installed <a class="reference external" href="http://refit.sourceforge.net/">rEFIt</a> as I have done in the past and it worked fine. Then I read that there is the newer <a class="reference external" href="http://www.rodsbooks.com/refind/">rEFInd</a>. I got rid of <a class="reference external" href="http://refit.sourceforge.net/">rEFIt</a> and installed <a class="reference external" href="http://www.rodsbooks.com/refind/">rEFInd</a> and it didn&#8217;t seem to work and it was getting boring so I swapped back to rEFIt. Your mileage may vary.</p>
 <p>Anyway, now you have three choices on boot: Mac OS X, Linux or some weird emergency prompt.</p>
 <p>Choose Linux and Grub boots &#8220;in a galaxy far far away&#8221;. Yes it is very very small!</p>
 </div>
 <div class="section" id="the-desktop-of-the-lilliputs">
-<h2>The desktop of the Lilliputs</h2>
+<h2>The desktop of the Lilliputs<a class="headerlink" href="#the-desktop-of-the-lilliputs" title="Permalink to this headline">¶</a></h2>
 <p>So there has not been a major or minor Ubuntu release since this laptop came out, and unlike some other friendly manufacturers, Apple do not make sure their hardware works with Linux before release (or in fact ever).</p>
 <p>However, for now, there is no getting around that this is a very high resolution screen. You have a Linux desktop, but unlike any you have seen before.</p>
 <p>There are two ways to work around this high resolution. One is to reduce the resolution in the monitor settings to a lower level, i and it didn&#8217;t seem to work and it was getting boring so I swapped back to rEFIt. Your mileage may vary.</p>
@@ -130,7 +130,7 @@
 <p>I went through all the Lubuntu Preferences menus changing the default font size from 11 to 20. So now I can at least read everything easily. Some of the icons and things are very undersized but I personally hate any visual evidence of the Operating System anyway. I prefer my whole screen to only show my running application, everything else goes away until I call for it. Most of the stock Lubuntu apps (which are mostly GNOME ones) handle this quite well. So far, the only non-bundled app I have got around to installing is Emacs which copes perfectly.</p>
 </div>
 <div class="section" id="hardware-support">
-<h2>Hardware support</h2>
+<h2>Hardware support<a class="headerlink" href="#hardware-support" title="Permalink to this headline">¶</a></h2>
 <p>So one of the attractions of this 13-inch model is that it has an Intel graphics card. My old Macbook Pro one had an Nvidia card which needed some proprietary blob and used up the battery much faster than Mac OS X would. The idea was that it would fallback to another chip when on battery, but that feature was not supported when I first installed Linux to it and never got around to looking into it again.</p>
 <p>I am not a hardcore gamer, so I always prefer an Intel graphics card over the fiddly proprietary ones. They have a long battery life and tend to just work.</p>
 <p>I also prefer a Linux wifi chip but sadly this has some brand new Broadcom chip. So you have to install the wifi driver for it. This is obviously easier if you have the Ethernet dongle we talked about above, if not you will need to download it to a USB stick or something to get it onto the laptop.</p>
@@ -145,7 +145,7 @@
 </div>
 </div>
 <div class="section" id="other-things">
-<h2>Other things</h2>
+<h2>Other things<a class="headerlink" href="#other-things" title="Permalink to this headline">¶</a></h2>
 <p>That is it really. Only remaining jobs are to remap a key to be middle click and maybe reduce the sensitivity of the trackpad. These are issues of personal taste so I will leave them for now.</p>
 <p>This post is a bit rough but I thought it was worth getting it online as soon as possible in case it helps someone.</p>
 </div>
@@ -171,6 +171,8 @@
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="../../../2017/07/04/happy_independence_day.html">Happy Independence Day America</a>
+        </li><li>
             <a href="../../../2017/06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
         </li><li>
             <a href="../../../2017/06/23/brexit_means_decolonisation.html">Brexit means decolonisation</a>
@@ -188,8 +190,6 @@
             <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
         </li><li>
             <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
-        </li><li>
-            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">

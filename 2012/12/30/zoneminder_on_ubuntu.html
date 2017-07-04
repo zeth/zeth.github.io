@@ -68,10 +68,10 @@
             <span>December 30, 2012</span>
         </div>
     <div class="section" id="zoneminder-on-ubuntu">
-<h1>Zoneminder on Ubuntu</h1>
+<h1>Zoneminder on Ubuntu<a class="headerlink" href="#zoneminder-on-ubuntu" title="Permalink to this headline">¶</a></h1>
 <p>Ever thought about building your own CCTV system? All you need is free and open source software Zoneminder, a free Linux distribution such as Ubuntu, Lubuntu or Debian, an old PC and a camera.</p>
 <div class="section" id="what-is-zoneminder">
-<h2>What is Zoneminder?</h2>
+<h2>What is Zoneminder?<a class="headerlink" href="#what-is-zoneminder" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.zoneminder.com/">Zoneminder</a> is an open source application used for CCTV and other security and surveillance applications. You can use it to monitor your home or work property or to monitor your pets while you are out, whatever you can imagine really (look at the <a class="reference external" href="http://www.zoneminder.com/screenshots">screenshots on the Zoneminder homepage</a> for more ideas).</p>
 <p>The implementation is basically a Perl/PHP web app using Apache and MySQL (<a class="reference external" href="http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29">LAMP</a> as we call it in the trade). If you have ever set up a website or blog or something then you will understand it instantly. It is a nice concept as using <a class="reference external" href="http://en.wikipedia.org/wiki/Shared_nothing">shared nothing</a> web application and system administration principles it can scale up indefinitely to very large commercial uses.</p>
 <p>If you are the kind of person who already has a home wifi or wired network and a home server or desktop on all the time, then Zoneminder will fit in great, as the only extra electricity you will be using will be the camera (or cameras) themselves.</p>
@@ -79,7 +79,7 @@
 <p>Zoneminder stores the recorded video as single frame images in a simple data layout on your filesystem and the web application allows you to configure it and view the cameras in real time and view recorded footage. The metadata is stored in the MySQL database.</p>
 </div>
 <div class="section" id="what-kind-of-camera-do-i-need">
-<h2>What kind of camera do I need?</h2>
+<h2>What kind of camera do I need?<a class="headerlink" href="#what-kind-of-camera-do-i-need" title="Permalink to this headline">¶</a></h2>
 <p>It seems you can use anything. If you have a simple USB webcam lying around at home, that is all you need to get started. If then you like Zoneminder you can then get a posher camera later if you want.</p>
 <p>There different types of cameras depending on how serious you are. The more serious people put a card in their computer (such as the <a class="reference external" href="http://www.amazon.co.uk/gp/product/B000075ANQ/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B000075ANQ">Hauppauge Impact VCB/PCI Composite AV Input card</a> ) and use real high definition video cameras.</p>
 <p>I personally use a &#8216;netcam&#8217; (I have the model called <a class="reference external" href="http://www.amazon.co.uk/gp/product/B004UBSHQO/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B004UBSHQO">TRENDnet SecurView Wireless N Internet Camera</a> if you want to be precise) which is basically a webcam with a built in wireless card (and or ethernet socket). So you can put the camera anywhere you can power it and it will log onto your wireless network like any other device. You don&#8217;t have to run AV cables back to your computer.</p>
@@ -88,19 +88,19 @@
 <p>If a burglar manages to get in and picks up the netcam, there are no wires to follow back and so no clue as to where the images go. One can also use backup software or write a few bash scripts to copy images to a remote server or the cloud if you are in a high crime area. If you have a really good internet connection at both ends, you can put netcams in your relatives&#8217; houses and allow your Zoneminder server to grab the images off.</p>
 </div>
 <div class="section" id="what-kind-of-server-do-i-need">
-<h2>What kind of server do I need?</h2>
+<h2>What kind of server do I need?<a class="headerlink" href="#what-kind-of-server-do-i-need" title="Permalink to this headline">¶</a></h2>
 <p>By &#8216;server&#8217; in the article, I just mean the computer that will have Zoneminder installed, as opposed to any other computers, tablets, phones or even TVs you might use to operate the system on a day to day basis.</p>
 <p>I suppose (in theory) you could use any operating system that can run Perl, Apache and Mysql. However, the assumption from here is that you will be using a Linux distribution, because Windows and OS X are, to put it bluntly, completely crap in this server role and a massive hassle to work with. If you have a Linux Desktop already at home, then that will probably work fine.</p>
 <p>In my experience, the server does not need to particularly powerful for a simple home setup. I am using a low-powered PC from 2006 which runs Zoneminder and lots of other apps quite nicely.</p>
 <p>You don&#8217;t have to have a graphical system, you can use something like Ubuntu Server if you want. However, you will need some computer or phone with a web browser to control Zoneminder and view the saved images/video, this does not have to be a Linux computer (toy operating systems work fine as clients).</p>
 </div>
 <div class="section" id="source-vs-packages">
-<h2>Source vs Packages</h2>
+<h2>Source vs Packages<a class="headerlink" href="#source-vs-packages" title="Permalink to this headline">¶</a></h2>
 <p>A couple of years ago I installed Zoneminder on Ubuntu 11.04 by downloading the source. Now over Christmas I had a spare 20 mins and re-installed the OS. I like backing up and reinstalling occasionally as it gives a nice clean system. This time I went for Ubuntu 12.10 in the Lubuntu flavour (I will talk about that in the future). Then I had to put all the data and programs back on.</p>
 <p>Last time I installed Zoneminder from source, this time I thought I would try the Ubuntu packages. This guide should work for any Ubuntu or Debian type system, but your mileage may vary.</p>
 </div>
 <div class="section" id="lets-get-started">
-<h2>Lets get started.</h2>
+<h2>Lets get started.<a class="headerlink" href="#lets-get-started" title="Permalink to this headline">¶</a></h2>
 <p>Firstly, we need to install the zoneminder package, you can do this in the graphical &#8220;software centre&#8221; or you can just open a terminal and use this command:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">zoneminder</span>
 </pre></div>
@@ -108,7 +108,7 @@
 <p>On a fresh system without Mysql, it will ask you to set a Mysql root password. Next it configures the nullmailer mail relay, I just accepted the default answers. Then it stops returns control of the shell.</p>
 </div>
 <div class="section" id="apache-settings">
-<h2>Apache settings</h2>
+<h2>Apache settings<a class="headerlink" href="#apache-settings" title="Permalink to this headline">¶</a></h2>
 <p>Now we need to let Apache know what is going on. If you are already using Apache to show websites on this system, you can integrate Zoneminder in a way that does not clash with your other sites.</p>
 <p>However, on a fresh system, you can do this:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zm</span><span class="o">/</span><span class="n">apache</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">zoneminder</span><span class="o">.</span><span class="n">conf</span>
@@ -120,7 +120,7 @@
 <p>If you have installed Zoneminder to a non-graphical server distribution, then obviously use the IP address or domain name instead of localhost when you access Zoneminder from your external computer or phone or whatever.</p>
 </div>
 <div class="section" id="camera-setup">
-<h2>Camera Setup</h2>
+<h2>Camera Setup<a class="headerlink" href="#camera-setup" title="Permalink to this headline">¶</a></h2>
 <p>When you click on Add New Monitor, you get a web form that looks like this:</p>
 <img alt="Image of the Add New Monitor web form in a web browser." src="../../../_images/zoneminder_on_ubuntu-2addmonitor.png" />
 <p>The most important field here is &#8220;source type&#8221;, the setting chosen affects the options available in the source tab (see below). Since I am using a netcam, I set it to remote.</p>
@@ -130,7 +130,7 @@
 <p>This window allows you to define the hostname of your camera. So for a netcam we give it the host name of the camera, which in a home setup will probably be a private ip address (e.g. 192.168.x.x). Look up your camera on the <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/Supported_hardware">Supported hardware section of the Zoneminder wiki</a>  to find what settings you need to add here.</p>
 </div>
 <div class="section" id="log-driven-configuration">
-<h2>Log driven configuration</h2>
+<h2>Log driven configuration<a class="headerlink" href="#log-driven-configuration" title="Permalink to this headline">¶</a></h2>
 <p>You can read the Zoneminder &#8216;system log&#8217; by clicking on a link unsurprisingly called &#8216;log&#8217; (as shown in the main console screenshot above). This gives as a log viewer, as shown below:</p>
 <img alt="Image of the log viewer in a web browser." src="../../../_images/zoneminder_on_ubuntu-4log.png" />
 <p>The way I configure Zoneminder is by reading the activity log and keep changing configuration until it stops moaning.</p>
@@ -172,7 +172,7 @@
 <p>Just keep attacking the log errors until it is all happy really.</p>
 </div>
 <div class="section" id="configuring-image-location">
-<h2>Configuring Image Location</h2>
+<h2>Configuring Image Location<a class="headerlink" href="#configuring-image-location" title="Permalink to this headline">¶</a></h2>
 <p>By default the images are bunged into: /usr/share/zoneminder/events which is a symbolic link to /var/cache/zoneminder/events/1/</p>
 <p>In theory, to change this you need to change the setting ZM_DIR_EVENTS which is the first setting under &#8216;Options&#8217; then &#8216;Paths&#8217;. Use an absolute path and make sure the destination has the correct permissions.</p>
 <p>In reality, I never had much luck changing this. When it tries to read the events back, it seems to be somehow hardcoded to the old location which is then appends with this location. If anyone has the answer to this let me know.</p>
@@ -185,7 +185,7 @@
 <p>There are lots of other things you can configure like the sensitivity of the motion detection and which regions of the image to watch and which to ignore it etc. However, we have covered everything specific to using Zoneminder on an Ubuntu/Debian system using the .deb packages. The <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/">Zoneminder wiki</a> is very useful and comprehensive so dig around there to find out more.</p>
 </div>
 <div class="section" id="zoneminder-in-action">
-<h2>Zoneminder in action</h2>
+<h2>Zoneminder in action<a class="headerlink" href="#zoneminder-in-action" title="Permalink to this headline">¶</a></h2>
 <p>Now if you have read this far you deserve to have some silly pictures.</p>
 <p>Having a CCTV camera at the front of your house educates you a lot about what happens in your local community. I have learned all sorts of things from watching back footage at random. Most of the cool snaps I probably cannot post online for legal and taste reasons.</p>
 <p>The first revelation is that a large amount of people look through your windows. Here is a fairly tame and blurry one.</p>
@@ -202,7 +202,7 @@
 <img alt="Image of bin men and a dust cart." src="../../../_images/zoneminder_on_ubuntu-9binmen.jpg" />
 </div>
 <div class="section" id="over-to-you">
-<h2>Over to you</h2>
+<h2>Over to you<a class="headerlink" href="#over-to-you" title="Permalink to this headline">¶</a></h2>
 <p>So setting up Zoneminder takes a little fiddling but it is good fun and reassuring to have the ability to look back in time at what was happening in front of your house in the past. If you have a go or have tried Zoneminder before, please let everyone know how you got on and how I could improve this guide. Bonus points for silly pictures.</p>
 </div>
 </div>
@@ -227,6 +227,8 @@
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="../../../2017/07/04/happy_independence_day.html">Happy Independence Day America</a>
+        </li><li>
             <a href="../../../2017/06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
         </li><li>
             <a href="../../../2017/06/23/brexit_means_decolonisation.html">Brexit means decolonisation</a>
@@ -244,8 +246,6 @@
             <a href="../../../2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
         </li><li>
             <a href="../../../2016/11/06/godwin_part_two.html">Godwin part two</a>
-        </li><li>
-            <a href="../../../2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">

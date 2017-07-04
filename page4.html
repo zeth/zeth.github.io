@@ -65,10 +65,60 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>January 12, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/12/installing_multiple_versions_of_firefox.html">Installing Multiple Versions of Firefox<a class="headerlink" href="#installing-multiple-versions-of-firefox" title="Permalink to this headline">¶</a></a></h1>
+<img alt="Iceweasel logo" src="_images/500px-Iceweasel_icon.svg.png"/>
+<p>8Y3U5AJRHKZ2</p>
+<p>So I want to test my web application using multiple versions of Firefox,
+especially the latest version, but I do not want to mess with my default system
+version (which is in fact Iceweasel :).</p>
+<p>You can make this as over-complicated as you like. The simple way is to ignore
+apt and your system packaging system and run the test browser completely in user
+space.</p>
+<p>The downside of this is that you will not get automatic security updates, so
+you have to keep an eye yourself for them and download new versions yourself.
+On the bright side, the browser is running as an unprivileged user and you are
+only testing your own site.</p>
+<p>So you just download the archive from Mozilla. So I am using 64 bit Linux and
+I speak British English, so I used the following URL:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ftp</span><span class="o">.</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">mozilla</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">firefox</span><span class="o">/</span><span class="n">releases</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">/</span><span class="n">en</span><span class="o">-</span><span class="n">GB</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>You can edit the URL as appropriate and then unpack it e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">tar</span> <span class="n">jxf</span> <span class="n">firefox</span><span class="o">*.</span><span class="n">tar</span><span class="o">.</span><span class="n">bz2</span>
+</pre></div>
+</div>
+<p>Inside the new firefox directory there is an executable named, somewhat
+unsurprisingly, firefox, call it in the following way:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="o">./</span><span class="n">firefox</span> <span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">remote</span> <span class="o">-</span><span class="n">P</span>
+</pre></div>
+</div>
+<p>This will pop up a little dialogue that allows you to choose the user profile,
+so create a new one:</p>
+<img alt="Image of firefox user profile dialogue" src="_images/firefox_user_profile_dialog.png"/>
+<p>You can see I have created a profile called Firefox26. In this way, the new
+Firefox version will not mess with the main system version. Click ‘Start
+Firefox’ to launch it. Having a new profile for each test version will keep
+things both sane and nicely decoupled.</p>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/firefox.html">firefox</a>, <a href="tags/webdevelopment.html">webdevelopment</a>, <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>January 11, 2014</span>
         </div>
         <div class="section">
-            <h1><a href="2014/01/11/building_python_from_source_on_debian_or_ubuntu.html">Building Python from source on Debian or Ubuntu</a></h1>
+            <h1><a href="2014/01/11/building_python_from_source_on_debian_or_ubuntu.html">Building Python from source on Debian or Ubuntu<a class="headerlink" href="#building-python-from-source-on-debian-or-ubuntu" title="Permalink to this headline">¶</a></a></h1>
 <img alt="Cruchbang Linux Logo" src="_images/500px-Python-logo-notext.svg.png"/>
 <p>Python is available pre-built for more or less every platform and if you are
 using Linux or Mac then you have it already. If you don’t know why would you want to build Python from source, then this post is probably not for you.</p>
@@ -144,7 +194,7 @@ pretty quick (especially compared to the earlier steps), around half of cpython 
             <span>January 10, 2014</span>
         </div>
         <div class="section">
-            <h1><a href="2014/01/10/crunchbang.html">Even more minimal with CrunchBang Linux</a></h1>
+            <h1><a href="2014/01/10/crunchbang.html">Even more minimal with CrunchBang Linux<a class="headerlink" href="#even-more-minimal-with-crunchbang-linux" title="Permalink to this headline">¶</a></a></h1>
 <img alt="Cruchbang Linux Logo" src="_images/500px-Crunchbang_linux_logo.svg.png"/>
 <p>I seem to have become the <a class="reference external" href="http://youtu.be/IzBQnWlWpRY">Littlest Hobo</a> of Linux distributions. I still like
 Lubuntu, which is perhaps the best known of half a dozen configured
@@ -192,7 +242,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <span>March 09, 2013</span>
         </div>
         <div class="section">
-            <h1><a href="2013/03/09/why_lubuntu.html">Why Lubuntu?</a></h1>
+            <h1><a href="2013/03/09/why_lubuntu.html">Why Lubuntu?<a class="headerlink" href="#why-lubuntu" title="Permalink to this headline">¶</a></a></h1>
 <img alt="Lubuntu Logo" src="_images/Lubuntu_logo500.png"/>
 <p><a class="reference external" href="http://lubuntu.net">Lubuntu</a> is a version of Ubuntu with the LXDE desktop instead of Unity. I am not a Unity hater, I actually like Unity a lot. I just like LXDE more.</p>
 <p><a class="reference external" href="http://lxde.org/">LXDE</a> is a desktop focused on performance and keeping out of your way. It is based on GTK+, so in practice it is similar to GNOME or Unity.</p>
@@ -223,7 +273,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <span>March 08, 2013</span>
         </div>
         <div class="section">
-            <h1><a href="2013/03/08/lubuntu_on_macbook_pro_retina.html">Ubuntu on Macbook Pro Retina</a></h1>
+            <h1><a href="2013/03/08/lubuntu_on_macbook_pro_retina.html">Ubuntu on Macbook Pro Retina<a class="headerlink" href="#ubuntu-on-macbook-pro-retina" title="Permalink to this headline">¶</a></a></h1>
 <p>Yesterday I installed Lubuntu on the Macbook Pro Retina 13 inch. (MacBookPro10,2). I am going to talk about it here. It will be useful for installing normal Ubuntu, or other Linux based distribution on this model of laptop. At the level of hardware support, all flavours of Ubuntu are the same, regardless of the desktop environment.</p>
 <p>There are some dire posts on the web saying installing Ubuntu on this machine is impossible. This is not true.</p>
 <p>Installing on Macbook Pros are always a bit more involved than PC laptops, partly because Apple is very innovative and always uses the most up to date hardware, it doesn’t seem to care much about compatibility with other hardware or even with its own older products. However, it also does not share its plans or co-operate much, so by the time that the support has got down to the Linux distributions, Apple has completely changed its product line again for the next Christmas.</p>
@@ -233,7 +283,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>Here we are talking more like two hours or so for the install - or longer if you write lots of crap into your blog :)</p>
 <p>For this laptop, the main problem is not the install, it is that the desktop environments are not yet geared up for such a high resolution, more on this topic later.</p>
 <div class="section" id="usb-boot">
-<h2>USB Boot</h2>
+<h2>USB Boot<a class="headerlink" href="#usb-boot" title="Permalink to this headline">¶</a></h2>
 <p>The first hurdle is to make a bootable USB stick. This model of Macbook Pro does not have a DVD drive. Therefore, making a bootable USB stick or bootable USB drive is next easiest thing. I tried two different approaches.</p>
 <p>The first and simplest approach is to use the usb-creator-gtk application on an existing Linux system. This is a graphical tool that takes an ISO image which you download from the web (e.g. from the <a class="reference external" href="http://lubuntu.net">Lubuntu</a> or <a class="reference external" href="http://ubuntu.com">Ubuntu</a> websites)</p>
 <p>The Macbook Pro seemed to be a bit fussy and hard to please regarding which USB sticks it agreed to boot. Best to gather all the ones you own and find one it likes. Before I did my final install, I played about with various distributions on various sticks. I did not notice any particular pattern or reason why some were rejected.</p>
@@ -250,19 +300,19 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>That takes quite some time. Check out <a class="reference external" href="http://www.warp1337.com/content/install-ubuntu-1210-quantal-quetzal-macbook-pro-101-retina-solved">the article on warp1337 for much fuller instructions</a>.</p>
 </div>
 <div class="section" id="a-note-on-mac-os-x-s-toy-file-system">
-<h2>A note on Mac OS X’s toy file system</h2>
+<h2>A note on Mac OS X’s toy file system<a class="headerlink" href="#a-note-on-mac-os-x-s-toy-file-system" title="Permalink to this headline">¶</a></h2>
 <p>I don’t know if they have fixed it now, but in my previous experience, I have found that Mac OS X and its Mac OS Extended format does not defragment itself very well, especially compared to ext4. So after you have run OS X for a long time, the partition will be so fragmented that disk utility will refuse to reduce the size of the OS X partition. In this case the only solution is to reformat the partition and reinstall OS X before you try to install Linux.</p>
 <p>If you are buying a Mac with the aim of installing Linux, then repartition the drive as soon as you can. If you want to delay installing Linux for some reason then keep it as FAT or some other generic format (you can get Mac OS X applications that give ext support). If you make it a Mac OS X extended format partition then OS X might start storing files there and will then break or moan once you replace the partition with ext4 or whatever.</p>
 </div>
 <div class="section" id="resize-mac-partitions">
-<h2>Resize Mac Partitions</h2>
+<h2>Resize Mac Partitions<a class="headerlink" href="#resize-mac-partitions" title="Permalink to this headline">¶</a></h2>
 <p>Now we have to make some space for Linux.</p>
 <p>In previous versions of Mac OS X, the utility called “Boot Camp Assistant” would do a lot of the work here, since setting up a partition for Windows would work nicely for Linux too. In OS X 10.8, it wants a Windows DVD to be put in the non-existent DVD drive before it does any work. However, one useful thing Boot Camp Assistant still does is recommend how small you can make the OS X partition, which in my case was 29 GB. So in Boot Camp Assistant, pull the slider around to see what is recommended.</p>
 <p>So we need to shrink the Mac OS X partition it and add a new FAT partition, which we will set aside for Linux, this is then reformatted as part of the Linux install. Don’t worry about giving it a swap partition, you can live without it or use a swap file which works just as well.</p>
 <p>[Now if like me, you have done it all before in older Macs, be aware. In previous versions, OS X took one partition. Now it actually takes three logical partitions for boot, root and recovery. However, this detail is hidden in the OS X disk utility which only shows one partition, and in the background, re-partitions the root partition and moves the recovery partition along too. I did not realise this and instead of doing the above with the FAT partition, just made free space and let the Ubuntu installer automatically install Linux in it. It kept the first two partitions and gave me Linux root and swap, deleting the recovery partition - frak! Do not make the same mistake, always make sure you have chosen manual partitioning in the installer program - and then double check. If you know how to make OS X put back the OS X recovery partition, please let me know by emailing zeth at the domain name of this site.]</p>
 </div>
 <div class="section" id="linux-install">
-<h2>Linux Install</h2>
+<h2>Linux Install<a class="headerlink" href="#linux-install" title="Permalink to this headline">¶</a></h2>
 <p>So now all the boring stuff is done, shut down the computer.</p>
 <p>If you have the Ethernet dongle, then it is best to plug it in now to an Ethernet connection.</p>
 <p>Stick the USB stick in to the USB port and boot to the USB stick by hold down alt (also known as the Option key - but it says Alt on the key!) when you turn it on.</p>
@@ -270,14 +320,14 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>Choose manual partitioning and delete the FAT partition you made earlier. As said above, don’t worry about swap right now. You can install a swap file later or just forget it. You have 8GB of RAM so hopefully swap will rarely be needed, and a solid state disk does not appreciate it anyway.</p>
 </div>
 <div class="section" id="refit">
-<h2>rEFIt</h2>
+<h2>rEFIt<a class="headerlink" href="#refit" title="Permalink to this headline">¶</a></h2>
 <p>Your Linux install finishes, it reboots and ... nothing happens, OS X boots as before without any choice of Linux!</p>
 <p>Now you have to install a boot menu. I installed <a class="reference external" href="http://refit.sourceforge.net/">rEFIt</a> as I have done in the past and it worked fine. Then I read that there is the newer <a class="reference external" href="http://www.rodsbooks.com/refind/">rEFInd</a>. I got rid of <a class="reference external" href="http://refit.sourceforge.net/">rEFIt</a> and installed <a class="reference external" href="http://www.rodsbooks.com/refind/">rEFInd</a> and it didn’t seem to work and it was getting boring so I swapped back to rEFIt. Your mileage may vary.</p>
 <p>Anyway, now you have three choices on boot: Mac OS X, Linux or some weird emergency prompt.</p>
 <p>Choose Linux and Grub boots “in a galaxy far far away”. Yes it is very very small!</p>
 </div>
 <div class="section" id="the-desktop-of-the-lilliputs">
-<h2>The desktop of the Lilliputs</h2>
+<h2>The desktop of the Lilliputs<a class="headerlink" href="#the-desktop-of-the-lilliputs" title="Permalink to this headline">¶</a></h2>
 <p>So there has not been a major or minor Ubuntu release since this laptop came out, and unlike some other friendly manufacturers, Apple do not make sure their hardware works with Linux before release (or in fact ever).</p>
 <p>However, for now, there is no getting around that this is a very high resolution screen. You have a Linux desktop, but unlike any you have seen before.</p>
 <p>There are two ways to work around this high resolution. One is to reduce the resolution in the monitor settings to a lower level, i and it didn’t seem to work and it was getting boring so I swapped back to rEFIt. Your mileage may vary.</p>
@@ -285,7 +335,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>I went through all the Lubuntu Preferences menus changing the default font size from 11 to 20. So now I can at least read everything easily. Some of the icons and things are very undersized but I personally hate any visual evidence of the Operating System anyway. I prefer my whole screen to only show my running application, everything else goes away until I call for it. Most of the stock Lubuntu apps (which are mostly GNOME ones) handle this quite well. So far, the only non-bundled app I have got around to installing is Emacs which copes perfectly.</p>
 </div>
 <div class="section" id="hardware-support">
-<h2>Hardware support</h2>
+<h2>Hardware support<a class="headerlink" href="#hardware-support" title="Permalink to this headline">¶</a></h2>
 <p>So one of the attractions of this 13-inch model is that it has an Intel graphics card. My old Macbook Pro one had an Nvidia card which needed some proprietary blob and used up the battery much faster than Mac OS X would. The idea was that it would fallback to another chip when on battery, but that feature was not supported when I first installed Linux to it and never got around to looking into it again.</p>
 <p>I am not a hardcore gamer, so I always prefer an Intel graphics card over the fiddly proprietary ones. They have a long battery life and tend to just work.</p>
 <p>I also prefer a Linux wifi chip but sadly this has some brand new Broadcom chip. So you have to install the wifi driver for it. This is obviously easier if you have the Ethernet dongle we talked about above, if not you will need to download it to a USB stick or something to get it onto the laptop.</p>
@@ -300,7 +350,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 </div>
 </div>
 <div class="section" id="other-things">
-<h2>Other things</h2>
+<h2>Other things<a class="headerlink" href="#other-things" title="Permalink to this headline">¶</a></h2>
 <p>That is it really. Only remaining jobs are to remap a key to be middle click and maybe reduce the sensitivity of the trackpad. These are issues of personal taste so I will leave them for now.</p>
 <p>This post is a bit rough but I thought it was worth getting it online as soon as possible in case it helps someone.</p>
 </div>
@@ -324,7 +374,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <span>January 14, 2013</span>
         </div>
         <div class="section">
-            <h1><a href="2013/01/14/samsung_printers_on_ubuntu.html">Samsung Printers on Ubuntu</a></h1>
+            <h1><a href="2013/01/14/samsung_printers_on_ubuntu.html">Samsung Printers on Ubuntu<a class="headerlink" href="#samsung-printers-on-ubuntu" title="Permalink to this headline">¶</a></a></h1>
 <p>After installing the Lubuntu flavour of Ubuntu on most of my machines, I then had to remember how to setup the printer. This is a ‘note to self’ post, hopefully it might be useful to other people.</p>
 <p>I don’t print a lot. It it easy and cheap to order family photos online or print them at the local photo shop. But when I do want to print (e.g. boarding pass), I want it to work.</p>
 <p>That is why I hate inkjet printers, they are so unreliable and fragile, and the cartridges run out very quickly. So a few years ago I bought a laserjet. They cost a little more but actually work.</p>
@@ -374,11 +424,11 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <span>January 02, 2013</span>
         </div>
         <div class="section">
-            <h1><a href="2013/01/02/netbooks_in_a_tablet_world.html">Netbooks in a tablet world</a></h1>
+            <h1><a href="2013/01/02/netbooks_in_a_tablet_world.html">Netbooks in a tablet world<a class="headerlink" href="#netbooks-in-a-tablet-world" title="Permalink to this headline">¶</a></a></h1>
 <p>The <a class="reference external" href="http://www.guardian.co.uk/technology/2012/dec/31/netbooks-dead-2013">Guardian is ringing the death knell</a> on the netbook. I would tell the story a little differently, so I will.</p>
 <img alt="Image of a netbook on bike handlebars" src="_images/netbooks_in_a_tablet_world_bike.jpg"/>
 <div class="section" id="in-the-beginning-was-the-100-laptop-dream">
-<h2>In the beginning was the $100 laptop dream</h2>
+<h2>In the beginning was the $100 laptop dream<a class="headerlink" href="#in-the-beginning-was-the-100-laptop-dream" title="Permalink to this headline">¶</a></h2>
 <p>Before 2005, there were not many small factor laptops. I had the smallest Thinkpad, which was merely a smaller version of any other Thinkpad, which had a high end processor and lots of RAM, and it cost quite a bit back then. $1000-2000 dollars was the typical price for a laptop, and due to economies of scale, the then standard 15 inch screen laptop was always the cheapest model, smaller and larger sizes were a bit more expensive.</p>
 <p>In 2005, the OLPC (One Laptop Per Child) X1 was announced - a $100 laptop aimed at children, with a special low power processor from AMD, running a version of Fedora Linux, with suitable proportions for a children. The X1 included a video camera, touch screen, sd card slot and wifi; features that were considered high end in 2005.</p>
 <img alt="Image the XO laptop for children." src="_images/netbooks_in_a_tablet_world_xo.jpg"/>
@@ -392,7 +442,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>This is is a shame because the <a class="reference external" href="http://en.wikipedia.org/wiki/Sugar_%28desktop_environment%29">Sugar interface</a> is a fantastic learning tool for children. Maybe its time is still to come. They are trying to pull everyone back together for the launch of the new iteration, the XO-4, <a class="reference external" href="http://blog.laptop.org/2012/08/15/one-laptop-per-child-confirms-upcoming-launch-of-groundbreaking-dual-function-xo-4-touch/#post-5016">sometime this year</a>.</p>
 </div>
 <div class="section" id="netbooks-and-dodgy-linux-pre-installs">
-<h2>Netbooks and dodgy Linux pre-installs</h2>
+<h2>Netbooks and dodgy Linux pre-installs<a class="headerlink" href="#netbooks-and-dodgy-linux-pre-installs" title="Permalink to this headline">¶</a></h2>
 <p>A lot of other manufacturers brought out ‘netbooks’, we were given an Acer Aspire One by a relative, and some of them, including the Eee PC, came with Linux. What I have never understood about netbooks, is that they always came with an unknown and slightly crap form of Linux, with almost no decent applications on them.</p>
 <p>In the wider desktop and laptop markets, Linux users tend to install Linux distributions as an after-market upgrade, sidelining or wiping out completely the redundant copy of Windows install that came pre-installed with the computer. It is an extremely competitive market; at the time of writing this article, the DistroWatch website lists <a class="reference external" href="http://distrowatch.com/dwres.php?resource=popularity">314 currently available Linux distributions</a>.</p>
 <img alt="Image of the Fedora 17 desktop" src="_images/netbooks_in_a_tablet_world_fedora-17.png"/>
@@ -405,7 +455,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>In the mean time, what people commonly call “Real Linux” distributions have been completely overtaken by the rise of Android, as we will come to shortly.</p>
 </div>
 <div class="section" id="the-short-reign-of-the-netbook">
-<h2>2007-2010 - The short reign of the netbook</h2>
+<h2>2007-2010 - The short reign of the netbook<a class="headerlink" href="#the-short-reign-of-the-netbook" title="Permalink to this headline">¶</a></h2>
 <p>Despite some promising signs, the netbook boom ended pretty quickly. I agree with the Guardian article on that to a certain extent.</p>
 <p>As the Guardian points out, the first major blow was specification creep. The computer hardware industry’s habits would not die easily, and they soon watered down the concept. Instead of a small fast portable computer with a web browser, simple fast applications, no moving parts, and costing £200, they soon reverted to type: to make Windows and its accompanying bloatware perform decently required better hardware, regular hard drives replaced solid state storage, whirring fans came back, battery run times collapsed, and they soon crept back up to £300-400.</p>
 <img alt="Image of Clippy, the Microsoft Office Assistant" src="_images/netbooks_in_a_tablet_world_clippy.png"/>
@@ -416,7 +466,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>However, I think the fact that netbooks were sold with unsuitable Windows operating systems was the biggest factor. I think with the right tailored software, netbooks can be useful tools.</p>
 </div>
 <div class="section" id="the-rise-of-android-and-chrome">
-<h2>The rise of Android and Chrome</h2>
+<h2>The rise of Android and Chrome<a class="headerlink" href="#the-rise-of-android-and-chrome" title="Permalink to this headline">¶</a></h2>
 <p>While the “Real Linux” distributions were mostly ignored by the manufacturers. In an act of genius that we almost have come to expect from Google as a matter of routine, it got the concept of commodity computing and used it as a way to increase usage of its own services. Android and Chrome are technically Linux, but all the common applications are replaced by Google’s own offerings, and whatever crap the manufacturer adds on.</p>
 <p>Long time Linux users were initially not impressed they could not easily use their existing applications and the fact that it launched with a Java only development environment alienated a lot of C and Python developers on the Linux platform who felt lobotomised by it. Over the last five years, the Linux community has mostly come to terms with Android.</p>
 <img alt="Parody image of Android logo eating the Apple logo" src="_images/netbooks_in_a_tablet_world_android.jpg"/>
@@ -427,7 +477,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>So from the perspective of a Linux user, despite the initial faff, Ubuntu on an Acer Chromebook is little different than running Ubuntu on an Acer Aspire. For me Chromebooks are still netbooks.</p>
 </div>
 <div class="section" id="netbooks-will-not-die">
-<h2>Netbooks will not die</h2>
+<h2>Netbooks will not die<a class="headerlink" href="#netbooks-will-not-die" title="Permalink to this headline">¶</a></h2>
 <p>For me the netbook format is still relevant and will not die (yet at least).</p>
 <p>Tablets are like small babies, you have to hold them all the time, I haven’t mastered the art of propping the iPad up. Even bespoke stands are never around the moment you want to put the tablet down. Giving a presentation from a tablet or a phone not only requires being very organised - it is hard to make last minute changes from a tablet, it is also quite expensive to get a VGA connector for them (and you have to not lose it).</p>
 <img alt="Image of a bluetooth keyboard" src="_images/netbooks_in_a_tablet_world_keyboard.jpg"/>
@@ -439,7 +489,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>For me a netbook is a very nice complement to the desktop/home media server type setup. It works enough offline, and with a good connection I can use the full power of my home desktop remotely. If it breaks it is less of a problem, being £200 to replace.</p>
 </div>
 <div class="section" id="chromebooks">
-<h2>Chromebooks</h2>
+<h2>Chromebooks<a class="headerlink" href="#chromebooks" title="Permalink to this headline">¶</a></h2>
 <p>Lets have a look at some Chromebooks.</p>
 <img alt="Image of the Acer C7" src="_images/netbooks_in_a_tablet_world_acer.jpg"/>
 <p>The cheapest current Chromebook seems to be the <a class="reference external" href="http://www.amazon.co.uk/gp/product/B009VHRMOU/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B009VHRMOU">Acer C7 Chromebook</a> which at $200 and £200 is a pretty unfair currency conversion, it certainly one to buy while in the US, or perhaps have posted from a US seller if you are not in a hurry. I like the fact it has VGA (for projectors) and HDMI (for TVs) and still has an ethernet port (for plugging into a wired network) which is rare this days. It is not lacking in power with an over-generous 2GB of RAM. It has a massive 320GB old fashioned hard drive, which you will either love (lots of storage and less fear of disk corruption) or hate (it is a moving part which can make noise and potentially fail). I personally would prefer a small solid state drive.</p>
@@ -450,7 +500,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>Both seem nice but neither are the perfect netbook.</p>
 </div>
 <div class="section" id="less-is-more">
-<h2>Less is more</h2>
+<h2>Less is more<a class="headerlink" href="#less-is-more" title="Permalink to this headline">¶</a></h2>
 <p>Fundamentally, I think these are still too high expensive and in that sense, netbooks have not really begun yet.</p>
 <img alt="Image of a coloured Asus netbooks" src="_images/netbooks_in_a_tablet_world_colour.jpg"/>
 <p>Of course when compiling software or doing video editing or whatever, one still wants the best computer possible. However, If I was designing a netbook, I would accept that in 2013, you are likely to have many computing devices - phones, tablets, smart TVs, desktops and games consoles and so on. I would explicitly make it good at being a cheap portable laptop you sling in your backpack.</p>
@@ -484,10 +534,10 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <span>December 30, 2012</span>
         </div>
         <div class="section">
-            <h1><a href="2012/12/30/zoneminder_on_ubuntu.html">Zoneminder on Ubuntu</a></h1>
+            <h1><a href="2012/12/30/zoneminder_on_ubuntu.html">Zoneminder on Ubuntu<a class="headerlink" href="#zoneminder-on-ubuntu" title="Permalink to this headline">¶</a></a></h1>
 <p>Ever thought about building your own CCTV system? All you need is free and open source software Zoneminder, a free Linux distribution such as Ubuntu, Lubuntu or Debian, an old PC and a camera.</p>
 <div class="section" id="what-is-zoneminder">
-<h2>What is Zoneminder?</h2>
+<h2>What is Zoneminder?<a class="headerlink" href="#what-is-zoneminder" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.zoneminder.com/">Zoneminder</a> is an open source application used for CCTV and other security and surveillance applications. You can use it to monitor your home or work property or to monitor your pets while you are out, whatever you can imagine really (look at the <a class="reference external" href="http://www.zoneminder.com/screenshots">screenshots on the Zoneminder homepage</a> for more ideas).</p>
 <p>The implementation is basically a Perl/PHP web app using Apache and MySQL (<a class="reference external" href="http://en.wikipedia.org/wiki/LAMP_%28software_bundle%29">LAMP</a> as we call it in the trade). If you have ever set up a website or blog or something then you will understand it instantly. It is a nice concept as using <a class="reference external" href="http://en.wikipedia.org/wiki/Shared_nothing">shared nothing</a> web application and system administration principles it can scale up indefinitely to very large commercial uses.</p>
 <p>If you are the kind of person who already has a home wifi or wired network and a home server or desktop on all the time, then Zoneminder will fit in great, as the only extra electricity you will be using will be the camera (or cameras) themselves.</p>
@@ -495,7 +545,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>Zoneminder stores the recorded video as single frame images in a simple data layout on your filesystem and the web application allows you to configure it and view the cameras in real time and view recorded footage. The metadata is stored in the MySQL database.</p>
 </div>
 <div class="section" id="what-kind-of-camera-do-i-need">
-<h2>What kind of camera do I need?</h2>
+<h2>What kind of camera do I need?<a class="headerlink" href="#what-kind-of-camera-do-i-need" title="Permalink to this headline">¶</a></h2>
 <p>It seems you can use anything. If you have a simple USB webcam lying around at home, that is all you need to get started. If then you like Zoneminder you can then get a posher camera later if you want.</p>
 <p>There different types of cameras depending on how serious you are. The more serious people put a card in their computer (such as the <a class="reference external" href="http://www.amazon.co.uk/gp/product/B000075ANQ/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B000075ANQ">Hauppauge Impact VCB/PCI Composite AV Input card</a> ) and use real high definition video cameras.</p>
 <p>I personally use a ‘netcam’ (I have the model called <a class="reference external" href="http://www.amazon.co.uk/gp/product/B004UBSHQO/ref=as_li_ss_tl?ie=UTF8&amp;tag=commlinewarr-21&amp;linkCode=as2&amp;camp=1634&amp;creative=19450&amp;creativeASIN=B004UBSHQO">TRENDnet SecurView Wireless N Internet Camera</a> if you want to be precise) which is basically a webcam with a built in wireless card (and or ethernet socket). So you can put the camera anywhere you can power it and it will log onto your wireless network like any other device. You don’t have to run AV cables back to your computer.</p>
@@ -504,19 +554,19 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>If a burglar manages to get in and picks up the netcam, there are no wires to follow back and so no clue as to where the images go. One can also use backup software or write a few bash scripts to copy images to a remote server or the cloud if you are in a high crime area. If you have a really good internet connection at both ends, you can put netcams in your relatives’ houses and allow your Zoneminder server to grab the images off.</p>
 </div>
 <div class="section" id="what-kind-of-server-do-i-need">
-<h2>What kind of server do I need?</h2>
+<h2>What kind of server do I need?<a class="headerlink" href="#what-kind-of-server-do-i-need" title="Permalink to this headline">¶</a></h2>
 <p>By ‘server’ in the article, I just mean the computer that will have Zoneminder installed, as opposed to any other computers, tablets, phones or even TVs you might use to operate the system on a day to day basis.</p>
 <p>I suppose (in theory) you could use any operating system that can run Perl, Apache and Mysql. However, the assumption from here is that you will be using a Linux distribution, because Windows and OS X are, to put it bluntly, completely crap in this server role and a massive hassle to work with. If you have a Linux Desktop already at home, then that will probably work fine.</p>
 <p>In my experience, the server does not need to particularly powerful for a simple home setup. I am using a low-powered PC from 2006 which runs Zoneminder and lots of other apps quite nicely.</p>
 <p>You don’t have to have a graphical system, you can use something like Ubuntu Server if you want. However, you will need some computer or phone with a web browser to control Zoneminder and view the saved images/video, this does not have to be a Linux computer (toy operating systems work fine as clients).</p>
 </div>
 <div class="section" id="source-vs-packages">
-<h2>Source vs Packages</h2>
+<h2>Source vs Packages<a class="headerlink" href="#source-vs-packages" title="Permalink to this headline">¶</a></h2>
 <p>A couple of years ago I installed Zoneminder on Ubuntu 11.04 by downloading the source. Now over Christmas I had a spare 20 mins and re-installed the OS. I like backing up and reinstalling occasionally as it gives a nice clean system. This time I went for Ubuntu 12.10 in the Lubuntu flavour (I will talk about that in the future). Then I had to put all the data and programs back on.</p>
 <p>Last time I installed Zoneminder from source, this time I thought I would try the Ubuntu packages. This guide should work for any Ubuntu or Debian type system, but your mileage may vary.</p>
 </div>
 <div class="section" id="lets-get-started">
-<h2>Lets get started.</h2>
+<h2>Lets get started.<a class="headerlink" href="#lets-get-started" title="Permalink to this headline">¶</a></h2>
 <p>Firstly, we need to install the zoneminder package, you can do this in the graphical “software centre” or you can just open a terminal and use this command:</p>
 <div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">zoneminder</span>
 </pre></div>
@@ -524,7 +574,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>On a fresh system without Mysql, it will ask you to set a Mysql root password. Next it configures the nullmailer mail relay, I just accepted the default answers. Then it stops returns control of the shell.</p>
 </div>
 <div class="section" id="apache-settings">
-<h2>Apache settings</h2>
+<h2>Apache settings<a class="headerlink" href="#apache-settings" title="Permalink to this headline">¶</a></h2>
 <p>Now we need to let Apache know what is going on. If you are already using Apache to show websites on this system, you can integrate Zoneminder in a way that does not clash with your other sites.</p>
 <p>However, on a fresh system, you can do this:</p>
 <div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">zm</span><span class="o">/</span><span class="n">apache</span><span class="o">.</span><span class="n">conf</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apache2</span><span class="o">/</span><span class="n">conf</span><span class="o">.</span><span class="n">d</span><span class="o">/</span><span class="n">zoneminder</span><span class="o">.</span><span class="n">conf</span>
@@ -536,7 +586,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>If you have installed Zoneminder to a non-graphical server distribution, then obviously use the IP address or domain name instead of localhost when you access Zoneminder from your external computer or phone or whatever.</p>
 </div>
 <div class="section" id="camera-setup">
-<h2>Camera Setup</h2>
+<h2>Camera Setup<a class="headerlink" href="#camera-setup" title="Permalink to this headline">¶</a></h2>
 <p>When you click on Add New Monitor, you get a web form that looks like this:</p>
 <img alt="Image of the Add New Monitor web form in a web browser." src="_images/zoneminder_on_ubuntu-2addmonitor.png"/>
 <p>The most important field here is “source type”, the setting chosen affects the options available in the source tab (see below). Since I am using a netcam, I set it to remote.</p>
@@ -546,7 +596,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>This window allows you to define the hostname of your camera. So for a netcam we give it the host name of the camera, which in a home setup will probably be a private ip address (e.g. 192.168.x.x). Look up your camera on the <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/Supported_hardware">Supported hardware section of the Zoneminder wiki</a>  to find what settings you need to add here.</p>
 </div>
 <div class="section" id="log-driven-configuration">
-<h2>Log driven configuration</h2>
+<h2>Log driven configuration<a class="headerlink" href="#log-driven-configuration" title="Permalink to this headline">¶</a></h2>
 <p>You can read the Zoneminder ‘system log’ by clicking on a link unsurprisingly called ‘log’ (as shown in the main console screenshot above). This gives as a log viewer, as shown below:</p>
 <img alt="Image of the log viewer in a web browser." src="_images/zoneminder_on_ubuntu-4log.png"/>
 <p>The way I configure Zoneminder is by reading the activity log and keep changing configuration until it stops moaning.</p>
@@ -588,7 +638,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>Just keep attacking the log errors until it is all happy really.</p>
 </div>
 <div class="section" id="configuring-image-location">
-<h2>Configuring Image Location</h2>
+<h2>Configuring Image Location<a class="headerlink" href="#configuring-image-location" title="Permalink to this headline">¶</a></h2>
 <p>By default the images are bunged into: /usr/share/zoneminder/events which is a symbolic link to /var/cache/zoneminder/events/1/</p>
 <p>In theory, to change this you need to change the setting ZM_DIR_EVENTS which is the first setting under ‘Options’ then ‘Paths’. Use an absolute path and make sure the destination has the correct permissions.</p>
 <p>In reality, I never had much luck changing this. When it tries to read the events back, it seems to be somehow hardcoded to the old location which is then appends with this location. If anyone has the answer to this let me know.</p>
@@ -601,7 +651,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <p>There are lots of other things you can configure like the sensitivity of the motion detection and which regions of the image to watch and which to ignore it etc. However, we have covered everything specific to using Zoneminder on an Ubuntu/Debian system using the .deb packages. The <a class="reference external" href="http://www.zoneminder.com/wiki/index.php/">Zoneminder wiki</a> is very useful and comprehensive so dig around there to find out more.</p>
 </div>
 <div class="section" id="zoneminder-in-action">
-<h2>Zoneminder in action</h2>
+<h2>Zoneminder in action<a class="headerlink" href="#zoneminder-in-action" title="Permalink to this headline">¶</a></h2>
 <p>Now if you have read this far you deserve to have some silly pictures.</p>
 <p>Having a CCTV camera at the front of your house educates you a lot about what happens in your local community. I have learned all sorts of things from watching back footage at random. Most of the cool snaps I probably cannot post online for legal and taste reasons.</p>
 <p>The first revelation is that a large amount of people look through your windows. Here is a fairly tame and blurry one.</p>
@@ -618,7 +668,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
 <img alt="Image of bin men and a dust cart." src="_images/zoneminder_on_ubuntu-9binmen.jpg"/>
 </div>
 <div class="section" id="over-to-you">
-<h2>Over to you</h2>
+<h2>Over to you<a class="headerlink" href="#over-to-you" title="Permalink to this headline">¶</a></h2>
 <p>So setting up Zoneminder takes a little fiddling but it is good fun and reassuring to have the ability to look back in time at what was happening in front of your house in the past. If you have a go or have tried Zoneminder before, please let everyone know how you got on and how I could improve this guide. Bonus points for silly pictures.</p>
 </div>
 
@@ -641,7 +691,7 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <span>December 11, 2012</span>
         </div>
         <div class="section">
-            <h1><a href="2012/12/11/cant_stop_the_signal.html">You can’t stop the signal</a></h1>
+            <h1><a href="2012/12/11/cant_stop_the_signal.html">You can’t stop the signal<a class="headerlink" href="#you-can-t-stop-the-signal" title="Permalink to this headline">¶</a></a></h1>
 <p>When I started this site in 2005, I said that my blog was:</p>
 <blockquote>
 <div>“about taking control of your own technology, it looks at our experiences of computing; especially computing using GNU/Linux, often using the command line and other textual means, but also other issues such as ethics, best practices and whatever is cool now.”</div></blockquote>
@@ -673,6 +723,8 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2017/07/04/happy_independence_day.html">Happy Independence Day America</a>
+        </li><li>
             <a href="2017/06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
         </li><li>
             <a href="2017/06/23/brexit_means_decolonisation.html">Brexit means decolonisation</a>
@@ -690,8 +742,6 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <a href="2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
         </li><li>
             <a href="2016/11/06/godwin_part_two.html">Godwin part two</a>
-        </li><li>
-            <a href="2016/10/08/world_according_to_clinton_email.html">The World According to Clinton's Email</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">
