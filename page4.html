@@ -65,6 +65,125 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
+            <span>January 13, 2014</span>
+        </div>
+        <div class="section">
+            <h1><a href="2014/01/13/crunchbang_linux_tips.html">Three Crunchbang Linux Tips</a></h1>
+<img alt="Image of Debian swirls in black and grey" src="_images/debian-bulbs-by-omns.png"/>
+<p>As <a class="reference external" href="http://zeth.net/2014/01/10/crunchbang.html">talked about previously</a>, my main computers currently have the
+Crunchbang Linux distribution, which is a version of Debian GNU/Linux
+using the Openbox window manager.</p>
+<p>These tips might also be useful for some other Debian or Ubuntu based
+systems.</p>
+<div class="section" id="setting-the-keymap-for-an-apple-keyboard">
+<h2>Setting the keymap for an Apple keyboard</h2>
+<img alt="Image of Apple Keyboard with big keys" src="_images/A1048_british_apple_keyboard.jpg"/>
+<p>While laptops might need flat keys for portability (though I might
+argue the point), I hate typing on them. I like full-sized keys, not
+flaccid little flat ones.</p>
+<p>I once bought an Apple Mac G4, I don’t use it anymore but I still use
+the keyboard I bought for it. Using Linux, it is not too much of a
+problem just to use the IBM layout without (i.e. remembering that the
+double quote mark is above the 2 key for example) but it is worth
+setting it properly in case someone else needs to use my computer.</p>
+<p>I also have an Apple Macbook Pro laptop for work reasons which also
+has the same key layout.</p>
+<p>Anyway, I edited the file called /etc/default/keyboard and set the
+following option:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">XKBVARIANT</span><span class="o">=</span><span class="s2">"mac"</span>
+</pre></div>
+</div>
+<p>I am in Great Britain, so I also need to be sure that the following
+option is set:</p>
+<blockquote>
+<div>XKBLAYOUT=”gb”</div></blockquote>
+<p>Maybe there was a way to change this using a graphical tool, but this
+way worked.</p>
+</div>
+<div class="section" id="creating-screen-layouts-with-arandr">
+<h2>Creating screen layouts with ARandR</h2>
+<img alt="Image of ARandR Screen Layout Editor programme" src="_images/arandr.png"/>
+<p>ARandR Screen Layout Editor is a wonderful tool for setting up your
+monitors.  You can drag them around, change the resolution and rotate
+them in order to create your perfect screen layout.</p>
+<p>To save the configuration, click on ‘Layout’ then ‘Save As’ to save a
+particular configuration.</p>
+<p>You can reload this configuration within the program, but the
+configuration file is itself a simple shell script (which calls xrandr
+with arguments representing what you have picked in the GUI).</p>
+<p>So to automatically configure your screen layout when the graphical
+session first starts, you can append the script to the file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="o">~/.</span><span class="n">config</span><span class="o">/</span><span class="n">openbox</span><span class="o">/</span><span class="n">autostart</span>
+</pre></div>
+</div>
+<p>The fact that a configuration is just a shell script means you can
+easily have multiple layouts for different situations, and either call
+them yourself on the command line, assign desktop shortcuts or use
+other tools to call them, e.g.  you can use cron to change the screen
+configuration at a certain time or write an upstart/systemd script to
+execute it based on some system event etc.</p>
+</div>
+<div class="section" id="dealing-with-not-found-commands">
+<h2>Dealing with not-found commands</h2>
+<img alt="Image of glass smashing with Linux penguin looking through" src="_images/tuxsmash.png"/>
+<p>When using the command line in Ubuntu, if you try to call a
+command/program that has not been installed, it says something like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">The</span> <span class="n">program</span> <span class="s1">'tuxpaint'</span> <span class="ow">is</span> <span class="n">currently</span> <span class="ow">not</span> <span class="n">installed</span><span class="o">.</span> <span class="n">You</span> <span class="n">can</span> <span class="n">install</span> <span class="n">it</span> <span class="n">by</span> <span class="n">typing</span><span class="p">:</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">tuxpaint</span>
+</pre></div>
+</div>
+<p>Here is a more complicated example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">The</span> <span class="n">program</span> <span class="s1">'a2ensite'</span> <span class="ow">is</span> <span class="n">currently</span> <span class="ow">not</span> <span class="n">installed</span><span class="o">.</span> <span class="n">You</span> <span class="n">can</span> <span class="n">install</span> <span class="n">it</span> <span class="n">by</span> <span class="n">typing</span><span class="p">:</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">apache2</span><span class="o">.</span><span class="mi">2</span><span class="o">-</span><span class="n">common</span>
+</pre></div>
+</div>
+<p>What actually happens here is a Python script appropriately named
+command-not-found is called which then looks up what package is needed
+to run the program.</p>
+<p>If you want the same behaviour on Crunchbang, just do:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">command</span><span class="o">-</span><span class="ow">not</span><span class="o">-</span><span class="n">found</span>
+</pre></div>
+</div>
+<p>The problem with this utility on older hardware is when you
+accidentally make a typo that is actually a valid command somewhere,
+you get a second or so delay while it searches Apt’s cache, which
+could get annoying quite quickly.</p>
+<p>If you want to search for a particular package, you can just use the
+pre-installed apt-cache command, e.g.:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">cache</span> <span class="n">search</span> <span class="n">tuxpaint</span>
+</pre></div>
+</div>
+<p>All the packages to do with tuxpaint are listed in the
+terminal. However, this does not go down to the file level like
+command-not-found does. For example, the other example of a2ensite
+finds nothing:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">cache</span> <span class="n">search</span> <span class="n">a2ensite</span>
+</pre></div>
+</div>
+<p>I don’t know a way of searching for a package by command using the
+stock Crunchbang install. However, you can install the apt-file
+package, which allows searches like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span/><span class="n">apt</span><span class="o">-</span><span class="n">file</span> <span class="n">search</span> <span class="n">filename</span>
+</pre></div>
+</div>
+</div>
+
+        </div>
+        <div class="postmeta">
+        <div class="author">
+            <span>Posted by Zeth</span>
+        </div>
+        <div class="categories">
+            <span>
+                Filed under:
+                <a href="categories/crunchbang.html">crunchbang</a>, <a href="categories/linux.html">linux</a>, <a href="categories/notetoself.html">notetoself</a>, <a href="categories/tips.html">tips</a></span>
+        </div>
+        <div class="tags">
+            <span>
+                Tags:
+                <a href="tags/craft.html">craft</a></span>
+        </div>
+        </div><div class="separator post_separator"></div><div class="timestamp postmeta">
             <span>January 12, 2014</span>
         </div>
         <div class="section">
@@ -723,6 +842,8 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
+            <a href="2017/07/08/unit_testing_libraries_for_c.html">Unit Testing Libraries for C</a>
+        </li><li>
             <a href="2017/07/04/happy_independence_day.html">Happy Independence Day America</a>
         </li><li>
             <a href="2017/06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
@@ -740,8 +861,6 @@ rather marginal and certainly far less than my previous jumps from Slackware to 
             <a href="2016/12/01/the_end_of_the_world_is_cancelled.html">The End of the World is Cancelled</a>
         </li><li>
             <a href="2016/12/01/the_treaty_of_losers.html">The Treaty of Losers</a>
-        </li><li>
-            <a href="2016/11/06/godwin_part_two.html">Godwin part two</a>
         </li></ul>
 </div>
 </section><section><div class="widget" id="searchbox" role="search">

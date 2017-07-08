@@ -1,0 +1,122 @@
+Unit Testing Libraries for C
+============================
+
+.. image:: /newimages/posts/unit_testing_libraries_for_c/unittest.png
+
+The last time I did some unit testing on C, I used `Novaprova`_. However,
+at least at the moment, this doesn't run on non-Intel platforms (like
+the ARM based Pi).
+
+I decided to make a quick survey of what tools there are. I focused
+mainly on the ones that are already available through Linux package
+managers.
+
+Everyone loves Autotools
+------------------------
+
+The leading approach seems to be to use autotools'
+`built-in test runner`_ i.e. "make check".
+
+To choose two of my favourite projects at random, VLC and JSON-C, both
+follow this approach.
+
+Using GCC's built-in preprocessor and linker gets you some way to
+mocking and so on.
+
+A lot of applications roll their own test runners using bash or Python
+scripts.
+
+If you are using a big framework, you may have already installed
+testing utilities as part of it, for example GNOME's Glib and Boost
+(which is C++) both come with their own testing tools.
+
+Without further ado, onward to the tables. Currently, these are just
+in approximate alphabetical order.
+
+C Only
+------
+
++------------------------+--------------------------+-------------------------+
+| Name                   | Apt Package              | Projects Using It       |
++========================+==========================+=========================+
+| Check_                 | check                    | Expat, GStreamer        |
++------------------------+--------------------------+-------------------------+
+| cmocka_                | cmocka                   | libssh, OpenVPN         |
++------------------------+--------------------------+-------------------------+
+| CUnit_                 | libcunit1                | OpenDataPlane           |
++------------------------+--------------------------+-------------------------+
+| GNU Autounit           | libautounit-dev          |                         |
++------------------------+--------------------------+-------------------------+
+
+C and C++
+---------
+
++------------------------+--------------------------+----------------------------------+
+| Name                   | Apt Package              | Projects Using It                |
++========================+==========================+==================================+
+| `API Sanity Checker`_  | api-sanity-checker       |                                  |
++------------------------+--------------------------+----------------------------------+
+| CppUnit_               | libcppunit-dev           | LibreOffice                      |
++------------------------+--------------------------+----------------------------------+
+| CppUTest_              | cpputest                 |                                  |
++------------------------+--------------------------+----------------------------------+
+| Criterion_             | criterion-dev (ppa)      |                                  |
++------------------------+--------------------------+----------------------------------+
+| CTest (CMake)          | cmake                    | Netflix, ZeroMQ, libpng, Poppler |
++------------------------+--------------------------+----------------------------------+
+| `Cutter`_              | cutter-testing-framework | libnfc, Groonga                  |
++------------------------+--------------------------+----------------------------------+
+| DejaGnu_               | dejagnu                  | GCC, Other GNU tools             |
++------------------------+--------------------------+----------------------------------+
+| `Google Test`_         | googletest               | Chromium, LLVM, OpenCV, Blender  |
++------------------------+--------------------------+----------------------------------+
+
+
+C++ Only
+--------
+
+There are loads of C++ testing utilities such as Catch_ and CxxTest_
+(and too many others to mention) that do not claim explicit support
+for C.
+
+If you want to use one of those, you can just test your C code using a
+C++ compiler.
+
+Some purists will object, as in `this Stackoverflow comment`_:
+
+    I know C and C++ has a lot of overlap, but it doesn't strike me as a
+    good idea to use a C++ testing library when you're producing code that
+    will be ultimately compiled in a C compiler
+
+Tell me your stories
+--------------------
+
+I haven't had the opportunity yet to go beyond listing them.
+
+What are you using? What have I missed?
+
+I'm especially keen to get more information to fill in the third
+column in the table above (i.e. what any testing tools vaguely well
+known open source projects use).
+
+
+.. _`Novaprova`: http://novaprova.org/
+.. _DejaGnu: https://www.gnu.org/software/dejagnu/
+.. _CppUTest: http://cpputest.github.io/
+.. _Check: https://libcheck.github.io/check/
+.. _cmocka: https://cmocka.org/
+.. _CxxTest: http://cxxtest.com/
+.. _CppUnit: https://www.freedesktop.org/wiki/Software/cppunit/
+.. _CUnit: http://cunit.sourceforge.net/
+.. _`Google Test`: https://github.com/google/googletest
+.. _Cutter: http://cutter.sourceforge.net/
+.. _`API Sanity Checker`: https://lvc.github.io/api-sanity-checker/
+.. _Catch: https://github.com/philsquared/Catch
+.. _Criterion: https://github.com/Snaipe/Criterion/
+.. _`this Stackoverflow comment`: https://stackoverflow.com/questions/65820/unit-testing-c-code#comment42945657_1410143
+.. _`built-in test runner`: https://www.gnu.org/software/automake/manual/html_node/Tests.html
+
+.. author:: default
+.. categories:: none
+.. tags:: craft
+.. comments::

@@ -5,8 +5,145 @@
         <link>https://www.zeth.net/</link>
         <description>Taking control of your own technology</description>
         <language>en-us</language>
-        <pubDate>Tue, 04 Jul 2017 00:00:00 +0100</pubDate>
+        <pubDate>Sat, 08 Jul 2017 00:00:00 +0100</pubDate>
         
+        <item>
+            <link>https://www.zeth.net/2017/07/08/unit_testing_libraries_for_c.html</link>
+            <guid>https://www.zeth.net/2017/07/08/unit_testing_libraries_for_c.html</guid>
+            <title><![CDATA[Unit Testing Libraries for C]]></title>
+            <description><![CDATA[<h1>Unit Testing Libraries for C</h1>
+<img alt="../../../_images/unittest.png" src="https://www.zeth.net/_images/unittest.png"/>
+<p>The last time I did some unit testing on C, I used <a class="reference external" href="http://novaprova.org/">Novaprova</a>. However,
+at least at the moment, this doesn’t run on non-Intel platforms (like
+the ARM based Pi).</p>
+<p>I decided to make a quick survey of what tools there are. I focused
+mainly on the ones that are already available through Linux package
+managers.</p>
+<div class="section" id="everyone-loves-autotools">
+<h2>Everyone loves Autotools</h2>
+<p>The leading approach seems to be to use autotools’
+<a class="reference external" href="https://www.gnu.org/software/automake/manual/html_node/Tests.html">built-in test runner</a> i.e. “make check”.</p>
+<p>To choose two of my favourite projects at random, VLC and JSON-C, both
+follow this approach.</p>
+<p>Using GCC’s built-in preprocessor and linker gets you some way to
+mocking and so on.</p>
+<p>A lot of applications roll their own test runners using bash or Python
+scripts.</p>
+<p>If you are using a big framework, you may have already installed
+testing utilities as part of it, for example GNOME’s Glib and Boost
+(which is C++) both come with their own testing tools.</p>
+<p>Without further ado, onward to the tables. Currently, these are just
+in approximate alphabetical order.</p>
+</div>
+<div class="section" id="c-only">
+<h2>C Only</h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%"/>
+<col width="35%"/>
+<col width="33%"/>
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Apt Package</th>
+<th class="head">Projects Using It</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://libcheck.github.io/check/">Check</a></td>
+<td>check</td>
+<td>Expat, GStreamer</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://cmocka.org/">cmocka</a></td>
+<td>cmocka</td>
+<td>libssh, OpenVPN</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://cunit.sourceforge.net/">CUnit</a></td>
+<td>libcunit1</td>
+<td>OpenDataPlane</td>
+</tr>
+<tr class="row-odd"><td>GNU Autounit</td>
+<td>libautounit-dev</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="c-and-c">
+<h2>C and C++</h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%"/>
+<col width="31%"/>
+<col width="40%"/>
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Apt Package</th>
+<th class="head">Projects Using It</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://lvc.github.io/api-sanity-checker/">API Sanity Checker</a></td>
+<td>api-sanity-checker</td>
+<td> </td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://www.freedesktop.org/wiki/Software/cppunit/">CppUnit</a></td>
+<td>libcppunit-dev</td>
+<td>LibreOffice</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://cpputest.github.io/">CppUTest</a></td>
+<td>cpputest</td>
+<td> </td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/Snaipe/Criterion/">Criterion</a></td>
+<td>criterion-dev (ppa)</td>
+<td> </td>
+</tr>
+<tr class="row-even"><td>CTest (CMake)</td>
+<td>cmake</td>
+<td>Netflix, ZeroMQ, libpng, Poppler</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://cutter.sourceforge.net/">Cutter</a></td>
+<td>cutter-testing-framework</td>
+<td>libnfc, Groonga</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://www.gnu.org/software/dejagnu/">DejaGnu</a></td>
+<td>dejagnu</td>
+<td>GCC, Other GNU tools</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/google/googletest">Google Test</a></td>
+<td>googletest</td>
+<td>Chromium, LLVM, OpenCV, Blender</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>C++ Only</h2>
+<p>There are loads of C++ testing utilities such as <a class="reference external" href="https://github.com/philsquared/Catch">Catch</a> and <a class="reference external" href="http://cxxtest.com/">CxxTest</a>
+(and too many others to mention) that do not claim explicit support
+for C.</p>
+<p>If you want to use one of those, you can just test your C code using a
+C++ compiler.</p>
+<p>Some purists will object, as in <a class="reference external" href="https://stackoverflow.com/questions/65820/unit-testing-c-code#comment42945657_1410143">this Stackoverflow comment</a>:</p>
+<blockquote>
+<div>I know C and C++ has a lot of overlap, but it doesn’t strike me as a
+good idea to use a C++ testing library when you’re producing code that
+will be ultimately compiled in a C compiler</div></blockquote>
+</div>
+<div class="section" id="tell-me-your-stories">
+<h2>Tell me your stories</h2>
+<p>I haven’t had the opportunity yet to go beyond listing them.</p>
+<p>What are you using? What have I missed?</p>
+<p>I’m especially keen to get more information to fill in the third
+column in the table above (i.e. what any testing tools vaguely well
+known open source projects use).</p>
+</div>
+]]></description>
+             <pubDate>Sat, 08 Jul 2017 00:00:00 +0100</pubDate>
+        </item>
+    
         <item>
             <link>https://www.zeth.net/2017/07/04/happy_independence_day.html</link>
             <guid>https://www.zeth.net/2017/07/04/happy_independence_day.html</guid>

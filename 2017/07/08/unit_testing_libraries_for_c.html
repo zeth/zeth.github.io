@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="description" content="Zeth talks about technology, power, Linux, Python, open source software and other topics">
         <meta name="viewport" content="width=device-width">
-        <title>Brexit means decolonisation &mdash; Zeth.net</title>
+        <title>Unit Testing Libraries for C &mdash; Zeth.net</title>
             <link rel="stylesheet" href="../../../_static/normalize.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/sphinx.css" type="text/css">
             <link rel="stylesheet" href="../../../_static/main.css" type="text/css">
@@ -28,7 +28,7 @@
         <script>window.jQuery || document.write('<script src="../../../_static/vendor/jquery-1.8.2.min.js"><\/script>')</script>
         <script src="../../../_static/plugins.js"></script>
         <script src="../../../_static/main.js"></script>
-        <link rel="next" title="Facebook is dead - long live the mesh" href="../../03/17/facebook_is_dead_long_live_the_mesh.html" /><link rel="prev" title="All aboard the great ship Britannia" href="../24/all_aboard_the_great_ship_britannia.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
+        <link rel="next" title="Happy Independence Day America" href="../04/happy_independence_day.html" /><link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.html" /><script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
         VERSION:     '1.5',
@@ -65,50 +65,138 @@
                 </li>
               </ul>
           </nav><div class="main-container" role="main"><div class="main wrapper body clearfix"><article><div class="timestamp postmeta">
-            <span>June 23, 2017</span>
+            <span>July 08, 2017</span>
         </div>
-    <div class="section" id="brexit-means-decolonisation">
-<h1>Brexit means decolonisation</h1>
-<img alt="../../../_images/ecj.png" src="../../../_images/ecj.png" />
-<p>The EU&#8217;s position paper called <a class="reference external" href="https://ec.europa.eu/commission/sites/beta-political/files/essential-principles-citizens-rights_en_0.pdf">Essential Principles on Citizens&#8217; Rights</a>
-demands, among other things, that:</p>
+    <div class="section" id="unit-testing-libraries-for-c">
+<h1>Unit Testing Libraries for C</h1>
+<img alt="../../../_images/unittest.png" src="../../../_images/unittest.png" />
+<p>The last time I did some unit testing on C, I used <a class="reference external" href="http://novaprova.org/">Novaprova</a>. However,
+at least at the moment, this doesn&#8217;t run on non-Intel platforms (like
+the ARM based Pi).</p>
+<p>I decided to make a quick survey of what tools there are. I focused
+mainly on the ones that are already available through Linux package
+managers.</p>
+<div class="section" id="everyone-loves-autotools">
+<h2>Everyone loves Autotools</h2>
+<p>The leading approach seems to be to use autotools&#8217;
+<a class="reference external" href="https://www.gnu.org/software/automake/manual/html_node/Tests.html">built-in test runner</a> i.e. &#8220;make check&#8221;.</p>
+<p>To choose two of my favourite projects at random, VLC and JSON-C, both
+follow this approach.</p>
+<p>Using GCC&#8217;s built-in preprocessor and linker gets you some way to
+mocking and so on.</p>
+<p>A lot of applications roll their own test runners using bash or Python
+scripts.</p>
+<p>If you are using a big framework, you may have already installed
+testing utilities as part of it, for example GNOME&#8217;s Glib and Boost
+(which is C++) both come with their own testing tools.</p>
+<p>Without further ado, onward to the tables. Currently, these are just
+in approximate alphabetical order.</p>
+</div>
+<div class="section" id="c-only">
+<h2>C Only</h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="35%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Apt Package</th>
+<th class="head">Projects Using It</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://libcheck.github.io/check/">Check</a></td>
+<td>check</td>
+<td>Expat, GStreamer</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://cmocka.org/">cmocka</a></td>
+<td>cmocka</td>
+<td>libssh, OpenVPN</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://cunit.sourceforge.net/">CUnit</a></td>
+<td>libcunit1</td>
+<td>OpenDataPlane</td>
+</tr>
+<tr class="row-odd"><td>GNU Autounit</td>
+<td>libautounit-dev</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="c-and-c">
+<h2>C and C++</h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="29%" />
+<col width="31%" />
+<col width="40%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Apt Package</th>
+<th class="head">Projects Using It</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="https://lvc.github.io/api-sanity-checker/">API Sanity Checker</a></td>
+<td>api-sanity-checker</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://www.freedesktop.org/wiki/Software/cppunit/">CppUnit</a></td>
+<td>libcppunit-dev</td>
+<td>LibreOffice</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="http://cpputest.github.io/">CppUTest</a></td>
+<td>cpputest</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/Snaipe/Criterion/">Criterion</a></td>
+<td>criterion-dev (ppa)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>CTest (CMake)</td>
+<td>cmake</td>
+<td>Netflix, ZeroMQ, libpng, Poppler</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="http://cutter.sourceforge.net/">Cutter</a></td>
+<td>cutter-testing-framework</td>
+<td>libnfc, Groonga</td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="https://www.gnu.org/software/dejagnu/">DejaGnu</a></td>
+<td>dejagnu</td>
+<td>GCC, Other GNU tools</td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="https://github.com/google/googletest">Google Test</a></td>
+<td>googletest</td>
+<td>Chromium, LLVM, OpenCV, Blender</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id1">
+<h2>C++ Only</h2>
+<p>There are loads of C++ testing utilities such as <a class="reference external" href="https://github.com/philsquared/Catch">Catch</a> and <a class="reference external" href="http://cxxtest.com/">CxxTest</a>
+(and too many others to mention) that do not claim explicit support
+for C.</p>
+<p>If you want to use one of those, you can just test your C code using a
+C++ compiler.</p>
+<p>Some purists will object, as in <a class="reference external" href="https://stackoverflow.com/questions/65820/unit-testing-c-code#comment42945657_1410143">this Stackoverflow comment</a>:</p>
 <blockquote>
-<div>The Commission should have full powers for the monitoring and the
-Court of Justice of the European Union should have full jurisdiction
-corresponding to the duration of the protection of citizen&#8217;s rights in
-the Withdrawal agreement.</div></blockquote>
-<p>If the ECJ can be an mediator in every interaction the UK government
-or a company has with an EU citizen, then we will still have no
-ability to fix any of the pressing issues facing this country,
-including the still unresolved causes of the 2008 crash. Every
-government policy has winners and losers. Every bad policy has some
-corner-case where someone benefits from it.</p>
-<p>With 3 million or more EU citizens, any issue can be turned into an
-issue affecting an EU citizen providing forum shopping and then the EU
-law will apply.</p>
-<p>The idea of everyone being equal before the common law and that UK
-judges are trusted to apply it is anathema to the EU’s Napoleonic
-position that only the ECJ can be trusted to protect EU citizens.</p>
-<p>This is really a “special interest”/“closed shop” self serving
-argument, if national courts can be trusted, there is no point to the
-EU. To protect its own need to exist, the EU has to insert itself into
-everything, even if it is not needed.</p>
-<p>The US Supreme Court doesn&#8217;t need to interfere if an American citizen
-resident in the UK has a problem with a public institution or company,
-that American just uses the normal UK courts to plead their case.</p>
-<p>The UK has residents who hail from the whole world including millions
-of citizens from the other 169 countries in the world that are not in
-the EU. They manage quite fine to use the existing UK Courts. They
-don&#8217;t need their legal systems to intervene in British law.</p>
-<p>Note there is no reciprocal right in the proposal for British citizens
-living in the EU to call for assistance from the British courts.</p>
-<p>This whole lop-sided proposal shows how the Euro-federalists see the
-UK as a difficult colony, not as an independent country or let alone
-as an equal partner.</p>
-<p>Staying under the law of the EU is not Brexit, we would have just
-moved from a colony with very little say of how we are governed to a
-colony with no say over how we are governed.</p>
-<p>It is not the independent country that people voted for.</p>
+<div>I know C and C++ has a lot of overlap, but it doesn&#8217;t strike me as a
+good idea to use a C++ testing library when you&#8217;re producing code that
+will be ultimately compiled in a C compiler</div></blockquote>
+</div>
+<div class="section" id="tell-me-your-stories">
+<h2>Tell me your stories</h2>
+<p>I haven&#8217;t had the opportunity yet to go beyond listing them.</p>
+<p>What are you using? What have I missed?</p>
+<p>I&#8217;m especially keen to get more information to fill in the third
+column in the table above (i.e. what any testing tools vaguely well
+known open source projects use).</p>
+</div>
 </div>
 
     <div class="postmeta">
@@ -119,21 +207,21 @@ colony with no say over how we are governed.</p>
         <div class="tags">
             <span>
                 Tags:
-                <a href="../../../tags/civic.html">civic</a></span>
+                <a href="../../../tags/craft.html">craft</a></span>
         </div>
         </div><ul class="related clearfix">
-            <li class="left"> &laquo; <a href="../24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a></li>
-            <li class="right"><a href="../../03/17/facebook_is_dead_long_live_the_mesh.html">Facebook is dead - long live the mesh</a> &raquo; </li>
+            <li class="left"></li>
+            <li class="right"><a href="../04/happy_independence_day.html">Happy Independence Day America</a> &raquo; </li>
         </ul></article><aside class="sidebar"><section><div class="widget">
     <h1>Recent Posts</h1>
     <ul><li>
-            <a href="../../07/08/unit_testing_libraries_for_c.html">Unit Testing Libraries for C</a>
+            <a href="#">Unit Testing Libraries for C</a>
         </li><li>
-            <a href="../../07/04/happy_independence_day.html">Happy Independence Day America</a>
+            <a href="../04/happy_independence_day.html">Happy Independence Day America</a>
         </li><li>
-            <a href="../24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
+            <a href="../../06/24/all_aboard_the_great_ship_britannia.html">All aboard the great ship Britannia</a>
         </li><li>
-            <a href="#">Brexit means decolonisation</a>
+            <a href="../../06/23/brexit_means_decolonisation.html">Brexit means decolonisation</a>
         </li><li>
             <a href="../../03/17/facebook_is_dead_long_live_the_mesh.html">Facebook is dead - long live the mesh</a>
         </li><li>
