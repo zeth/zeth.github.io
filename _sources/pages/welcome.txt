@@ -69,29 +69,6 @@ Games
 * `MicroPython Invaders`_ - save the world from those evil LEDs!
 * `Turtle attack`_ - introduces basic programming concepts (via the Python language) without being boring.
 
-Blog
-----
-
-Blogs are pretty uncool and outdated I know, but I like to get a bit
-of long-form thought off my chest occasionally.
-
-Craft_
-~~~~~~
-
-These are pages about technology and software development. Bear in
-mind as you read that everything in technology ages quickly of course.
-
-
-Civic_
-~~~~~~
-
-These are pages about politics, society and economics. The main focus
-is on the UK so they will probably not be very interesting if you are
-not interested in local UK politics.
-
-
-.. _Craft: https://zeth.net/tags/craft.html
-.. _Civic: https://zeth.net/tags/civic.html
 .. _`PyCon UK`: http://pyconuk.org
 .. _`inputs`: https://github.com/zeth/inputs
 .. _`pip install inputs`: https://pypi.python.org/pypi/inputs
