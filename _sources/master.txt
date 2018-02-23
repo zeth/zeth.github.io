@@ -4,6 +4,7 @@ Sitemap
 .. toctree::
    :maxdepth: 1
 
+   2017/07/19/mocking_with_c
    2017/07/08/unit_testing_libraries_for_c
    2017/07/04/happy_independence_day
    2017/06/24/all_aboard_the_great_ship_britannia

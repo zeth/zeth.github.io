@@ -5,8 +5,118 @@
         <link>https://www.zeth.net/</link>
         <description>Taking control of your own technology</description>
         <language>en-us</language>
-        <pubDate>Sat, 08 Jul 2017 00:00:00 +0100</pubDate>
+        <pubDate>Wed, 19 Jul 2017 00:00:00 +0100</pubDate>
         
+        <item>
+            <link>https://www.zeth.net/2017/07/19/mocking_with_c.html</link>
+            <guid>https://www.zeth.net/2017/07/19/mocking_with_c.html</guid>
+            <title><![CDATA[Mocking with C]]></title>
+            <description><![CDATA[<h1>Mocking with C</h1>
+<div class="section" id="it-s-not-beautiful">
+<h2>It’s not beautiful</h2>
+<p>Python comes bundled with fantastic mocking support in its standard
+library. C has no such high level mocking support.</p>
+<p>As was famously said by those folks at ISO who maintain the C standard:</p>
+<blockquote>
+<div>The Committee is content to let C++ be the big and ambitious language.</div></blockquote>
+<p>The C standard is revised only once per decade, and any changes tend
+to reflect existing features the compilers already support.</p>
+<p>Since there are no agreed upon mocking approaches to get into the
+current process, don’t expect any built in help until at least the
+2030s.</p>
+<p>There are however at least three obvious ways to do what is called
+“Interpositioning” and third-party high level mock libraries tend to
+be synaptic sugar around one or all of these techniques.</p>
+<p>So googling for the more general term interpositioning rather than
+mocking tends to result in more useful search results, and a common
+example given is how to replace malloc with your own interpretation or
+wrapper of malloc. This is probably all you need to know and you can
+take it from here.</p>
+<p>A lot of the examples call the compiler directly, so you end up doing
+cargo cult programming, trawling open source project code for the
+correct recipe to stick in your own Makefile.am</p>
+</div>
+<div class="section" id="other-uses-of-interpositioning">
+<h2>Other uses of interpositioning</h2>
+<p>Apart from mocking, it is worth saying that there are other (more
+specialised) reasons why you might like to intercept a call to a
+function,</p>
+<p>Apart from reverse engineering something you don’t have the source
+for, the main reasons are adding encryption to things, sandboxing
+things and profiling things.</p>
+<p>Like all monkey patch type approaches, if you do this with other
+people’s libraries, you have to track their development very strongly,
+and if you are doing that, you might as well submit your changes to
+upstream or at least ask that project for the relevant calls so you
+feature can be added without intercepting functions.</p>
+<p>Of course, your interest in mocking is to write unit tests for your
+own libraries, so you don’t have this problem.</p>
+</div>
+<div class="section" id="types-of-interpositions">
+<h2>Types of interpositions</h2>
+<p>Back to the main topic, we interposition our replacement (i.e. mock)
+function at three places. One approach seems to be more popular than
+the other two.</p>
+<p>The first less popular approach is to intercept the function at
+compile time i.e. when the source of the application code is compiled,
+your mock function goes into the application binary instead of the
+original function.</p>
+<p>The second less popular approach is to intercept the function at
+runtime by your tests loading the application code as a dynamic
+library, this is known as “the LD_PRELOAD trick”.</p>
+<p>Anything fed to the environment variable LD_PRELOAD in your makefile
+is used first.</p>
+<p>Your mock functions are given precedence (pre-loaded) so when the
+application code tries to define that function, it is already there.</p>
+<p>The last and most popular approach is to get the linker (ld) to do all
+the heavy lifting for you.</p>
+<p>Giving the linker the argument –wrap and the name of the symbol(s)
+you want to wrap, changes how those symbols are resolved.</p>
+<p>So in the malloc example, you call your own malloc function
+__wrap_malloc and then it is used instead of malloc.</p>
+<p>The original standard library malloc is still available but gets
+renamed into __real_malloc.</p>
+<p>The idea being that if your __wrap_malloc first wants to do something
+(like log some information or something) it can still afterwards call
+__real_malloc</p>
+<blockquote>
+<div><p>–wrap symbol Use a wrapper function for symbol. Any undefined reference to symbol will be resolved to __wrap_symbol.</p>
+<p>Any undefined reference to __real_symbol will be resolved to symbol.</p>
+</div></blockquote>
+<p>So you just have to use the prefix __wrap_ for your wrapper function and __real_ when you want to call the real function. A simple example is:</p>
+</div>
+<div class="section" id="or-just-fake-it">
+<h2>Or just fake it</h2>
+<p>You may be able to avoid any of this by clever use of header files,
+i.e. make it so when the test runner is compiled, a different header
+file is used for those functions that you need to mock.</p>
+<p>Putting “if we are in the test runner, use this header file” macros in
+the application code will horrify purists though so at least try to
+put as much junk as possible in the Makefile rather than the C code.</p>
+<p>Firstly, at compile time</p>
+<p>Compile time: When the source code is compiled
+Link time: When the relocatable object files are statically linked to form an executable object file
+Load/run time: When an executable object file is loaded into memory, dynamically linked, and then executed.</p>
+<p>High level mock functions only work on x86 because they go under C and
+inject machine code.</p>
+<p>Some other approaches involve running tests of your C code in a C++
+compiler and using extra C++ features to do the job.</p>
+<p>Premade C wraps from people associated with the samba project</p>
+<p><a class="reference external" href="https://packages.debian.org/buster/libuid-wrapper">https://packages.debian.org/buster/libuid-wrapper</a>
+<a class="reference external" href="https://packages.debian.org/buster/libnss-wrapper">https://packages.debian.org/buster/libnss-wrapper</a>
+<a class="reference external" href="https://packages.debian.org/buster/libsocket-wrapper">https://packages.debian.org/buster/libsocket-wrapper</a>
+<a class="reference external" href="https://packages.debian.org/buster/libpam-wrapper">https://packages.debian.org/buster/libpam-wrapper</a>
+<a class="reference external" href="https://packages.debian.org/buster/libresolv-wrapper">https://packages.debian.org/buster/libresolv-wrapper</a></p>
+<p>LD_PRELOAD</p>
+<p>You put all your mocks into one library.</p>
+<p>First load MockLibrary
+Second Load Application code (and standard library and third party libraries etc)
+Third Load Test Runner (whose main is run).</p>
+</div>
+]]></description>
+             <pubDate>Wed, 19 Jul 2017 00:00:00 +0100</pubDate>
+        </item>
+    
         <item>
             <link>https://www.zeth.net/2017/07/08/unit_testing_libraries_for_c.html</link>
             <guid>https://www.zeth.net/2017/07/08/unit_testing_libraries_for_c.html</guid>
